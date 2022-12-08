@@ -1,0 +1,17 @@
+
+.containerApp {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 100px auto 50px;
+  
+}
+
+.containerApp>* {
+  padding: 0 calc(50% - 600px);
+}
+
+@media (max-width: 1260px) {
+  .containerApp>* {
+    padding: 0 30px;
+  }  
+}

@@ -1,0 +1,36 @@
+.header { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 0 5px #2226;
+    top: 0;
+    position: sticky;
+    background-color: rgba(250, 225, 6);
+    z-index: 1;
+}   
+
+.logo {
+    font-size: 1.5em;
+}
+
+.search {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #222;
+    outline: none;
+}
+
+.search:focus {
+    border-bottom-color: #fff;
+}
+
+.nav{
+    display: flex;
+    gap: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
