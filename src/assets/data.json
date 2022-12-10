@@ -1,0 +1,733 @@
+[
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/4.jpg",
+            "likes": [
+                "622b6ffc09b12f80f4c10ba5",
+                "624f266aae19f546dc083a51",
+                "626446cc438a77ca8f287765",
+                "6269930997fcd005ee67139a",
+                "62979411fd97250691adebe3",
+                "624f25edae19f546dc083a4f",
+                "62f170a96aa1910432828654",
+                "627aa2b8fd97250691ade93f",
+                "636a510759b98b038f779d11",
+                "636a510759b98b038f779d12",
+                "636a510659b98b038f779cf9",
+                "636a510759b98b038f779d1e",
+                "636a510659b98b038f779cfa"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77d477d63f6e70967d1f",
+            "name": "Мелкая говяжья сушено-вяленая жилка",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 300,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:08.147Z",
+            "updated_at": "2022-12-07T12:03:53.622Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/5.jpg",
+            "likes": [
+                "625e01360cdd7d3fd52f8508",
+                "624f25edae19f546dc083a4f",
+                "636a510659b98b038f779cf4",
+                "636a510759b98b038f779d11",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [
+                {
+                    "rating": 4,
+                    "_id": "6368ae7583229609c9bdced1",
+                    "text": "2df23r",
+                    "author": "622b6ffc09b12f80f4c10baa",
+                    "product": "622c77dc77d63f6e70967d20",
+                    "created_at": "2022-11-07T07:06:29.411Z",
+                    "updated_at": "2022-11-07T07:06:29.411Z",
+                    "__v": 0
+                }
+            ],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77dc77d63f6e70967d20",
+            "name": "Калтык говяжий для собак",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 290,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:16.303Z",
+            "updated_at": "2022-12-07T13:08:53.722Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/6.jpg",
+            "likes": [
+                "62696f5797fcd005ee671375",
+                "62f170a96aa1910432828654",
+                "636a510659b98b038f779cf4",
+                "636a510659b98b038f779cee",
+                "636a510759b98b038f779d11",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77e277d63f6e70967d21",
+            "name": "Бублик из бычьего корня",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 340,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:22.446Z",
+            "updated_at": "2022-12-07T13:08:54.382Z",
+            "__v": 0
+        },
+        {
+            "discount": 35,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/7.jpg",
+            "likes": [
+                "624c50e47c57d93142703808",
+                "624f25edae19f546dc083a4f",
+                "62696f5797fcd005ee671375",
+                "636a510759b98b038f779d11",
+                "627aa2b8fd97250691ade93f",
+                "636a510759b98b038f779d1a",
+                "636a510759b98b038f779d12",
+                "636a510659b98b038f779d09",
+                "636a510659b98b038f779cee",
+                "636a510759b98b038f779d1e",
+                "636a510759b98b038f779d10",
+                "636a510659b98b038f779d05"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77e877d63f6e70967d22",
+            "name": "Копыто оленье",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 490,
+            "wight": "1 шт",
+            "description": "Копыто оленье — прекрасный аналог зубной щетки!<br/> <ul> <li>Отлично развивает мышцы челюсти</li><li>Cтимулирует слюноотделение, способствуя очищению зубного налета, профилактике образования зубного камня.</li></ul>Собака будет долго увлечена этой вкусной игрушкой. Несмотря на свои большие размеры, с копытом справляются даже собаки малых пород.",
+            "created_at": "2022-03-12T10:37:28.565Z",
+            "updated_at": "2022-12-07T15:38:43.130Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/8.jpg",
+            "likes": [
+                "62696f5797fcd005ee671375",
+                "622b6ffc09b12f80f4c10baa",
+                "636a510759b98b038f779d12",
+                "636a510759b98b038f779d11"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77f077d63f6e70967d23",
+            "name": "Бараний рубец сушенный",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 330,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:36.280Z",
+            "updated_at": "2022-12-07T11:54:36.301Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/9.jpg",
+            "likes": [
+                "624f25edae19f546dc083a4f",
+                "636a510759b98b038f779d26",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77f677d63f6e70967d24",
+            "name": "Рубец говяжий для собак",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 290,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:42.823Z",
+            "updated_at": "2022-12-06T15:01:26.265Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/10.jpg",
+            "likes": [
+                "625a6a960cdd7d3fd52f837a",
+                "636a510759b98b038f779d11",
+                "636a510659b98b038f779d05",
+                "636a510659b98b038f779d09"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c77ff77d63f6e70967d25",
+            "name": "Свиные уши для собак",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 330,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:51.078Z",
+            "updated_at": "2022-12-07T11:39:01.480Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/11.jpg",
+            "likes": [
+                "624f25edae19f546dc083a4f",
+                "636a510759b98b038f779d11",
+                "636a510659b98b038f779d00",
+                "636a510759b98b038f779d26",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c780677d63f6e70967d26",
+            "name": "Уши говяжьи для собак",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 330,
+            "wight": "100 г",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:37:58.049Z",
+            "updated_at": "2022-12-07T11:53:33.789Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/12.jpg",
+            "likes": [
+                "636a510759b98b038f779d11",
+                "636a510659b98b038f779d0c",
+                "636a510659b98b038f779d05",
+                "636a510659b98b038f779cfa",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c780c77d63f6e70967d27",
+            "name": "Печенья с яблоком (печень говяжья, сердце)",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 340,
+            "wight": "14 шт",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:38:04.499Z",
+            "updated_at": "2022-12-03T17:42:33.072Z",
+            "__v": 0
+        },
+        {
+            "discount": 14,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/13.jpg",
+            "likes": [
+                "636a510659b98b038f779d05"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c781277d63f6e70967d28",
+            "name": "Рога оленя для собак весом до 3кг. Размер XS",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 350,
+            "wight": "1 шт",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:38:10.906Z",
+            "updated_at": "2022-12-07T11:54:51.262Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/14.jpg",
+            "likes": [
+                "636a510659b98b038f779cf4",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c781877d63f6e70967d29",
+            "name": "Рога оленя для собак весом от 3 до 5 кг. Размер S",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 400,
+            "wight": "1 шт",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:38:16.598Z",
+            "updated_at": "2022-12-06T15:01:23.817Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/15.jpg",
+            "likes": [
+                "624f25edae19f546dc083a4f",
+                "636a510659b98b038f779cf9"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c781e77d63f6e70967d2a",
+            "name": "Рога оленя для собак весом от 5 до 10 кг. Размер M",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 600,
+            "wight": "1 шт",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:38:22.986Z",
+            "updated_at": "2022-12-01T11:49:53.545Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 10,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/16.jpg",
+            "likes": [],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "622c782577d63f6e70967d2b",
+            "name": "Рога оленя для собак весом от 10 до 30 кг. Размер L",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 800,
+            "wight": "1 шт",
+            "description": "Описание demo",
+            "created_at": "2022-03-12T10:38:29.475Z",
+            "updated_at": "2022-12-07T11:54:48.289Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://e1.edimdoma.ru/data/ingredients/0000/2379/2379-ed4_wide.jpg?1507193758",
+            "likes": [
+                "625e01360cdd7d3fd52f8508",
+                "627aa2b8fd97250691ade93f",
+                "636a510659b98b038f779cfa",
+                "636a510659b98b038f779d00"
+            ],
+            "reviews": [],
+            "tags": [
+                "Non accusantium odio"
+            ],
+            "isPublished": true,
+            "_id": "6256fbb40cdd7d3fd52f8201",
+            "name": "Oleg Burch",
+            "author": {
+                "name": "Кто?",
+                "about": "Student",
+                "avatar": "https://e3.365dm.com/22/09/2048x1152/skynews-emmanuel-macron-french-president_5888764.jpg",
+                "_id": "622bd81b06c7d323b8ae4614",
+                "email": "maxim_91@inbox.ru",
+                "__v": 0
+            },
+            "price": 739,
+            "description": "Id voluptas sunt fug",
+            "created_at": "2022-04-13T16:35:00.128Z",
+            "updated_at": "2022-12-02T22:46:23.367Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/default-image.jpg",
+            "likes": [
+                "624f25edae19f546dc083a4f",
+                "636a510659b98b038f779cf4",
+                "627aa2b8fd97250691ade93f",
+                "637e9e9859b98b038f779d47",
+                "622f9992ae5c40c10c11dfe4"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "626428df438a77ca8f287753",
+            "name": "Landor",
+            "author": {
+                "name": "Slowpoke",
+                "about": "pinkpokemon",
+                "avatar": "https://react-learning.ru/image-compressed/default-image.jpg",
+                "_id": "625870360cdd7d3fd52f82ec",
+                "email": "slowpoke@ya.ru",
+                "__v": 0
+            },
+            "price": 1000,
+            "description": "Сухой корм холистик",
+            "created_at": "2022-04-23T16:27:11.504Z",
+            "updated_at": "2022-12-06T18:30:59.568Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/default-image.jpg",
+            "likes": [
+                "636a510659b98b038f779cf4",
+                "636a510659b98b038f779cee",
+                "627aa2b8fd97250691ade93f",
+                "636a510659b98b038f779d0c",
+                "637e9e9859b98b038f779d47"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "6272801afd97250691ade588",
+            "name": "jhgf",
+            "author": {
+                "name": "Антон Бережок",
+                "about": "Студент",
+                "avatar": "https://i.ytimg.com/vi/PbbNMgPVfqs/maxresdefault.jpg",
+                "_id": "624c50e47c57d93142703808",
+                "email": "maxim@mail.ru",
+                "__v": 0
+            },
+            "price": 12,
+            "description": "hgf",
+            "created_at": "2022-05-04T13:31:06.553Z",
+            "updated_at": "2022-12-06T16:07:48.774Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://react-learning.ru/image-compressed/default-image.jpg",
+            "likes": [
+                "636a510659b98b038f779cf4",
+                "637e9e9859b98b038f779d47"
+            ],
+            "reviews": [
+                {
+                    "rating": 1,
+                    "_id": "6297ba00fd97250691adebe9",
+                    "text": "Очень дорого",
+                    "author": "622b6ffc09b12f80f4c10bc0",
+                    "product": "6277743ffd97250691ade73c",
+                    "created_at": "2022-06-01T19:12:00.396Z",
+                    "updated_at": "2022-06-01T19:12:00.396Z",
+                    "__v": 0
+                }
+            ],
+            "tags": [],
+            "isPublished": true,
+            "_id": "6277743ffd97250691ade73c",
+            "name": "fffdfsd",
+            "author": {
+                "name": "Максим Ахметшин",
+                "about": "Студент",
+                "avatar": "https://react-learning.ru/image-compressed/default-image.jpg",
+                "_id": "625d69e60cdd7d3fd52f84ba",
+                "email": "max96rusel@mail.ru",
+                "__v": 0
+            },
+            "price": 1111123455432,
+            "description": "dssssss",
+            "created_at": "2022-05-08T07:41:51.114Z",
+            "updated_at": "2022-11-29T07:58:33.926Z",
+            "__v": 0
+        },
+        {
+            "discount": 20,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://4lapy.ru/resize/240x240/upload/iblock/3cd/3cd0b22b109ecda09efa455cc65a0f7d.jpg",
+            "likes": [
+                "627aa2b8fd97250691ade93f",
+                "636a510759b98b038f779d11",
+                "622f9992ae5c40c10c11dfe4"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "6386512059b98b038f779d53",
+            "name": "Ушки зайки-побегайки =)",
+            "author": {
+                "name": "Leksas Multer",
+                "about": "Fake account",
+                "avatar": "https://wikiclipart.com/wp-content/uploads/2016/11/Snake-clipart-cliparts-for-you.jpg",
+                "_id": "627aa2b8fd97250691ade93f",
+                "email": "123@123.com",
+                "__v": 0
+            },
+            "price": 400,
+            "wight": "55 г",
+            "description": "Вкуснейшие ломтики крольчатины для собак мелких пород от Деревенские лакомства. В состав продукта входят только натуральные ингредиенты, насыщенные полезными минералами и питательными веществами. Они обеспечивают улучшение иммунной системы животного, обогащение его организма энергией и силой. ^_^",
+            "created_at": "2022-11-29T18:36:16.639Z",
+            "updated_at": "2022-12-06T18:20:53.470Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://4lapy.ru/resize/240x240/upload/iblock/3cd/3cd0b22b109ecda09efa455cc65a0f7d.jpg",
+            "likes": [],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "6386514559b98b038f779d54",
+            "name": "Ломтики крольчатины",
+            "author": {
+                "name": "Примак Екатерина Ивановна",
+                "about": "Писатель",
+                "avatar": "https://react-learning.ru/image-compressed/default-image.jpg",
+                "_id": "636a510759b98b038f779d11",
+                "group": "group-7",
+                "email": "kate.vesnushkina@gmail.com",
+                "__v": 0
+            },
+            "price": 209,
+            "wight": "55 г",
+            "description": "Вкусные ломтики крольчатины для собак мелких пород",
+            "created_at": "2022-11-29T18:36:53.800Z",
+            "updated_at": "2022-11-30T18:28:54.916Z",
+            "__v": 0
+        },
+        {
+            "discount": 10,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://4lapy.ru/resize/480x480/upload/iblock/e2a/e2afa03d780cc6c1a16f6f4d8519fcb6.jpg",
+            "likes": [
+                "636a510659b98b038f779d05"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "6386529159b98b038f779d55",
+            "name": "Кость из жил",
+            "author": {
+                "name": "Романов Александр Васильевич",
+                "about": "Писатель",
+                "avatar": "https://react-learning.ru/image-compressed/default-image.jpg",
+                "_id": "636a510759b98b038f779d12",
+                "group": "group-7",
+                "email": "avromanov98@gmail.com",
+                "__v": 0
+            },
+            "price": 250,
+            "wight": "115",
+            "description": "Косточки из жил CHEWELL – это аппетитное лакомство для собак, которое надолго займёт вашу собаку и позаботится о здоровье зубов и дёсен.\n\nУпаковка содержит 2 косточки из жил для собак средних пород. Удобная zip-застёжка сохранит лакомство от высыхания и посторонних запахов.",
+            "created_at": "2022-11-29T18:42:25.265Z",
+            "updated_at": "2022-12-07T11:52:58.789Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://kormburg.ru/upload/iblock/b78/uu8g5pdehdk1txg9f02ud6y0m1trs9ot.jpg",
+            "likes": [
+                "622f9992ae5c40c10c11dfe4",
+                "636a510659b98b038f779cfa"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "63891a7a59b98b038f779d5d",
+            "name": "Колбаски из утки ",
+            "author": {
+                "name": "Завалишка Елена Николаевна",
+                "about": "хорошии будущий frontend разработчик ^_^",
+                "avatar": "https://www.shutterstock.com/image-vector/programming-software-website-application-development-600w-1906683778.jpg",
+                "_id": "636a510659b98b038f779cfa",
+                "group": "group-7",
+                "email": "zavalisca.elena@gmail.com",
+                "__v": 0
+            },
+            "price": 260,
+            "wight": "100",
+            "description": "Полезное угощение для здоровья Вашего любимого питомца, обогащенное общеукрепляющим комплексом витаминов A, E, D3 и L-карнитином",
+            "created_at": "2022-12-01T21:19:54.515Z",
+            "updated_at": "2022-12-07T14:34:29.598Z",
+            "__v": 0
+        },
+        {
+            "discount": 5,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://vashkinolog.com/wp-content/uploads/2017/02/lakomstvo-360x186.jpg",
+            "likes": [
+                "622f9992ae5c40c10c11dfe4",
+                "636a510659b98b038f779cfa"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "63891b9559b98b038f779d5e",
+            "name": "Печени и лёгкого и бульона",
+            "author": {
+                "name": "Завалишка Елена Николаевна",
+                "about": "хорошии будущий frontend разработчик ^_^",
+                "avatar": "https://www.shutterstock.com/image-vector/programming-software-website-application-development-600w-1906683778.jpg",
+                "_id": "636a510659b98b038f779cfa",
+                "group": "group-7",
+                "email": "zavalisca.elena@gmail.com",
+                "__v": 0
+            },
+            "price": 230,
+            "wight": "100",
+            "description": "Лакомство требуется для поощрения собаки во время тренировок. Однако нигде не говорится, какое лакомство нужно.",
+            "created_at": "2022-12-01T21:24:37.914Z",
+            "updated_at": "2022-12-07T12:04:30.881Z",
+            "__v": 0
+        },
+        {
+            "discount": 0,
+            "stock": 1,
+            "available": true,
+            "pictures": "https://kormburg.ru/upload/iblock/79b/a3pi5fqnwcdljwe4khs9akjmu24o4hcq.jpg",
+            "likes": [
+                "622f9992ae5c40c10c11dfe4"
+            ],
+            "reviews": [],
+            "tags": [],
+            "isPublished": true,
+            "_id": "63891ed759b98b038f779d5f",
+            "name": "Трахея говяжья отборная для собак",
+            "author": {
+                "name": "Завалишка Елена Николаевна",
+                "about": "хорошии будущий frontend разработчик ^_^",
+                "avatar": "https://www.shutterstock.com/image-vector/programming-software-website-application-development-600w-1906683778.jpg",
+                "_id": "636a510659b98b038f779cfa",
+                "group": "group-7",
+                "email": "zavalisca.elena@gmail.com",
+                "__v": 0
+            },
+            "price": 315,
+            "wight": "100",
+            "description": "Натуральное лакомство для собак, приготовленное с сохранением всех полезных свойств, витаминов и микроэлементов. Оно богато хрящевой и соединительной тканью, полезной для вашего питомца. Эта прекрасная съедобная игрушка тренирует жевательные мышцы и очищает зубы собаки от зубного налета, препятствуя образованию зубного камня. ",
+            "created_at": "2022-12-01T21:38:31.070Z",
+            "updated_at": "2022-12-06T18:20:47.728Z",
+            "__v": 0
+        }
+]

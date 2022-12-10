@@ -1,0 +1,43 @@
+.search {
+    min-width: 300px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    position: relative;    
+}
+
+.search>input {
+    flex: 1;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    border-radius: 15px;
+    border: 1px solid silver;
+    font-size: 16px;
+    outline: none;
+}
+
+.search>input:focus {
+    border-color: rgba(250, 225, 6);
+}
+
+.search>button {
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    height: 24px;
+}
+
+.search>button>svg {
+    height: 80%;
+    fill: silver;
+    display: block;
+}
+
+.searchResult {
+    position: absolute;
+    top: 36px;
+    left: 12px;
+    font-size: 12px;
+}

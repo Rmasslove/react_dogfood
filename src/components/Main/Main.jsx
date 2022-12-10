@@ -1,22 +1,14 @@
-import { Card } from '../Card/Card' // Импорт компонента
-import stylesMain from './main.module.scss' // Импорт компонента стилей
+import { Catalog } from '../Pages/catalog' // Импорт компонента
+import { Home } from '../Pages/home' // Импорт компонента
 
-function Main() { // Компонент Main с {props}
+function Main({ user, dataProducts }) { // Компонент Main с {props}
   const smiles = ['o_o', 'O_o', 'o_O', 'o_o', 'O_o', 'o_O'] // Временные данные для карточек
-
-  const getRandom = () => Math.random() * new Date().getMilliseconds() /* Получение случайного
-  числа для поля (key) */
 
   return ( // jsx разметка
     <main>
-      <div className={stylesMain.cards}>
-        {smiles.map((el) => (/* Метод мап для отображения нужного количества карточек */
-          <Card /* Компонента Card */
-            key={getRandom() /* Вызов функции для получения (key) */}
-            el={el /* Информация (содержимое) для карточек ввиде props */}
-          />
-        ))}
-      </div>
+      {user /* В случае регистрации юзера */
+        ? <Catalog dataProducts={dataProducts} /* Выбор страницы копонента (Catalog) *//>
+        : <Home dataSmiles={smiles} /* При отсутствии юзера выбор страницы копонента (Home) *//>}
     </main>
   )
 }
