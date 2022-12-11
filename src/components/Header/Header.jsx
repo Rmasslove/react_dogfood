@@ -1,7 +1,9 @@
 import { Search } from '../Search/search' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
 
-function Header({ user, setUser, dataProducts }) { // Компонент Header с {props}
+function Header({
+  user, setUser, dataProducts, setModalActive,
+}) { // Компонент Header с {props}
   const logIn = (e) => { // функция для Логина
     e.preventDefault() // Отмена действий по умолчанию
     // eslint-disable-next-line no-alert
@@ -9,6 +11,7 @@ function Header({ user, setUser, dataProducts }) { // Компонент Header 
     if (name) { // проверка на то что пользователь ввёл имя
       localStorage.setItem('userLs', name) // запись (localStorage) имени
       setUser(name) // Запись о пользователе в Хук (useState)
+      setModalActive((prev) => !prev)
     }
   }
   const logOut = (e) => { // функция для Выхода

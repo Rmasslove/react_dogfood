@@ -1,0 +1,40 @@
+
+.form {
+    display: grid;
+    gap: 10px;
+}
+
+.h {
+    margin: 0;
+    text-align: center;
+}
+
+input {
+    flex: 1;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    border-radius: 15px;
+    border: 1px solid silver;
+    font-size: 16px;
+    outline: none;
+    padding-right: 25px;
+}
+
+input:focus {
+    border-color: rgba(250, 225, 6);
+}
+
+.btn {
+    border: none;
+    height: 30px;
+    border-radius: 15px;
+    background-color: rgba(250, 225, 6);
+}
+
+.link {
+    background-color: transparent;
+    border-radius: 15px;
+    border: 1px solid rgba(250, 225, 6);
+    height: 30px;
+}
