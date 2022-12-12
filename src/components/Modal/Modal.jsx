@@ -4,7 +4,9 @@ import { ReactComponent as Xmark } from '../Search/img/circle-xmark-regular.svg'
 import { Signup } from './Signup' // Импорт компонента
 import { Login } from './Login' // Импорт компонента
 
-export function Modal({ modalActive, setModalActive }) { // Компонент (Modal) с {props}
+export function Modal({
+  modalActive, setModalActive, api, setToken,
+}) { // Компонент (Modal) с {props}
   const [auth, setAuth] = useState(true) // Хук для форм регистрайии (Signup) и авторизации (Login)
   const style = { // Стиль для скрытия и отображения модального окна
     display: modalActive ? 'flex' : 'none',
@@ -13,7 +15,9 @@ export function Modal({ modalActive, setModalActive }) { // Компонент (
     setModalActive(false) // Метод передающий значения (false) в Хук
   }
 
-  const changeModal = () => (auth ? <Login setAuth={setAuth} /> : <Signup setAuth={setAuth} />)
+  const changeModal = () => (auth
+    ? <Login setAuth={setAuth} api={api} setModalActive={setModalActive} setToken={setToken} />
+    : <Signup setAuth={setAuth} api={api} setModalActive={setModalActive} setToken={setToken} />)
   // Выбор компонента для отображения форм регистрайии (Signup) и авторизации (Login)
 
   return ( // jsx разметка

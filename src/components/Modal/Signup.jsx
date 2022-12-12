@@ -1,7 +1,8 @@
 import { useState } from 'react' // Импорт компонента
 import stylesSignup from './signup.module.scss' // Импорт стилей
 
-export function Signup({ setAuth }) { // Компонент (Signup) с {props}
+// eslint-disable-next-line no-unused-vars
+export function Signup({ setAuth, api, setModalActive }) { // Компонент (Signup) с {props}
   const [inp1, setInp1] = useState('') // Хук для поля (email)
   const [inp2, setInp2] = useState('') // Хук для поля (password-1)
   const [inp3, setInp3] = useState('') // Хук для поля (password-2)
@@ -27,7 +28,29 @@ export function Signup({ setAuth }) { // Компонент (Signup) с {props}
       email: inp1, // Емейл
       password: inp2, // Пароль
     }
-    console.log(body) // Временный консоль для отладки
+    console.log('body в signUp', body) // Временный консоль для отладки
+    api.signUp(body) // Вызов метода регистрации
+      .then((res) => res.json()) // Ответ в json
+      .then((data) => { // Ответ в объекте
+        if (!data.err) { // Проверка на ошибку (если нет - то)
+          setInp1('') // Запись в Хук (inp1) для очистки поля воода
+          setInp2('') // Запись в Хук (inp2) для очистки поля воода
+          setInp3('') // Запись в Хук (inp3) для очистки поля воода
+          setAuth((prev) => !prev) // Запись в Хук (auth) для смены страницы с (Signup) на (Login)
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(data.message) // Вывод информации об ошибке
+        }
+      })
+
+    /* api.signIn(body)
+      .then((res) => res.json())
+      .then((data) => {
+          localStorage.setItem('userSM8', data.data.name)
+          localStorage.setItem('tokenSM8', data.token)
+          setToken(data.token)
+        console.log('data2 Signup', data) // Временный консоль
+      }) */
   }
 
   return ( // jsx разметка

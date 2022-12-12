@@ -7,16 +7,16 @@ function Header({
   const logIn = (e) => { // функция для Логина
     e.preventDefault() // Отмена действий по умолчанию
     // eslint-disable-next-line no-alert
-    const name = prompt('Как вас зовут?') // вызов окна с запросом на ввод пользователя
-    if (name) { // проверка на то что пользователь ввёл имя
-      localStorage.setItem('userLs', name) // запись (localStorage) имени
-      setUser(name) // Запись о пользователе в Хук (useState)
-      setModalActive((prev) => !prev)
-    }
+    // const name = prompt('Как вас зовут?') // вызов окна с запросом на ввод пользователя
+    // if (name) { // проверка на то что пользователь ввёл имя
+    // localStorage.setItem('userSM8', name) // запись (localStorage) имени
+    // setUser(name) // Запись о пользователе в Хук (useState)
+    setModalActive((prev) => !prev)
+    // }
   }
   const logOut = (e) => { // функция для Выхода
     e.preventDefault() // Отмена действий по умолчанию
-    localStorage.removeItem('user') // Удаления записи о пользователе из (localStorage)
+    localStorage.removeItem('userSM8') // Удаления записи о пользователе из (localStorage)
     setUser('') // Удаление записи о пользователе в Хук (useState)
   }
 
