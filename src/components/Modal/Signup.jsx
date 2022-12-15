@@ -51,6 +51,15 @@ export function Signup({ setAuth, api, setModalActive }) { // Компонент
           setToken(data.token)
         console.log('data2 Signup', data) // Временный консоль
       }) */
+
+    /* api.signIn(body)
+      .then((res) => res.json())
+      .then(
+        localStorage.setItem('userSM8', data.data.name)
+        localStorage.setItem('tokenSM8', data.token)
+        setToken(data.token)
+        console.log('data2 Signup', data) // Временный консоль
+      ) */
   }
 
   return ( // jsx разметка
