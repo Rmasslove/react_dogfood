@@ -20,6 +20,9 @@ function App() { // Компотент App
         .then((res) => res.json()) // ответ в json
         .then((data) => { // ответ в объекте
           setGoods(data.products) // Запись результата в Хук (dataProducts)
+          const strData = JSON.stringify(data.products)
+          // Сущность для с товарами для записи в (localStorage)
+          localStorage.setItem('localProducts', strData) // Запись в (localStorage)
         })// Добавить проверку на ошибку и (Нужен ли этот Хук вообще)
     }
   }, [])
@@ -54,6 +57,7 @@ function App() { // Компотент App
           user={user}
           setUser={setUser}
           dataProducts={dataProducts}
+          setGoods={setGoods}
           setModalActive={setModalActive}
         />
         <Main user={user} dataProducts={dataProducts}/* компонент Main с пропсами */ />
@@ -64,6 +68,7 @@ function App() { // Компотент App
         setModalActive={setModalActive}
         api={api}
         setToken={setToken}
+        user={user}
       />
     </>
   )

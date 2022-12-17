@@ -1,7 +1,7 @@
 import { Card } from '../Card/Card' // Импорт компонента
 import stylesPages from './pages.module.scss' // Импорт компонента стилей
 
-export function Catalog({ dataProducts }) { // Компонент (Catalog) с {props}
+export function Catalog({ dataProducts }) { // Компонент отрисовки карточик с {props}
   const getRandom = () => Math.random() * new Date().getMilliseconds() /* Получение случайного
     числа для поля (key) */
   return (

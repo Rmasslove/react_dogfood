@@ -1,21 +1,19 @@
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 
-export function Cardtags({ tags }) {
+export function Cardtags({ tags }) { // Компонент вывода (tags) с {props}
   const getRandom = () => Math.random() * new Date().getMilliseconds()
   /* Получение случайного числа для поля (key) */
 
-  const tagsFun = () => (
+  const tagsFun = () => ( // Функция собирающая (tags) и присваивающая стили
     tags.map((el) => (el === 'new'
-      // eslint-disable-next-line react/no-array-index-key
       ? (<span key={getRandom()} className={stylesCard.new}>{el}</span>)
-      // eslint-disable-next-line react/no-array-index-key
       : (<span key={getRandom()} className={stylesCard.other}>{el}</span>)
     ))
   )
 
-  return (
+  return ( // jsx разметка
     <div className={stylesCard.tags}>
-      {tagsFun(getRandom())}
+      {tagsFun(getRandom()) /* Элемент (tags) вызывающий функцию (tagsFun) */}
     </div>
 
   )
