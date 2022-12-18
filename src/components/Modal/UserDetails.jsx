@@ -1,5 +1,5 @@
 import stylesUserDetails from './userdetails.module.scss' // Импорт стилей
-import avatarDefault from './img/avatarDefault.jpg' // Импорт файла (jpg) преобразованного в компонент
+import avatarDefault from './img/avatarDefault.jpg' // Импорт файла (jpg)
 
 export function UserDetails({ userDetails }) { // Компонент (Signup) с {props}
   return ( // jsx разметка

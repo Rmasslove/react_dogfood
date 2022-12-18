@@ -12,11 +12,40 @@
      }      
 }
 
+.imgWr {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+    margin: 1em;
+    margin-bottom: 1em;
+    position: relative;
+}
+
 .home {
-    margin-top: 100px;
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10em;
+    text-align: center;
+    gap: 9em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;  
 }
+
+.home > h1 {
+    font-weight: 700;
+    font-size: 40px;
+    text-shadow: 0px 0px 7px rgba(250, 225, 6);
+    color: rgb(31, 18, 3);
+}
+
+.home > h2 {
+    font-weight: 700;
+    font-size: 40px;
+    text-shadow: 0px 0px 7px rgba(250, 225, 6);
+    color: rgb(31, 18, 3);
+}
+
