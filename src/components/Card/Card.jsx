@@ -12,7 +12,7 @@ export function Card({
   return ( // jsx разметка
     <div className={stylesCard.card}>
       <div className={stylesCard.imgWr}>
-        <img src={pictures} alt="name" />
+        <img src={pictures} alt={name} />
       </div>
       <Cardtags tags={tags} /* Компонент (Cardtags) с пропсом *//>
       <span className={stylesCard.heart}>
@@ -20,7 +20,7 @@ export function Card({
       </span>
       <div className={stylesCard.text}>
         <s className={stylesCard.discount}>{discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : '' }</s>
-        <p className={stylesCard.price}>{`${price} P` /* {props} с ценой для карточки */}</p>
+        <p className={discount ? stylesCard.priceDiscount : stylesCard.price}>{`${price} P` /* {props} с ценой и выбор стилей для скидки */}</p>
         <p className={stylesCard.wight}>{wight /* {props} размер упаковки (шт, гр) */}</p>
         <h5 className={stylesCard.name}>{name /* {props} с текстом для карточки */}</h5>
       </div>

@@ -26,6 +26,23 @@ img {
     max-width: 100%;
 }
 
+.discount {
+    font-weight: 500;
+}
+
+.price {
+    font-weight: 700;
+}
+
+.priceDiscount {
+    font-weight: 700;
+    color: rgba(255, 30, 0, 0.884);
+}
+
+.wight {
+    opacity: 0.5;
+}
+
 .btnWr {
     display: flex;
     justify-content: center;

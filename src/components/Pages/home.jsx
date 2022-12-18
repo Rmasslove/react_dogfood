@@ -4,7 +4,7 @@ import stylesPages from './pages.module.scss' // Импорт компонент
 export function Home() { // Компонент вывода страницы по умолчанию с {props}
   return ( // jsx разметка
     <div className={stylesPages.home}>
-      <h1>Каталог товаров</h1>
+      <h1>Вас приветствует магазин продуктов для собак</h1>
       <h2>Пожалуйста зарегистрируйтесь!</h2>
     </div>
   )

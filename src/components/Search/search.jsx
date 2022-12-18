@@ -4,8 +4,6 @@ import { ReactComponent as Glass } from './img/magnifying-glass-solid.svg' // И
 import { ReactComponent as Xmark } from './img/circle-xmark-regular.svg' // Импорт файла (svg) преобразованного в компонент
 
 export function Search({ dataProducts, setGoods }) { // Компонент строки поиска с {props}
-  // const strData = JSON.stringify(dataProducts)
-  // localStorage.setItem('localProducts', strData)
   const [text, updateText] = useState('') // Хук (useState) для поля поиска принимающий пустую строку
 
   const [searchData, setSearchData] = useState(dataProducts) // Хук принимающий список продуктов

@@ -1,12 +1,19 @@
 import stylesUserDetails from './userdetails.module.scss' // Импорт стилей
+import avatarDefault from './img/avatarDefault.jpg' // Импорт файла (jpg) преобразованного в компонент
 
-export function UserDetails() { // Компонент (Signup) с {props}
+export function UserDetails({ userDetails }) { // Компонент (Signup) с {props}
   return ( // jsx разметка
     <div className={stylesUserDetails.wr}>
-      <p>name</p>
-      <p>about</p>
-      <p>avatar</p>
-      <p>email</p>
+      <img src={userDetails.avatar === '' ? avatarDefault : userDetails.avatar} alt={userDetails.name} />
+      <div className={stylesUserDetails.text}>
+        <p>{userDetails.name}</p>
+        <p>{userDetails.about}</p>
+        <p>
+          email:
+          {' '}
+          {userDetails.email}
+        </p>
+      </div>
     </div>
   )
 }

@@ -2,22 +2,21 @@ import { Search } from '../Search/search' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
 
 function Header({
-  user, setUser, dataProducts, setModalActive, setGoods,
+  user, setUser, dataProducts, setModalActive, setGoods, setUserDetails, api,
 }) { // Компонент Header с {props}
-  const UserDetails = (e) => {
+  const UserDetails = (e) => { // функция запроса детальной информации о пользователе
     e.preventDefault() // Отмена действий по умолчанию
-    setModalActive((prev) => !prev)
+    api.getUserDetails() // Метод запроса на получение информации о пользователе
+      .then((res) => res.json()) // ответ в json
+      .then((data) => { // ответ в объекте
+        setUserDetails(data)
+      }) // Запись результата в Хук (userDetails)
+    setModalActive((prev) => !prev) // Смена режима модального окна (откр/закр)
   }
 
   const logIn = (e) => { // функция для Логина
     e.preventDefault() // Отмена действий по умолчанию
-    // eslint-disable-next-line no-alert
-    // const name = prompt('Как вас зовут?') // вызов окна с запросом на ввод пользователя
-    // if (name) { // проверка на то что пользователь ввёл имя
-    // localStorage.setItem('userSM8', name) // запись (localStorage) имени
-    // setUser(name) // Запись о пользователе в Хук (useState)
-    setModalActive((prev) => !prev)
-    // }
+    setModalActive((prev) => !prev) // Смена режима модального окна (откр/закр)
   }
   const logOut = (e) => { // функция для Выхода
     e.preventDefault() // Отмена действий по умолчанию

@@ -13,6 +13,7 @@ function App() { // Компотент App
   const [modalActive, setModalActive] = useState(false) // Хук для модального окна, скрыто (false)
   const [api, setApi] = useState(new Api(token)) // Хук для состояния (Api)
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
+  const [userDetails, setUserDetails] = useState([])
 
   useEffect(() => { // Хук для проверки загрузки страницы в первый раз на наличие (token)
     if (token) { // Если токен есть
@@ -23,12 +24,11 @@ function App() { // Компотент App
           const strData = JSON.stringify(data.products)
           // Сущность для с товарами для записи в (localStorage)
           localStorage.setItem('localProducts', strData) // Запись в (localStorage)
-        })// Добавить проверку на ошибку и (Нужен ли этот Хук вообще)
+        })
     }
   }, [])
 
   useEffect(() => { // Хук для проверки изменения (token)
-    console.log('token изменён') // Временный консоль для отладки
     setApi(new Api(token)) // Запись в Хук (api) новый токен
     setUser(localStorage.getItem('userSM8')) // Обновление в Хук (user) из (localStorage)
   }, [token]) // Срабатывает при изменении (token)
@@ -46,7 +46,7 @@ function App() { // Компотент App
         .then((res) => res.json()) // ответ в json
         .then((data) => { // ответ в объекте
           setGoods(data.products) // Запись результата в Хук (dataProducts)
-        }) // Добавить проверку на ошибку
+        })
     }
   }, [api]) // Срабатывает при изменении (api)
 
@@ -59,6 +59,8 @@ function App() { // Компотент App
           dataProducts={dataProducts}
           setGoods={setGoods}
           setModalActive={setModalActive}
+          setUserDetails={setUserDetails}
+          api={api}
         />
         <Main user={user} dataProducts={dataProducts}/* компонент Main с пропсами */ />
         <Footer /* компонент Footer *//>
@@ -69,6 +71,7 @@ function App() { // Компотент App
         api={api}
         setToken={setToken}
         user={user}
+        userDetails={userDetails}
       />
     </>
   )

@@ -2,7 +2,7 @@ class Api { // Класс (Api)
   constructor(token) { // Конструктор принимающий информацию о (token)
     this.path = 'https://api.react-learning.ru' // Основной адрес (URL)
     // eslint-disable-next-line quotes
-    this.group = "sm8" // eslint меняет ковычки ("") на ('') пришлось отключить
+    this.group = "sm8" // группа, eslint меняет ковычки ("") на ('') пришлось отключить
     this.token = token // Токен
   }
 
@@ -30,6 +30,15 @@ class Api { // Класс (Api)
 
   getProducts() { // Функция запрос всех продуктов
     return fetch(`${this.path}/products`, { // Запрос на сервер
+      headers: { // заголовок
+        // eslint-disable-next-line quote-props
+        'authorization': `Bearer ${this.token}`, // Строка с токеном
+      },
+    })
+  }
+
+  getUserDetails() { // Функция получение информации о пользователе по токену
+    return fetch(`${this.path}/v2/${this.group}/users/me`, { // Запрос на сервер
       headers: { // заголовок
         // eslint-disable-next-line quote-props
         'authorization': `Bearer ${this.token}`, // Строка с токеном
