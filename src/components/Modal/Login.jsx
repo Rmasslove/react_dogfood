@@ -11,7 +11,7 @@ export function Login({
     api.signIn(body) // Вызов метода логина
       .then((res) => res.json()) // Ответ в json
       .then((data) => { // Ответ в объекте
-        if (!data.err) { // Проверка на ошибку (если нет - то)
+        if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
           localStorage.setItem('userSM8', data.data.name) // Запись в (localStorage) имени
           localStorage.setItem('tokenSM8', data.token) // Запись в (localStorage) токена
           setToken(data.token) // Запись в Хук (token)

@@ -15,37 +15,51 @@ function App() { // Компотент App
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
   const [userDetails, setUserDetails] = useState([])
 
-  useEffect(() => { // Хук для проверки загрузки страницы в первый раз на наличие (token)
+  useEffect(() => { // Хук для проверки загрузки страницы и перезагрузки, при наличии (token)
     if (token) { // Если токен есть
       api.getProducts() // Метод запроса на получение продуктов
         .then((res) => res.json()) // ответ в json
         .then((data) => { // ответ в объекте
-          setGoods(data.products) // Запись результата в Хук (dataProducts)
-          const strData = JSON.stringify(data.products)
-          // Сущность для с товарами для записи в (localStorage)
-          localStorage.setItem('localProducts', strData) // Запись в (localStorage)
+          if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+            setGoods(data.products) // Запись результата в Хук (dataProducts)
+          } else {
+            // eslint-disable-next-line no-alert
+            alert(data.message) // Вывод информации об ошибке
+          }
         })
     }
   }, [])
 
   useEffect(() => { // Хук для проверки изменения (token)
-    setApi(new Api(token)) // Запись в Хук (api) новый токен
-    setUser(localStorage.getItem('userSM8')) // Обновление в Хук (user) из (localStorage)
+    if (!token) { // если токена нет
+      localStorage.removeItem('userSM8') // Очистка юзера из (localStorage)
+      setUser(null) // Очистка хука с юзером
+      localStorage.removeItem('localProducts') // Очистка записи о продуктах из (localStorage)
+    } else {
+      setApi(new Api(token)) // Запись в Хук (api) новый токен
+      setUser(localStorage.getItem('userSM8')) // Обновление в Хук (user) из (localStorage)
+    }
   }, [token]) // Срабатывает при изменении (token)
 
-  useEffect(() => { // Хук удаляющий информацию о (user)
+  useEffect(() => { // Хук удаляющий информацию о токене если изменился (user)
     if (!user) { // Если (user) нет
-      localStorage.removeItem('tokenSM8') // Очистка (localStorage)
+      localStorage.removeItem('tokenSM8') // Очистка токена из (localStorage)
       setToken(null) // Очистка информации о токене в (token)
+      localStorage.removeItem('localProducts') // Очистка записи о продуктах из (localStorage)
     }
   }, [user]) // Срабатывает при изменении (user)
 
-  useEffect(() => { // Хук проверяющий изменения в (api)
-    if (token) { // Если токен есть
+  useEffect(() => { // Хук загрузка товаров в 1 раз, при изменении в (api)
+    if (token && user) { // Если токен есть
       api.getProducts() // Метод запроса на получение продуктов
         .then((res) => res.json()) // ответ в json
         .then((data) => { // ответ в объекте
-          setGoods(data.products) // Запись результата в Хук (dataProducts)
+          if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+            setGoods(data.products) // Запись результата в Хук (dataProducts)
+            const strData = JSON.stringify(data.products)
+            // Сущность для с товарами для записи в (localStorage)
+            localStorage.setItem('localProducts', strData) // Запись в (localStorage)
+          }
         })
     }
   }, [api]) // Срабатывает при изменении (api)
@@ -61,8 +75,13 @@ function App() { // Компотент App
           setModalActive={setModalActive}
           setUserDetails={setUserDetails}
           api={api}
+          token={token}
         />
-        <Main user={user} dataProducts={dataProducts}/* компонент Main с пропсами */ />
+        <Main
+          user={user}
+          dataProducts={dataProducts}
+          token={token}
+        />
         <Footer /* компонент Footer *//>
       </div>
       <Modal /* компонент Modal с пропсами */

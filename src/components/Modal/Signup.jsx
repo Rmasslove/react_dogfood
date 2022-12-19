@@ -30,7 +30,7 @@ export function Signup({ setAuth, api }) { // Компонент (Signup) с {pr
     api.signUp(body) // Вызов метода регистрации
       .then((res) => res.json()) // Ответ в json
       .then((data) => { // Ответ в объекте
-        if (!data.err) { // Проверка на ошибку (если нет - то)
+        if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
           setInp1('') // Запись в Хук (inp1) для очистки поля воода
           setInp2('') // Запись в Хук (inp2) для очистки поля воода
           setInp3('') // Запись в Хук (inp3) для очистки поля воода
