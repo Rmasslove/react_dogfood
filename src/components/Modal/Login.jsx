@@ -1,5 +1,5 @@
 import { useState } from 'react' // Импорт компонента
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom' // Импорт компонента
 import styleslogin from './login.module.scss' // Импорт стилей
 
 export function Login({
@@ -7,7 +7,7 @@ export function Login({
 }) { // Компонент (Login) с {props}
   const [inp1, setInp1] = useState('') // Хук для поля (email)
   const [inp2, setInp2] = useState('') // Хук для поля (password)
-  const navigate = useNavigate()
+  const navigate = useNavigate() // Хук для навигации из (react-router-dom)
 
   const logIn = (body) => { // Функция (logIn)
     api.signIn(body) // Вызов метода логина
@@ -20,7 +20,7 @@ export function Login({
           setInp1('') // Запись в Хук (inp1) для очистки поля воода
           setInp2('') // Запись в Хук (inp2) для очистки поля воода
           setModalActive(false) // Запись в Хку (modalActive) для скрытия модального окна
-          navigate('/catalog')
+          navigate('/catalog') // Переход на страницу каталога
         } else {
           // eslint-disable-next-line no-alert
           alert(data.message) // Вывод информации об ошибке

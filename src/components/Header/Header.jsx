@@ -1,5 +1,5 @@
-import { useNavigate, Link } from 'react-router-dom'
-import { Search } from '../Search/search' // Импорт компонента
+import { useNavigate, Link } from 'react-router-dom' // Импорт компонента
+import { Search } from '../Search/Search' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
 
 function Header({
@@ -31,7 +31,7 @@ function Header({
     e.preventDefault() // Отмена действий по умолчанию
     localStorage.removeItem('userSM8') // Удаления записи о пользователе из (localStorage)
     setUser('') // Удаление записи о пользователе в Хук (useState)
-    navigate('/')
+    navigate('/') // Переход на корневую страницу
   }
 
   return ( // jsx разметка
