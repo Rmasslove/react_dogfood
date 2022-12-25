@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react' // Импорт компонента
 import { Footer } from './components/Footer/Footer' // Импорт компонента
 import { Header } from './components/Header/Header' // Импорт компонента
 import { Main } from './components/Main/Main' // Импорт компонента
-// import fileProducts from './assets/data.json' // Импорт файла с данными
 import './App.css' // Импорт компонента стилей
 import { Modal } from './components/Modal/Modal' // Импорт компонента
 import { Api } from './Api' // Импорт компонента

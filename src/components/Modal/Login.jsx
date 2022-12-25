@@ -1,4 +1,5 @@
 import { useState } from 'react' // Импорт компонента
+import { useNavigate } from 'react-router-dom'
 import styleslogin from './login.module.scss' // Импорт стилей
 
 export function Login({
@@ -6,6 +7,7 @@ export function Login({
 }) { // Компонент (Login) с {props}
   const [inp1, setInp1] = useState('') // Хук для поля (email)
   const [inp2, setInp2] = useState('') // Хук для поля (password)
+  const navigate = useNavigate()
 
   const logIn = (body) => { // Функция (logIn)
     api.signIn(body) // Вызов метода логина
@@ -18,6 +20,7 @@ export function Login({
           setInp1('') // Запись в Хук (inp1) для очистки поля воода
           setInp2('') // Запись в Хук (inp2) для очистки поля воода
           setModalActive(false) // Запись в Хку (modalActive) для скрытия модального окна
+          navigate('/catalog')
         } else {
           // eslint-disable-next-line no-alert
           alert(data.message) // Вывод информации об ошибке
@@ -35,31 +38,31 @@ export function Login({
   }
 
   return ( // jsx разметка
-    <form className={styleslogin.form} onSubmit={sendForm /* Событие вызывающие функцию */}>
-      <h2 className={styleslogin.h}>Войти</h2>
-      <input
-        type="email"
-        placeholder="Введите вашу почту"
-        value={inp1}
-        required
-        onChange={(e) => { setInp1(e.target.value) }/* Поле принимающие данные, запись их в Хук */}
-      />
-      <input
-        type="password"
-        placeholder="Пароль"
-        value={inp2}
-        onChange={(e) => { setInp2(e.target.value) }/* Поле принимающие данные, запись их в Хук */}
-      />
-      <button className={styleslogin.btn} type="submit">
-        Войти
-      </button>
-      <button
-        className={styleslogin.link}
-        type="submit"
-        onClick={() => { setAuth((prev) => !prev) }/* Кнопка меняющая формы (Регистрация/Вход) */}
-      >
-        Зарегистрироваться
-      </button>
-    </form>
+    <div>
+      <form className={styleslogin.form} onSubmit={sendForm /* Событие вызывающие функцию */}>
+        <h2 className={styleslogin.h}>Войти</h2>
+        <input
+          type="email"
+          placeholder="Введите вашу почту"
+          value={inp1}
+          required
+          onChange={(e) => { setInp1(e.target.value) }/* Поле приема данных, запись их в Хук */}
+        />
+        <input
+          type="password"
+          placeholder="Пароль"
+          value={inp2}
+          onChange={(e) => { setInp2(e.target.value) }/* Поле приема данных, запись их в Хук */}
+        />
+        <button className={styleslogin.btn} type="submit">Войти</button>
+        <button
+          className={styleslogin.link}
+          type="submit"
+          onClick={() => { setAuth((prev) => !prev) }/* Кнопка меняющая формы (Регистрация/Вход) */}
+        >
+          Зарегистрироваться
+        </button>
+      </form>
+    </div>
   )
 }

@@ -6,6 +6,7 @@ import { Login } from './Login' // Импорт компонента
 import { UserDetails } from './UserDetails' // Импорт компонента
 
 export function Modal({
+  // eslint-disable-next-line no-unused-vars
   modalActive, setModalActive, api, setToken, user, userDetails,
 }) { // Компонент (Modal) с {props}
   const [auth, setAuth] = useState(true) // Хук для форм регистрайии (Signup) и авторизации (Login)

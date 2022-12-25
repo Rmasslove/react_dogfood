@@ -6,7 +6,7 @@ export function Catalog({ dataProducts }) { // Компонент отрисов
     числа для поля (key) */
   return (
     <>
-      <h1>Каталог товаров</h1>
+      <p className={stylesPages.link}>Каталог товаров</p>
       <div className={stylesPages.cards}>
         {dataProducts.map((el) => (/* Метод мап для отображения нужного количества карточек */
           <Card /* Компонента Card */

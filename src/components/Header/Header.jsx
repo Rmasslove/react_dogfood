@@ -1,9 +1,11 @@
+import { useNavigate, Link } from 'react-router-dom'
 import { Search } from '../Search/search' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
 
 function Header({
   user, setUser, dataProducts, setModalActive, setGoods, setUserDetails, api, token,
 }) { // Компонент Header с {props}
+  const navigate = useNavigate()
   const UserDetails = (e) => { // функция запроса детальной информации о пользователе
     e.preventDefault() // Отмена действий по умолчанию
     api.getUserDetails() // Метод запроса на получение информации о пользователе
@@ -24,19 +26,23 @@ function Header({
     e.preventDefault() // Отмена действий по умолчанию
     setModalActive((prev) => !prev) // Смена режима модального окна (откр/закр)
   }
+
   const logOut = (e) => { // функция для Выхода
     e.preventDefault() // Отмена действий по умолчанию
     localStorage.removeItem('userSM8') // Удаления записи о пользователе из (localStorage)
     setUser('') // Удаление записи о пользователе в Хук (useState)
+    navigate('/')
   }
 
   return ( // jsx разметка
     <header className={stylesHeader.header}>
-      <a className={stylesHeader.logo} href="_"/* Поле логотипа */>DogFood</a>
+      <Link to="/" className={stylesHeader.logo}>DogFood</Link>
+      {user && (
       <Search /* Компонент (Search) и передача пропсов */
         setGoods={setGoods}
         dataProducts={dataProducts}
       />
+      )}
       <nav className={stylesHeader.nav}>
         {(user && token) && <a className={stylesHeader.user} href="_" onClick={UserDetails}>{user}</a>/* Поле отображающие имя пользователя */}
         {(!user || !token) && <a className={stylesHeader.btn} href="_" onClick={logIn}>Войти</a>/* Поле кнопки войти */}
