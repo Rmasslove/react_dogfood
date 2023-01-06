@@ -1,7 +1,18 @@
-.imgWr {
+.card {
+    box-shadow: 0 0 5px #2226;
+    border-radius: 1em;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    gap: 1em;
+    justify-content: space-between;
 }
 
+.card:hover {
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.493);
+}
 
 .heart {
     position: absolute;
@@ -9,11 +20,6 @@
     right: 1em;
     color: silver;
     opacity: 0.5;
-}
-
-.name {
-    font-weight: 700;
-    margin-bottom: 20px;
 }
 
 img {
@@ -39,14 +45,12 @@ img {
 
 .btnWr {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-top: 100px;
+    align-items: flex-end;
 }
 
 .btn {
-    padding: 10px 18px;
+    padding: 7px 10px;
     border: none;
     color: inherit;
     background-color: rgba(250, 225, 6);
@@ -82,42 +86,3 @@ img {
     margin-right: 5px;   
 }
 
-.link {
-    opacity: 0.7;
-    font-weight: 600;
-    font-size: 24px;
-}
-
-.Wr{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3em;
-    margin: 1em;
-    margin-bottom: 3em;
-    margin-top: 3em;    
-    min-height: 65vh;
-    grid-template-rows: auto;
-    
-}
-
-.stock {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    text-align: center;
-    align-items: center;
-    padding: 5px;
-    border: none;
-    color: inherit;
-    background-color: rgba(192, 192, 192, 0.555);
-    border-radius: 4px;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-
-.stock>button {
-    border: none;
-    background-color: transparent;
-    font-weight: 600;
-    font-size: 20px;
-}

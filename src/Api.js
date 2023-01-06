@@ -49,6 +49,19 @@ class Api { // Класс (Api)
     }
   }
 
+  getProductId(id) { // Функция получение товара по Id
+    try {
+      return fetch(`${this.path}/products/${id}`, { // Запрос на сервер
+        headers: { // заголовок
+        // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
+
   getUserDetails() { // Функция получение информации о пользователе по токену
     try {
       return fetch(`${this.path}/v2/${this.group}/users/me`, { // Запрос на сервер

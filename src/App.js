@@ -12,7 +12,8 @@ function App() { // Компотент App
   const [modalActive, setModalActive] = useState(false) // Хук для модального окна, скрыто (false)
   const [api, setApi] = useState(new Api(token)) // Хук для состояния (Api)
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
-  const [userDetails, setUserDetails] = useState([])
+  const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
+  const [basket, setBasket] = useState([]) // Хук для отображения корзины с товарами
 
   useEffect(() => { // Хук для проверки загрузки страницы и перезагрузки, при наличии (token)
     if (token) { // Если токен есть
@@ -80,6 +81,9 @@ function App() { // Компотент App
           user={user}
           dataProducts={dataProducts}
           token={token}
+          api={api}
+          basket={basket}
+          setBasket={setBasket}
         />
         <Footer /* компонент Footer *//>
       </div>

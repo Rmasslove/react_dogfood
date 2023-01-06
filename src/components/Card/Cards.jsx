@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom' // Импорт компонента
-import stylesCard from './card.module.scss' // Импорт компонента стилей
+import stylesCard from './cards.module.scss' // Импорт компонента стилей
 import { Cardtags } from './Cardtags' // Импорт компонента
 
 export function Cards({
@@ -14,7 +14,7 @@ export function Cards({
 
   return ( // jsx разметка
     <div className={stylesCard.card} role="presentation" onClick={cardInfo}>
-      <div className={stylesCard.imgWr}>
+      <div>
         <img src={pictures} alt={name} />
       </div>
       <Cardtags tags={tags} /* Компонент (Cardtags) с пропсом *//>
@@ -22,13 +22,10 @@ export function Cards({
         <i className="fa-solid fa-heart" /* иконка с сердцем *//>
       </span>
       <div className={stylesCard.text}>
-        <s className={stylesCard.discount}>{discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : '' }</s>
-        <p className={discount ? stylesCard.priceDiscount : stylesCard.price}>{`${price} P` /* {props} с ценой и выбор стилей для скидки */}</p>
+        <s className={stylesCard.discount}>{discount > 0 ? `${price} P` : '' }</s>
+        <h4 className={discount ? stylesCard.priceDiscount : stylesCard.price}>{discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${price} P` /* ценa и выбор стилей для скидки */}</h4>
         <p className={stylesCard.wight}>{wight /* {props} размер упаковки (шт, гр) */}</p>
         <h5 className={stylesCard.name}>{name /* {props} с текстом для карточки */}</h5>
-      </div>
-      <div className={stylesCard.btnWr}>
-        <button type="button" className={stylesCard.btn}><span>В корзину</span></button>
       </div>
     </div>
   )

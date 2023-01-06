@@ -10,7 +10,12 @@ import img6 from '../Modal/img/img6.jpg' // Импорт файла (jpg)
 export function Home({ user }) { // Компонент вывода страницы по умолчанию с {props}
   return ( // jsx разметка
     <div>
-      {user && <Link to="/catalog"><p className={stylesPages.link}>Перейти в --&gt; каталог товаров</p></Link>/* Линк для перехода на страницу каталога */}
+      {user && (
+      <span className={stylesPages.link}>
+        Главная страница --&gt;
+        <Link to="/catalog"><span> Перейти в каталог товаров</span></Link>
+      </span>
+      )/* Линк для перехода на страницу каталога */}
       <div className={stylesPages.imgWr}>
         <img src={img1} alt="foto" />
         <img src={img2} alt="foto" />
