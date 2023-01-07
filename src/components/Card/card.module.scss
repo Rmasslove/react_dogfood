@@ -43,6 +43,9 @@ img {
     justify-content: center;
     align-items: center;
     margin-top: 100px;
+    padding-top: 25px;
+    padding-bottom: 30px;
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
 
 .btn {
@@ -115,9 +118,20 @@ img {
     margin-bottom: 30px;
 }
 
+.totalPrice {
+    font-weight: 700;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
 .stock>button {
     border: none;
     background-color: transparent;
     font-weight: 600;
     font-size: 20px;
+}
+
+.stockP {
+    font-weight: 500;
+    opacity: 0.7;
 }

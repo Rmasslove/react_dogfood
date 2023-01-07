@@ -2,13 +2,10 @@ import { useEffect, useState } from 'react' // Импорт компонента
 import { Link, useParams } from 'react-router-dom' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 
-// eslint-disable-next-line no-unused-vars
 export function Card({ api, basket, setBasket }) { // Компонет (Card) с инфо по одной карточке
   const { id } = useParams() // Хук из (react-router-dom) для извлечения id карточки
   const [productId, setProductId] = useState([]) // Хук для получения информации об одном товаре
-  const [stock, setStock] = useState([]) // Хук для отображения количества по одному товару
-
-  console.log({ stock }) // Служебный вывод для отладки
+  const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
 
   useEffect(() => { // Хук для загрузки информации об одном товере
     if (id) { // Если токен есть
@@ -17,7 +14,6 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
         .then((data) => { // ответ в объекте
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setProductId(data) // Запись в Хук информации об одном товаре
-            setStock(data.stock) // Запись в Хук информации о количестве одного товара
             const strData = JSON.stringify(data.stock) // Сущность для записи в (localStorage)
             localStorage.setItem('stock', strData) // Метод записи в (localStorage)
           } else {
@@ -34,14 +30,31 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
   }
 
   const stockPlus = () => { // Функция увеличивающая единиц за один товар
-    if (stock < localStorage.getItem('stock')) { // Если меньше чем записано изначально в (localStorage)
-      setStock(stock + 1) // Увеличиваем на 1
+    if (stockQuantity < localStorage.getItem('stock')) { // Если меньше чем записано изначально в (localStorage)
+      setStockQuantity(stockQuantity + 1) // Увеличиваем на 1
     }
   }
 
   const stockMinus = () => { // Функция уменьшающая единиц за один товар
-    if (stock > 1) { // Если больше чем 1
-      setStock(stock - 1) // Уменьшаем на 1
+    if (stockQuantity > 1) { // Если больше чем 1
+      setStockQuantity(stockQuantity - 1) // Уменьшаем на 1
+    }
+  }
+
+  const basketQuantity = () => { // Функция добавления товара в корзину
+    const basketCard = { // Карточка товара
+      id,
+      stockQuantity,
+    }
+    const arrBasket = basket.filter((el) => el.id.includes(id)) // Проверка наличия товара в корзине
+    if (arrBasket.length === 0) { // Если такого товара нет то...
+      const newArrBasket = basket.concat(basketCard) // Добавляем товар к массиву из Хука корзины
+      setBasket(newArrBasket) // Добавляем товар в Хук корзины
+      const strBasket = JSON.stringify(newArrBasket) // Сущность для записи в (localStorage)
+      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+      console.log('!!!!', newArrBasket) // Служебный вывод для отладки
+    } else { // Иначе если товар уже есть в корзине
+      console.log('*****', basket) // Служебный вывод для отладки
     }
   }
 
@@ -67,12 +80,26 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
           <h4 className={productId.discount ? stylesCard.priceDiscount : stylesCard.price}>{productId.discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${productId.price} P` /* ценa и выбор стилей для скидки */}</h4>
           <p className={stylesCard.wight}>{productId.wight /* {props} размер уп. (шт, гр) */}</p>
           <div className={stylesCard.btnWr}>
+            <p className={stylesCard.stockP}/* Товаров в наличии */>
+              В наличии
+              {' '}
+              {productId.stock}
+              {' '}
+              шт.
+            </p>
             <div className={stylesCard.stock}>
               <button type="button" onClick={stockMinus}>-</button>
-              {stock}
+              {stockQuantity}
               <button type="button" onClick={stockPlus}>+</button>
             </div>
-            <button type="button" className={stylesCard.btn}><span>В корзину</span></button>
+            <p className={stylesCard.totalPrice}/* Итоговая сумма */>
+              Сумма
+              {' '}
+              {stockQuantity * (productId.discount > 0 ? discountFun() : productId.price)}
+              {' '}
+              Р
+            </p>
+            <button type="button" onClick={basketQuantity} className={stylesCard.btn}><span>В корзину</span></button>
           </div>
         </div>
       </div>

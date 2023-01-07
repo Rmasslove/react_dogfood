@@ -76,6 +76,8 @@ function App() { // Компотент App
           setUserDetails={setUserDetails}
           api={api}
           token={token}
+          basket={basket}
+          setBasket={setBasket}
         />
         <Main
           user={user}

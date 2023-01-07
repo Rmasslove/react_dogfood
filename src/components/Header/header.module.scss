@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
     box-shadow: 0 0 5px #2226;
     top: 0;
     position: sticky;
@@ -11,7 +11,7 @@
 }   
 
 .logo {
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 .search {
@@ -28,7 +28,7 @@
 .nav{
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 0.2em;
 }
 
 a {
@@ -37,27 +37,47 @@ a {
 }
 
 .btn {
-    padding: 7px 15px;
+    padding: 6px 10px 6px 15px;
     background-color: rgba(250, 225, 6);
-    border-radius: 20px;
-    font-weight: 600;
+    border-radius: 10px;
+    font-size: 1.4em;
 }
 
 
 .btn:hover {
-    background-color: rgba(250, 213, 4, 0.671);
     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
 
 
 .user {
-    padding: 7px 15px;
+    padding: 6px 15px 6px 15px;
     background-color: rgba(250, 225, 6);
-    border-radius: 20px;
-    font-weight: 600;
+    border-radius: 10px;
+    font-size: 1.3em;
+}
+
+.basket {
+    padding: 5px 15px 5px 15px;
+    background-color: rgba(250, 225, 6);
+    border-radius: 10px;
+    font-size: 1.3em;
+    position: relative;
+}
+
+.basketQuantity {
+    position: absolute;
+    padding: 0px 9px 20px 34px;
+    border-radius: 10px;
+    bottom: 3px;
+    left: 0px;
+    color: red;
+    font-size: 15px;
+}
+
+.basketQuantity:hover {
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
 
 .user:hover {
-    background-color: rgba(250, 213, 4, 0.671);
     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
