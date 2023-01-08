@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom' // Импорт компонента
+import { BasketRoute } from '../Basket/BasketRoute' // Импорт компонента
 import { Card } from '../Card/Card' // Импорт компонента
 import { Catalog } from '../Pages/catalog' // Импорт компонента
 import { Home } from '../Pages/home' // Импорт компонента
 
-function Main({
+function Main({ // Копонент основного тела сайта
   dataProducts, user, api, basket, setBasket,
 }) { // Компонент Main с {props}
   return ( // jsx разметка
@@ -22,6 +23,7 @@ function Main({
         || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
         <Route path="/card/:id" element={<Card api={api} basket={basket} setBasket={setBasket} />} />
+        <Route path="/basket" element={<BasketRoute basket={basket} />} />
       </Routes>
     </main>
   )

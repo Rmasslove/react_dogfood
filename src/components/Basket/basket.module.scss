@@ -1,0 +1,36 @@
+
+.link {
+    opacity: 0.7;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.basketEmpty {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.basketEmptyI>i {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 150px;
+    color: rgba(34, 34, 34, 0.753);
+}
+
+.cardsWr{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    margin: 1em;
+    margin-bottom: 1em;
+}
+
+.card {
+    display: flex;
+}

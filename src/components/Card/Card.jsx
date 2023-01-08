@@ -45,6 +45,10 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
     const basketCard = { // Карточка товара
       id,
       stockQuantity,
+      name: productId.name,
+      pictures: productId.pictures,
+      discount: productId.discount,
+      price: productId.price,
     }
     const arrBasket = basket.filter((el) => el.id.includes(id)) // Проверка наличия товара в корзине
     if (arrBasket.length === 0) { // Если такого товара нет то...
@@ -52,9 +56,19 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
       setBasket(newArrBasket) // Добавляем товар в Хук корзины
       const strBasket = JSON.stringify(newArrBasket) // Сущность для записи в (localStorage)
       localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
-      console.log('!!!!', newArrBasket) // Служебный вывод для отладки
     } else { // Иначе если товар уже есть в корзине
-      console.log('*****', basket) // Служебный вывод для отладки
+      const modifiedArrBasket = basket.map((el) => { // Ищем товар в массиве
+        if (el.id === id) { // если id совпадают
+          return { // Меняем количество товаров
+            ...el,
+            stockQuantity,
+          }
+        }
+        return el // Или возвращаем товар
+      })
+      setBasket(modifiedArrBasket) // Добавляем товар в Хук корзины
+      const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
+      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
     }
   }
 

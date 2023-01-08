@@ -13,7 +13,6 @@ export function Catalog({ dataProducts }) { // Компонент отрисов
           <Cards /* Компонента Card */
             key={getRandom() /* Вызов функции для получения (key) */}
             {...el /* Информация (содержимое) для карточек ввиде props */}
-
           />
         ))}
       </div>

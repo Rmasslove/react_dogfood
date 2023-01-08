@@ -49,7 +49,7 @@ function Header({
       )}
       <nav className={stylesHeader.nav}>
         {(user && token) && (
-        <Link to="/catalog" className={stylesHeader.basket}>
+        <Link to="/basket" className={stylesHeader.basket}>
           <i className="fa-solid fa-basket-shopping" />
           <span className={stylesHeader.basketQuantity}>{basket.length}</span>
         </Link>

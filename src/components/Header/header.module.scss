@@ -48,12 +48,23 @@ a {
     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
 
+.btn:active {
+    background-color: rgb(175, 163, 50);
+}
 
 .user {
     padding: 6px 15px 6px 15px;
     background-color: rgba(250, 225, 6);
     border-radius: 10px;
     font-size: 1.3em;
+}
+
+.user:hover {
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+}
+
+.user:active {
+    background-color: rgb(175, 163, 50);
 }
 
 .basket {
@@ -78,6 +89,6 @@ a {
     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
 
-.user:hover {
-    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+.basketQuantity:active {
+    background-color: rgb(175, 163, 50);
 }

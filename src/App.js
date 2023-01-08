@@ -15,6 +15,13 @@ function App() { // Компотент App
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [basket, setBasket] = useState([]) // Хук для отображения корзины с товарами
 
+  useEffect(() => { // Хук для проверки записи о количестве товаров в корзине из (loc.Storage)
+    if (localStorage.getItem('Basket')) { // Если запись есть то...
+      const strBasket = localStorage.getItem('Basket') // Сущность принимающая сохраненное значение о товарах в корзине из (localStorage)
+      setBasket(JSON.parse(strBasket)) // Запись в Хук количества товаров в корзине из (loc.Storage)
+    }
+  }, [])
+
   useEffect(() => { // Хук для проверки загрузки страницы и перезагрузки, при наличии (token)
     if (token) { // Если токен есть
       api.getProducts() // Метод запроса на получение продуктов
