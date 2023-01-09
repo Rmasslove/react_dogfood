@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react' // Импорт компонента
-import { Link, useParams } from 'react-router-dom' // Импорт компонента
+import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 
 export function Card({ api, basket, setBasket }) { // Компонет (Card) с инфо по одной карточке
   const { id } = useParams() // Хук из (react-router-dom) для извлечения id карточки
   const [productId, setProductId] = useState([]) // Хук для получения информации об одном товаре
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
+  const navigate = useNavigate() // Хук из (react-router-dom)
 
   useEffect(() => { // Хук для загрузки информации об одном товере
     if (id) { // Если токен есть
@@ -23,6 +24,7 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
         })
     }
   }, [])
+
   const discountFun = () => { // Функция считающая скидку на товар
     const result = Math.round(productId.price - (
       (productId.price / 100) * productId.discount)) // Подсчёт и округление скидки
@@ -42,6 +44,7 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
   }
 
   const basketQuantity = () => { // Функция добавления товара в корзину
+    navigate('/basket') // Перенаправляем на страницу корзины с товарами
     const basketCard = { // Карточка товара
       id,
       stockQuantity,

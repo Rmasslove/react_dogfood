@@ -23,7 +23,7 @@ function Main({ // Копонент основного тела сайта
         || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
         <Route path="/card/:id" element={<Card api={api} basket={basket} setBasket={setBasket} />} />
-        <Route path="/basket" element={<BasketRoute basket={basket} />} />
+        <Route path="/basket" element={<BasketRoute basket={basket} setBasket={setBasket} />} />
       </Routes>
     </main>
   )

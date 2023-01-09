@@ -3,11 +3,12 @@ import { Basket } from './Basket' // Импорт компонента
 import stylesBasket from './basket.module.scss' // Импорт компонента стилей
 import { BasketEmpty } from './BasketEmpty' // Импорт компонента
 
-export function BasketRoute({ basket }) { // Компонент выбора страницы корзины или пустой корзины
+export function BasketRoute({ basket, setBasket }) {
+  // Компонент выбора страницы корзины или пустой корзины
   // eslint-disable-next-line react/no-unstable-nested-components
   function BasketRouteFn() { // функция выбора страницы
     if (basket.length > 0) { // Если корзина не пустая то...
-      return <Basket basket={basket} /* Страница корзины *//>
+      return <Basket basket={basket} setBasket={setBasket}/* Страница корзины */ />
     }
     return <BasketEmpty /* Если корзина пустая *//>
   }

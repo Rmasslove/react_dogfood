@@ -25,12 +25,62 @@
 
 .cardsWr{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2em;
-    margin: 1em;
-    margin-bottom: 1em;
+    grid-template-columns: 70% 30%;
+    gap: 1em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: grid;
+    gap: 0.8em;
 }
 
 .card {
-    display: flex;
+    display: grid;
+    gap: 0.8em;
+    align-items: center;
+    grid-template-columns: auto 50px 150px 90px 50px;
+    box-shadow: 0 0 5px #2226;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 400;
+    min-height: 100px;    
+}
+
+.arrange {
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 0 5px #2226;
+}
+
+p {
+    margin: 0;
+}
+
+.deletion {
+    border: none;
+    background-color: transparent;
+    fill: silver;
+    display: block;     
+    height: 80%;
+    width: 80%;
+}
+
+.checkbox {
+   display: flex;
+   font-size: 18px;
+   font-weight: 400;
+   align-items: center;  
+}
+
+.input {
+    max-width: 12px;
+    max-height: 12px;
+}
+
+.name {
+    margin-left: 10px;
 }
