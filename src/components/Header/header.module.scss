@@ -6,7 +6,8 @@
     box-shadow: 0 0 5px #2226;
     top: 0;
     position: sticky;
-    background-color: rgba(250, 225, 6);
+    // background-color: rgba(250, 225, 6);
+    background-color: #ffe44d;
     z-index: 1;
 }   
 
@@ -27,7 +28,6 @@
 
 .nav{
     display: flex;
-    flex-wrap: wrap;
     gap: 0.2em;
 }
 
@@ -38,7 +38,7 @@ a {
 
 .btn {
     padding: 6px 10px 6px 15px;
-    background-color: rgba(250, 225, 6);
+    background-color: #ffe44d;
     border-radius: 10px;
     font-size: 1.4em;
 }
@@ -54,7 +54,7 @@ a {
 
 .user {
     padding: 6px 15px 6px 15px;
-    background-color: rgba(250, 225, 6);
+    background-color: #ffe44d;
     border-radius: 10px;
     font-size: 1.3em;
 }
@@ -69,7 +69,7 @@ a {
 
 .basket {
     padding: 5px 15px 5px 15px;
-    background-color: rgba(250, 225, 6);
+    background-color: #ffe44d;
     border-radius: 10px;
     font-size: 1.3em;
     position: relative;

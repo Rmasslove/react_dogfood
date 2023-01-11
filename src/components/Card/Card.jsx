@@ -52,6 +52,7 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
       pictures: productId.pictures,
       discount: productId.discount,
       price: productId.price,
+      stock: productId.stock,
     }
     const arrBasket = basket.filter((el) => el.id.includes(id)) // Проверка наличия товара в корзине
     if (arrBasket.length === 0) { // Если такого товара нет то...
@@ -114,7 +115,7 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
               {' '}
               {stockQuantity * (productId.discount > 0 ? discountFun() : productId.price)}
               {' '}
-              Р
+              руб.
             </p>
             <button type="button" onClick={basketQuantity} className={stylesCard.btn}><span>В корзину</span></button>
           </div>

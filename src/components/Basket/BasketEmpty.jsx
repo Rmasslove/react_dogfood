@@ -8,7 +8,6 @@ export function BasketEmpty() { // Компонент пустой корзин�
         {' '}
         <i className="fa-solid fa-basket-shopping" />
       </div>
-
     </>
   )
 }

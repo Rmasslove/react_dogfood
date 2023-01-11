@@ -11,13 +11,13 @@
     justify-content: center;
     opacity: 0.8;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 30px;
 }
 
 .basketEmptyI>i {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
     font-weight: 600;
     font-size: 150px;
     color: rgba(34, 34, 34, 0.753);
@@ -31,6 +31,12 @@
     margin-bottom: 20px;
 }
 
+@media (max-width: 950px) {
+    .cardsWr {
+        grid-template-columns: auto;
+     }      
+}
+
 .cards {
     display: grid;
     gap: 0.8em;
@@ -40,20 +46,65 @@
     display: grid;
     gap: 0.8em;
     align-items: center;
-    grid-template-columns: auto 50px 150px 90px 50px;
+    grid-template-columns: auto 110px 30px 150px 90px 50px;
     box-shadow: 0 0 5px #2226;
     border-radius: 5px;
     padding: 10px 15px;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     min-height: 100px;    
+}
+
+.stock {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+    padding: 5px;
+    border: none;
+    color: inherit;
+    background-color: rgba(192, 192, 192, 0.308);
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.stock>button {
+    border: none;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .arrange {
     border-radius: 5px;
-    font-weight: 600;
     text-align: center;
     box-shadow: 0 0 5px #2226;
+    min-height: 300px;
+    padding-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+@media (max-width: 950px) {
+    .arrange {
+        min-height: 100px;
+        padding-bottom: 30px;
+     }      
+}
+
+.totalQuantityGoods {
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+.fullCalculation {
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    opacity: 0.9;
 }
 
 p {
@@ -83,4 +134,25 @@ p {
 
 .name {
     margin-left: 10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.btn {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    border: none;
+    color: inherit;
+    background-color: #ffe44d;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+}
+
+.btn:active {
+    background-color: rgb(196, 170, 28);
 }

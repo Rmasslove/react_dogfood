@@ -1,14 +1,17 @@
-.cards{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2em;
-    margin: 1em;
-    margin-bottom: 1em;
+.Wr{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+    font-weight: 600;
+    font-size: 30px;
 }
 
-@media (max-width: 1260px) {
-    .cards {
-        grid-template-columns: repeat(3, 1fr);
-     }      
+.WrI>i {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    font-weight: 600;
+    font-size: 150px;
+    color: rgba(34, 34, 34, 0.753);
 }
-

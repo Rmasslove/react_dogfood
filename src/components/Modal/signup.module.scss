@@ -22,19 +22,19 @@ input {
 }
 
 input:focus {
-    border-color: rgba(250, 225, 6);
+    border-color: #ffe44d;
 }
 
 .btn {
     border: none;
     height: 30px;
     border-radius: 15px;
-    background-color: rgba(250, 225, 6);
+    background-color: #ffe44d;
 }
 
 .link {
     background-color: transparent;
     border-radius: 15px;
-    border: 1px solid rgba(250, 225, 6);
+    border: 1px solid #ffe44d;
     height: 30px;
 }
