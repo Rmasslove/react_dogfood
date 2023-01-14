@@ -53,6 +53,7 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
       discount: productId.discount,
       price: productId.price,
       stock: productId.stock,
+      isChecked: false,
     }
     const arrBasket = basket.filter((el) => el.id.includes(id)) // Проверка наличия товара в корзине
     if (arrBasket.length === 0) { // Если такого товара нет то...

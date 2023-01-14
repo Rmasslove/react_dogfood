@@ -2,7 +2,7 @@ import stylesBasket from './basket.module.scss' // Импорт компонен
 import { ReactComponent as Xmark } from '../Search/img/circle-xmark-regular.svg' // Импорт файла (svg) преобразованного в компонент
 
 export function BasketCards({ // Компонента карточки товара в корзине
-  id, stockQuantity, name, pictures, discount, price, setBasket, basket, stock,
+  id, stockQuantity, name, pictures, discount, price, setBasket, basket, stock, isChecked,
 }) {
   const basketQuantityFn = () => { // Функция удаление товара из корзины заказа
     const newArrBasket = basket.filter((el) => el.id !== id)
@@ -56,14 +56,24 @@ export function BasketCards({ // Компонента карточки това�
     localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
   }
 
-  const handleSubmit = () => {
-    console.log('id', id)
+  const handleChange = () => { // Функция смены состояния для (checkbox)
+    const modifiedArrBasket = basket.map((el) => { // Создаём новый массив из (basket)
+      if (el.id === id) { // Если (id) совпадает
+        return {
+          ...el, // Разварачиваем объект
+          isChecked: !isChecked, // Меняем (checked)
+        }
+      } return el
+    })
+    setBasket(modifiedArrBasket) // Добавляем товар в Хук корзины
+    const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
+    localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
   }
 
   return ( // jsx разметка
     <div className={stylesBasket.card}>
       <label className={stylesBasket.checkbox} htmlFor={`coding${id}`}>
-        <input onClick={handleSubmit} className={stylesBasket.input} type="checkbox" id={`coding${id}`} /* defaultChecked */ />
+        <input onChange={handleChange} className={stylesBasket.input} type="checkbox" id={`coding${id}`} checked={isChecked}/* defaultChecked */ />
         <p className={stylesBasket.name}>{name}</p>
       </label>
       <div className={stylesBasket.stock}>
@@ -77,7 +87,9 @@ export function BasketCards({ // Компонента карточки това�
         {' '}
         &#8381;
       </p>
-      <img src={pictures} alt={name} />
+      <div>
+        <img className={stylesBasket.img} src={pictures} alt={name} />
+      </div>
       <div className={stylesBasket.deletionWr}>
         <button type="button" onClick={basketQuantityFn/* Удаление заказа из корзины */} className={stylesBasket.deletion}>
           <Xmark />

@@ -15,3 +15,22 @@
     font-size: 150px;
     color: rgba(34, 34, 34, 0.753);
 }
+
+.emptyBtnLink{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.emptyBtn{
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 30px;
+    opacity: 0.7;
+    padding: 5px 15px;
+}
+
+.emptyBtn:hover{
+    background-color: #ffe44d;
+}

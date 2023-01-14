@@ -14,6 +14,8 @@ function App() { // Компотент App
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [basket, setBasket] = useState([]) // Хук для отображения корзины с товарами
+  const [searchData, setSearchData] = useState(dataProducts) // Хук список продуктов поиска
+  const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
 
   useEffect(() => { // Хук для проверки записи о количестве товаров в корзине из (loc.Storage)
     if (localStorage.getItem('Basket')) { // Если запись есть то...
@@ -85,6 +87,10 @@ function App() { // Компотент App
           token={token}
           basket={basket}
           setBasket={setBasket}
+          searchData={searchData}
+          setSearchData={setSearchData}
+          searchText={searchText}
+          setUpdateSearchText={setUpdateSearchText}
         />
         <Main
           user={user}

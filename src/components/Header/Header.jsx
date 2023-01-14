@@ -4,9 +4,10 @@ import stylesHeader from './header.module.scss' // Импорт компонен
 
 function Header({
   user, setUser, dataProducts, setModalActive, setGoods,
-  setUserDetails, api, token, basket, setBasket,
+  setUserDetails, api, token, basket, setBasket, searchData,
+  setSearchData, searchText, setUpdateSearchText,
 }) { // Компонент Header с {props}
-  const navigate = useNavigate()
+  const navigate = useNavigate() // назначение Хук (useNavigate)
   const UserDetails = (e) => { // функция запроса детальной информации о пользователе
     e.preventDefault() // Отмена действий по умолчанию
     api.getUserDetails() // Метод запроса на получение информации о пользователе
@@ -45,9 +46,19 @@ function Header({
       <Search /* Компонент (Search) и передача пропсов */
         setGoods={setGoods}
         dataProducts={dataProducts}
+        searchData={searchData}
+        setSearchData={setSearchData}
+        searchText={searchText}
+        setUpdateSearchText={setUpdateSearchText}
       />
       )}
       <nav className={stylesHeader.nav}>
+        {(user && token) && (
+        <Link to="/" className={stylesHeader.heart}>
+          <i className="fa-solid fa-heart" /* иконка с сердцем *//>
+          <span className={stylesHeader.basketQuantity}>0</span>
+        </Link>
+        )/* Поле отображающие корзины заказа */}
         {(user && token) && (
         <Link to="/basket" className={stylesHeader.basket}>
           <i className="fa-solid fa-basket-shopping" />
