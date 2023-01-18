@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
+import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
+import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 
-export function Card({ api, basket, setBasket }) { // Компонет (Card) с инфо по одной карточке
+export function Card({ api }) { // Компонет (Card) с инфо по одной карточке
   const { id } = useParams() // Хук из (react-router-dom) для извлечения id карточки
   const [productId, setProductId] = useState([]) // Хук для получения информации об одном товаре
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
   const navigate = useNavigate() // Хук из (react-router-dom)
+  const dispatch = useDispatch() // Хук из (Redux)
+  const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
 
   useEffect(() => { // Хук для загрузки информации об одном товере
     if (id) { // Если токен есть
@@ -55,14 +59,12 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
       stock: productId.stock,
       isChecked: false,
     }
-    const arrBasket = basket.filter((el) => el.id.includes(id)) // Проверка наличия товара в корзине
+    const arrBasket = basketRedux.filter((el) => el.id.includes(id)) // Проверка товара в корзине
     if (arrBasket.length === 0) { // Если такого товара нет то...
-      const newArrBasket = basket.concat(basketCard) // Добавляем товар к массиву из Хука корзины
-      setBasket(newArrBasket) // Добавляем товар в Хук корзины
-      const strBasket = JSON.stringify(newArrBasket) // Сущность для записи в (localStorage)
-      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+      const newArrBasket = basketRedux.concat(basketCard) // Добавляем товар к массиву из корзины
+      dispatch(newArrBasketRedux(newArrBasket)) // Добавляем товар в Хук корзины
     } else { // Иначе если товар уже есть в корзине
-      const modifiedArrBasket = basket.map((el) => { // Ищем товар в массиве
+      const modifiedArrBasket = basketRedux.map((el) => { // Ищем товар в массиве
         if (el.id === id) { // если id совпадают
           return { // Меняем количество товаров
             ...el,
@@ -71,9 +73,7 @@ export function Card({ api, basket, setBasket }) { // Компонет (Card) с
         }
         return el // Или возвращаем товар
       })
-      setBasket(modifiedArrBasket) // Добавляем товар в Хук корзины
-      const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
-      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+      dispatch(newArrBasketRedux(modifiedArrBasket)) // Добавляем товар в Хук корзины
     }
   }
 

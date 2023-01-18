@@ -1,14 +1,17 @@
+import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
+import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesBasket from './basket.module.scss' // Импорт компонента стилей
 import { ReactComponent as Xmark } from '../Search/img/circle-xmark-regular.svg' // Импорт файла (svg) преобразованного в компонент
 
 export function BasketCards({ // Компонента карточки товара в корзине
-  id, stockQuantity, name, pictures, discount, price, setBasket, basket, stock, isChecked,
+  id, stockQuantity, name, pictures, discount, price, stock, isChecked,
 }) {
+  const dispatch = useDispatch() // Хук из (Redux)
+  const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
+
   const basketQuantityFn = () => { // Функция удаление товара из корзины заказа
-    const newArrBasket = basket.filter((el) => el.id !== id)
-    setBasket(newArrBasket) // Запись в Хук массива без товара по Id
-    const strBasket = JSON.stringify(newArrBasket) // Сущность для записи в (localStorage)
-    localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+    const newArrBasket = basketRedux.filter((el) => el.id !== id)
+    dispatch(newArrBasketRedux(newArrBasket))
   }
 
   const discountFun = () => { // Функция считающая скидку на товар
@@ -23,7 +26,7 @@ export function BasketCards({ // Компонента карточки това�
   const stockPlus = () => { // Функция увеличивающая единиц за один товар в корзине
     const strData = JSON.stringify(stock) // Сущность (stock) для записи в (localStorage)
     localStorage.setItem('stock', strData) // Метод записи в (localStorage)
-    const modifiedArrBasket = basket.map((el) => { // Ищем товар в массиве
+    const modifiedArrBasket = basketRedux.map((el) => { // Ищем товар в массиве
       if (el.id === id) { // если id совпадают
         if (stockQuantity < localStorage.getItem('stock')) { // Если меньше чем записано изначально в (localStorage)
           return { // Меняем количество товаров + 1
@@ -33,15 +36,13 @@ export function BasketCards({ // Компонента карточки това�
         }
       } return el
     })
-    setBasket(modifiedArrBasket) // Добавляем товар в Хук корзины
-    const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
-    localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+    dispatch(newArrBasketRedux(modifiedArrBasket))
   }
 
   const stockMinus = () => { // Функция уменьшающая единиц за один товар в корзине
     const strData = JSON.stringify(stock) // Сущность (stock) для записи в (localStorage)
     localStorage.setItem('stock', strData) // Метод записи в (localStorage)
-    const modifiedArrBasket = basket.map((el) => { // Ищем товар в массиве
+    const modifiedArrBasket = basketRedux.map((el) => { // Ищем товар в массиве
       if (el.id === id) { // если id совпадают
         if (stockQuantity > 1) { // Если больше чем 1
           return { // Меняем количество товаров - 1
@@ -51,13 +52,11 @@ export function BasketCards({ // Компонента карточки това�
         }
       } return el
     })
-    setBasket(modifiedArrBasket) // Добавляем товар в Хук корзины
-    const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
-    localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+    dispatch(newArrBasketRedux(modifiedArrBasket))
   }
 
   const handleChange = () => { // Функция смены состояния для (checkbox)
-    const modifiedArrBasket = basket.map((el) => { // Создаём новый массив из (basket)
+    const modifiedArrBasket = basketRedux.map((el) => { // Создаём новый массив из (basket)
       if (el.id === id) { // Если (id) совпадает
         return {
           ...el, // Разварачиваем объект
@@ -65,9 +64,7 @@ export function BasketCards({ // Компонента карточки това�
         }
       } return el
     })
-    setBasket(modifiedArrBasket) // Добавляем товар в Хук корзины
-    const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
-    localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+    dispatch(newArrBasketRedux(modifiedArrBasket))
   }
 
   return ( // jsx разметка

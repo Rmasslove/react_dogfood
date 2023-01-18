@@ -6,7 +6,7 @@ import { Home } from '../Pages/home' // Импорт компонента
 import { NotFoundPage } from './NotFoudPage' // Импорт компонента
 
 function Main({ // Копонент основного тела сайта
-  dataProducts, user, api, basket, setBasket,
+  dataProducts, user, api,
 }) { // Компонент Main с {props}
   return ( // jsx разметка
     <main>
@@ -23,8 +23,8 @@ function Main({ // Копонент основного тела сайта
           ))
         || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
-        <Route path="/card/:id" element={<Card api={api} basket={basket} setBasket={setBasket} />} />
-        <Route path="/basket" element={<BasketRoute basket={basket} setBasket={setBasket} />} />
+        <Route path="/card/:id" element={<Card api={api} />} />
+        <Route path="/basket" element={<BasketRoute />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </main>

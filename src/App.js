@@ -13,16 +13,8 @@ function App() { // Компотент App
   const [api, setApi] = useState(new Api(token)) // Хук для состояния (Api)
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
-  const [basket, setBasket] = useState([]) // Хук для отображения корзины с товарами
   const [searchData, setSearchData] = useState(dataProducts) // Хук список продуктов поиска
   const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
-
-  useEffect(() => { // Хук для проверки записи о количестве товаров в корзине из (loc.Storage)
-    if (localStorage.getItem('Basket')) { // Если запись есть то...
-      const strBasket = localStorage.getItem('Basket') // Сущность принимающая сохраненное значение о товарах в корзине из (localStorage)
-      setBasket(JSON.parse(strBasket)) // Запись в Хук количества товаров в корзине из (loc.Storage)
-    }
-  }, [])
 
   useEffect(() => { // Хук для проверки загрузки страницы и перезагрузки, при наличии (token)
     if (token) { // Если токен есть
@@ -85,8 +77,6 @@ function App() { // Компотент App
           setUserDetails={setUserDetails}
           api={api}
           token={token}
-          basket={basket}
-          setBasket={setBasket}
           searchData={searchData}
           setSearchData={setSearchData}
           searchText={searchText}
@@ -97,8 +87,6 @@ function App() { // Компотент App
           dataProducts={dataProducts}
           token={token}
           api={api}
-          basket={basket}
-          setBasket={setBasket}
         />
         <Footer /* компонент Footer *//>
       </div>

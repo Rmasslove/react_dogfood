@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react' // Импорт компонента
+import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
+import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesBasket from './basket.module.scss' // Импорт компонента стилей
 import { BasketCards } from './BasketCards' // Импорт компонента
 
-export function Basket({ basket, setBasket }) { // Компонент корзины
+export function Basket() { // Компонент корзины
   const [totalQuantityGoods, setTotalQuantityGoods] = useState([]) // Хук кол. едениц общего заказа
   const [fullCalculation, setFullCalculation] = useState([]) // Хук для подсчёта общего заказа
   const [checkboxSelectAll, setCheckboxSelectAll] = useState(false)
+  const dispatch = useDispatch() // Хук из (Redux)
+  const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
 
   useEffect(() => { // Хук для расчёта кол. едениц общего заказа
-    const filterArrBasket = basket.filter((el) => el.isChecked === true) // выбор отмеченых товаров
+    const filterArrBasket = basketRedux.filter((el) => el.isChecked === true) // выбр отмеченых тов.
     const resultArrBasket = filterArrBasket.reduce((sum, el) => sum + el.stockQuantity, 0) // сумма
     setTotalQuantityGoods(resultArrBasket) // Считаем сумму и записываем в Хук
-  }, [basket])
+  }, [basketRedux])
 
   useEffect(() => { // Хук для расчёта итоговой суммы заказа
-    const filterArrBasket = basket.filter((el) => el.isChecked === true) // выбор отмеченых товаров
+    const filterArrBasket = basketRedux.filter((el) => el.isChecked === true) // выбр отмеченых тов.
     const resultArrBasket = filterArrBasket.reduce((sum, el) => { // Расчёт итоговой суммы заказа
       if (el.discount > 0) { // Если есть скидка то...
         const result = Math.round(el.price - (
@@ -24,36 +28,30 @@ export function Basket({ basket, setBasket }) { // Компонент корзи
       return sum + el.price * el.stockQuantity // возвращаем сумму без скидки
     }, 0)
     setFullCalculation(resultArrBasket) // Записываем результат в Хук
-  }, [basket])
+  }, [basketRedux])
 
   const handleChangeSelectAll = (Event) => { // выбор всего заказа в корзине
     if (Event.target.checked) { // Если чекбокс true
       setCheckboxSelectAll(true) // Переводим Хук (Checkbox) в состояние (true)
-      const modifiedArrBasket = basket.map((el) => ({ // Создаем новый массив
+      const modifiedArrBasket = basketRedux.map((el) => ({ // Создаем новый массив
         ...el,
         isChecked: true, // Меняем значение на  true
       }))
-      setBasket(modifiedArrBasket) // Записываем результат в Хук
-      const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
-      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+      dispatch(newArrBasketRedux(modifiedArrBasket))
     } else { // Если чекбокс false
       setCheckboxSelectAll(false) // Переводим Хук (Checkbox) в состояние (false)
-      const modifiedArrBasket = basket.map((el) => ({ // Создаем новый массив
+      const modifiedArrBasket = basketRedux.map((el) => ({ // Создаем новый массив
         ...el,
         isChecked: false, // Меняем значение на (false)
       }))
-      setBasket(modifiedArrBasket) // Записываем результат в Хук
-      const strBasket = JSON.stringify(modifiedArrBasket) // Сущность для записи в (localStorage)
-      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+      dispatch(newArrBasketRedux(modifiedArrBasket))
     }
   }
 
   const basketDeletAll = () => { // Удаление выбранных товаров
     if (checkboxSelectAll) { // Если чекбокс (true)
-      const newArrBasket = basket.filter((el) => el.isChecked === false) // Массив без товаров
-      setBasket(newArrBasket) // Запись в Хук массива без товара по Id
-      const strBasket = JSON.stringify(newArrBasket) // Сущность для записи в (localStorage)
-      localStorage.setItem('Basket', strBasket) // Метод записи в (localStorage)
+      const newArrBasket = basketRedux.filter((el) => el.isChecked === false) // Массив без товаров
+      dispatch(newArrBasketRedux(newArrBasket))
       setCheckboxSelectAll(false) // Переводим Хук (Checkbox) в состояние (false)
     }
   }
@@ -76,11 +74,10 @@ export function Basket({ basket, setBasket }) { // Компонент корзи
       <div className={stylesBasket.cardsWr}>
         <div>
           <div className={stylesBasket.cards}>
-            {basket.map((el) => (/* Метод мап для отображения нужного количества карточек */
+            {basketRedux.map((el) => (/* Метод мап для отображения нужного количества карточек */
               <BasketCards /* Компонента Card */
                 key={crypto.randomUUID() /* Вызов функции для получения (key) */}
-                setBasket={setBasket}
-                basket={basket}
+                basketRedux={basketRedux}
                 {...el /* Информация (содержимое) для карточек ввиде props */}
               />
             ))}
