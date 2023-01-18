@@ -6,8 +6,17 @@ export function UserDetails({ userDetails }) { // Компонент (Signup) с
     <div className={stylesUserDetails.wr}>
       <img src={userDetails.avatar === '' ? avatarDefault : userDetails.avatar} alt={userDetails.name} />
       <div className={stylesUserDetails.text}>
-        <p>{userDetails.name}</p>
-        <p>{userDetails.about}</p>
+        <p>
+          name:
+          {' '}
+          {userDetails.name}
+        </p>
+        <p>
+          about:
+          {' '}
+          {userDetails.about}
+
+        </p>
         <p>
           email:
           {' '}

@@ -13,7 +13,7 @@ function App() { // Компотент App
   const [api, setApi] = useState(new Api(token)) // Хук для состояния (Api)
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
-  const [searchData, setSearchData] = useState(dataProducts) // Хук список продуктов поиска
+  const [searchData, setSearchData] = useState(dataProducts) // Хук список количества товаров поиска
   const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
 
   useEffect(() => { // Хук для проверки загрузки страницы и перезагрузки, при наличии (token)
