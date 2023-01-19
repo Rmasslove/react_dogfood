@@ -80,6 +80,7 @@ export function Card({ api }) { // Компонет (Card) с инфо по од
   const likesClick = (Event) => { // Функция для постоновки "лайка"
     console.log('>>>>') // Служебный вывод для отладки
     Event.stopPropagation() // Остановка всплытия события
+    Event.preventDefault()
   }
 
   return ( // jsx разметка

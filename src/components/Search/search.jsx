@@ -24,13 +24,16 @@ export function Search({
 
   useEffect(() => { // Хук для запуска поиска товара
     navigate('/catalog') // Перенаправляем на страницу каталога с товарами
-    const strProducts = JSON.parse(localStorage.getItem('localProducts')) // Сущность принимающая товары из (localStorage) для поиска и сортировки
-    if (searchText) {
-      const arr = strProducts.filter( // Метод сортировки списка продуктов
+    const Products = JSON.parse(localStorage.getItem('localProducts')) // Сущность принимающая товары из (localStorage) для поиска и сортировки
+    if (searchText) { // Если в строке поиска что-то есть то...
+      const arr = Products.filter( // Метод сортировки списка продуктов
         (el) => el.name.toLowerCase().includes(searchText.toLowerCase()),
       )
       setSearchData(arr) // Хук принимающий список отсортированых продуктов
       setGoods(arr) // Хук с тов. принимающий отсортированое значение после поиска для отображения
+    } else { // Если в строке поиска символов нет то...
+      const strProducts = localStorage.getItem('localProducts') // Сущность принимающая сохраненное значение о товарах в (localStorage)
+      setGoods(JSON.parse(strProducts)) // Запись в Хук начального значения товаров из (loc.Storage)
     }
   }, [debounceValue]) // Срабатывает на изменение функции (debounceValue) 600ms
 
