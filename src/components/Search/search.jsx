@@ -36,7 +36,7 @@ export function Search({
       setGoods(arr) // Хук с тов. принимающий отсортированое значение после поиска для отображения
     } else { // Если в строке поиска символов нет то...
       const strProducts = localStorage.getItem('localProducts')//  Сущность принимающая сохраненное значение о товарах в (localStorage)
-      if (strProducts) {
+      if (strProducts) { // Если в (loc.Storage) есть запись о товарах то...
         setGoods(JSON.parse(strProducts)) // Запись в Хук начальн. значения товаров из (loc.Storage)
       }
     }

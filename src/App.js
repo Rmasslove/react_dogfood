@@ -65,8 +65,6 @@ function App() { // Компотент App
     }
   }, [api]) // Срабатывает при изменении (api)
 
-  console.log('app', dataProducts)
-
   return ( // jsx разметка
     <>
       <div className="containerApp">
