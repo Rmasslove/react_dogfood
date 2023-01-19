@@ -1,9 +1,9 @@
 import { useNavigate, Link } from 'react-router-dom' // Импорт компонента
-import { useSelector } from 'react-redux' // Импорт компонента
+import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
 import { Search } from '../Search/Search' // Импорт компонента
-import { getBasketSliceSelector } from '../../redux/slices/basketSlice' // Импорт компонента
+import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
-import { REDUX_LS_KEY } from '../../redux/initState' // Импорт значения из компонента
+import { REDUX_LS_KEY, REDUX_LS_KEY2 } from '../../redux/initState' // Импорт значения из компонента
 
 function Header({
   user, setUser, dataProducts, setModalActive, setGoods,
@@ -12,6 +12,7 @@ function Header({
 }) { // Компонент Header с {props}
   const navigate = useNavigate() // назначение Хук (useNavigate)
   const basketRedux = useSelector(getBasketSliceSelector) //  Хук из (Redux) с массивом корзины
+  const dispatch = useDispatch() // Хук из (Redux)
 
   const UserDetails = (e) => { // функция запроса детальной информации о пользователе
     e.preventDefault() // Отмена действий по умолчанию
@@ -38,7 +39,9 @@ function Header({
     e.preventDefault() // Отмена действий по умолчанию
     localStorage.removeItem('userSM8') // Удаления записи о пользователе из (localStorage)
     localStorage.removeItem('stock') // Удаления записи о количестве товара из (localStorage)
+    dispatch(newArrBasketRedux([])) // Делаем запись в корзину в (redux)
     localStorage.removeItem(REDUX_LS_KEY) // Удаления записи о корзине из (localStorage)
+    localStorage.removeItem(REDUX_LS_KEY2) // Удаления записи о корзине из (localStorage)
     setUser('') // Удаление записи о пользователе в Хук (useState)
     navigate('/') // Переход на корневую страницу
   }

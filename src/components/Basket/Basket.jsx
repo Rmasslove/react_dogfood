@@ -37,21 +37,21 @@ export function Basket() { // Компонент корзины
         ...el,
         isChecked: true, // Меняем значение на  true
       }))
-      dispatch(newArrBasketRedux(modifiedArrBasket))
+      dispatch(newArrBasketRedux(modifiedArrBasket)) // Делаем запись в корзину в (redux)
     } else { // Если чекбокс false
       setCheckboxSelectAll(false) // Переводим Хук (Checkbox) в состояние (false)
       const modifiedArrBasket = basketRedux.map((el) => ({ // Создаем новый массив
         ...el,
         isChecked: false, // Меняем значение на (false)
       }))
-      dispatch(newArrBasketRedux(modifiedArrBasket))
+      dispatch(newArrBasketRedux(modifiedArrBasket)) // Делаем запись в корзину в (redux)
     }
   }
 
   const basketDeletAll = () => { // Удаление выбранных товаров
     if (checkboxSelectAll) { // Если чекбокс (true)
       const newArrBasket = basketRedux.filter((el) => el.isChecked === false) // Массив без товаров
-      dispatch(newArrBasketRedux(newArrBasket))
+      dispatch(newArrBasketRedux(newArrBasket)) // Делаем запись в корзину в (redux)
       setCheckboxSelectAll(false) // Переводим Хук (Checkbox) в состояние (false)
     }
   }
