@@ -23,7 +23,6 @@ export function Search({
   }
 
   useEffect(() => { // Хук для запуска поиска товара
-    navigate('/catalog') // Перенаправляем на страницу каталога с товарами
     const Products = JSON.parse(localStorage.getItem('localProducts')) // Сущность принимающая товары из (localStorage) для поиска и сортировки
     if (searchText) { // Если в строке поиска что-то есть то...
       const arr = Products.filter( // Метод сортировки списка продуктов
@@ -32,6 +31,7 @@ export function Search({
       if (arr.length === 0) { // Если товаров не нейдено
         navigate('/catalog/searchempty') // Перенаправляем на страницу (searchempty)
       }
+      navigate('/catalog') // Перенаправляем на страницу каталога с товарами
       setSearchData(arr) // Хук принимающий список отсортированых продуктов
       setGoods(arr) // Хук с тов. принимающий отсортированое значение после поиска для отображения
     } else { // Если в строке поиска символов нет то...
