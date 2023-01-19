@@ -87,6 +87,8 @@ function App() { // Компотент App
           dataProducts={dataProducts}
           token={token}
           api={api}
+          setGoods={setGoods}
+          setUpdateSearchText={setUpdateSearchText}
         />
         <Footer /* компонент Footer *//>
       </div>

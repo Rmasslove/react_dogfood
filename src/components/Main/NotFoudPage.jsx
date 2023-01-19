@@ -9,7 +9,9 @@ export function NotFoundPage() { // Компонент для несуществ
         <i className="fa-solid fa-magnifying-glass" />
       </div>
       <div className={stylesMain.emptyBtnLink}>
-        <Link to="/"><button type="button" className={stylesMain.emptyBtn}>На главную</button></Link>
+        <Link to="/">
+          <button type="button" className={stylesMain.emptyBtn}>На главную</button>
+        </Link>
       </div>
     </>
   )

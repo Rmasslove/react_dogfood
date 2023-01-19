@@ -29,6 +29,9 @@ export function Search({
       const arr = Products.filter( // Метод сортировки списка продуктов
         (el) => el.name.toLowerCase().includes(searchText.toLowerCase()),
       )
+      if (arr.length === 0) { // Если товаров не нейдено
+        navigate('/catalog/searchempty') // Перенаправляем на страницу (searchempty)
+      }
       setSearchData(arr) // Хук принимающий список отсортированых продуктов
       setGoods(arr) // Хук с тов. принимающий отсортированое значение после поиска для отображения
     } else { // Если в строке поиска символов нет то...
