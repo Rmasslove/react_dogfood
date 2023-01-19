@@ -13,21 +13,21 @@ function Main({ // Копонент основного тела сайта
     <main>
       <Routes>
         {/* (Роуты) маршруты для перехода по страницам */}
-        <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<Home user={user}/* При отсутствии юзера выбор копонента (Home) */ />} />
         <Route
           path="/catalog"
           element={(user && (
-          <Catalog
-            api={api}
-            dataProducts={dataProducts}
-          />
+            <Catalog
+              api={api}
+              dataProducts={dataProducts}
+            />
           ))
-        || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
+            || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
         <Route path="/card/:id" element={<Card api={api} />} />
         <Route path="/basket" element={<BasketRoute />} />
-        <Route path="/catalog/searchempty" element={<SearchEmpty setGoods={setGoods} setUpdateSearchText={setUpdateSearchText} />} />
+        <Route path="/catalog/searchempty" element={(<SearchEmpty setGoods={setGoods} setUpdateSearchText={setUpdateSearchText} />)} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </main>
   )

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom' // Импорт компонента
 import stylesSearch from './search.module.scss' // Импорт компонента стилей
 
-export function SearchEmpty({ setGoods, setUpdateSearchText }) { // Компонент пустой корзины
+export function SearchEmpty({ setGoods, setUpdateSearchText }) { // Компонент пустого поиска
   const navigate = useNavigate() // Хук из (react-router-dom)
   const navigeteFn = () => { // Функция для перехода в каталог
     navigate('/catalog') // Перенаправляем на страницу каталога с товарами

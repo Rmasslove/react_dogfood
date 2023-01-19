@@ -35,8 +35,10 @@ export function Search({
       setSearchData(arr) // Хук принимающий список отсортированых продуктов
       setGoods(arr) // Хук с тов. принимающий отсортированое значение после поиска для отображения
     } else { // Если в строке поиска символов нет то...
-      const strProducts = localStorage.getItem('localProducts') // Сущность принимающая сохраненное значение о товарах в (localStorage)
-      setGoods(JSON.parse(strProducts)) // Запись в Хук начального значения товаров из (loc.Storage)
+      const strProducts = localStorage.getItem('localProducts')//  Сущность принимающая сохраненное значение о товарах в (localStorage)
+      if (strProducts) {
+        setGoods(JSON.parse(strProducts)) // Запись в Хук начальн. значения товаров из (loc.Storage)
+      }
     }
   }, [debounceValue]) // Срабатывает на изменение функции (debounceValue) 600ms
 
