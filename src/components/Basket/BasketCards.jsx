@@ -8,6 +8,7 @@ export function BasketCards({ // Компонента карточки това�
 }) {
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
+  const stokStyl = localStorage.getItem('stock') // Сущность принимающая значения (stock) для стилей кнопок
 
   const basketQuantityFn = () => { // Функция удаление товара из корзины заказа
     const newArrBasket = basketRedux.filter((el) => el.id !== id)
@@ -74,9 +75,9 @@ export function BasketCards({ // Компонента карточки това�
         <p className={stylesBasket.name}>{name}</p>
       </label>
       <div className={stylesBasket.stock}>
-        <button type="button" onClick={stockMinus}>-</button>
+        <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesBasket.stockStop : stylesBasket.stockStopFalse}>-</button>
         {stockQuantity}
-        <button type="button" onClick={stockPlus}>+</button>
+        <button type="button" onClick={stockPlus} className={(stockQuantity < stokStyl) ? stylesBasket.stockStopFalse : stylesBasket.stockStop}>+</button>
       </div>
       <p>шт.</p>
       <p>

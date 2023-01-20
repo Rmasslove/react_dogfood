@@ -11,6 +11,7 @@ export function Card({ api }) { // Компонет (Card) с инфо по од
   const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
+  const stokStyl = localStorage.getItem('stock') // Сущность принимающая значения (stock) для стилей кнопок
 
   useEffect(() => { // Хук для загрузки информации об одном товере
     if (id) { // Если токен есть
@@ -108,9 +109,9 @@ export function Card({ api }) { // Компонет (Card) с инфо по од
               шт.
             </p>
             <div className={stylesCard.stock}>
-              <button type="button" onClick={stockMinus}>-</button>
+              <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesCard.stockStop : stylesCard.stockStopFalse}>-</button>
               {stockQuantity}
-              <button type="button" onClick={stockPlus}>+</button>
+              <button type="button" onClick={stockPlus} className={(stockQuantity < stokStyl) ? stylesCard.stockStopFalse : stylesCard.stockStop}>+</button>
             </div>
             <p className={stylesCard.totalPrice}/* Итоговая сумма */>
               Сумма
