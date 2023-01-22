@@ -7,27 +7,16 @@ import { REDUX_LS_KEY, REDUX_LS_KEY2 } from '../../redux/initState' // Импо�
 
 function Header({
   user, setUser, dataProducts, setModalActive, setGoods,
-  setUserDetails, api, token, searchData,
-  setSearchData, searchText, setUpdateSearchText,
+  token, searchData,
+  setSearchData, searchText, setUpdateSearchText, userDetails,
 }) { // Компонент Header с {props}
   const navigate = useNavigate() // назначение Хук (useNavigate)
   const basketRedux = useSelector(getBasketSliceSelector) //  Хук из (Redux) с массивом корзины
   const dispatch = useDispatch() // Хук из (Redux)
 
-  const UserDetails = (e) => { // функция запроса детальной информации о пользователе
+  const UserDetails = (e) => { // функция открытия модал окна с детальной информации о пользователе
     e.preventDefault() // Отмена действий по умолчанию
-    api.getUserDetails() // Метод запроса на получение информации о пользователе
-      .then((res) => res.json()) // ответ в json
-      .then((data) => { // ответ в объекте
-        if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-          setUserDetails(data)
-          // Запись результата в Хук (userDetails)
-          setModalActive((prev) => !prev) // Смена режима модального окна (откр/закр)
-        } else {
-          // eslint-disable-next-line no-alert
-          alert(data.message) // Вывод информации об ошибке
-        }
-      })
+    setModalActive((prev) => !prev) // Смена режима модального окна (откр/закр)
   }
 
   const logIn = (e) => { // функция для Логина
@@ -46,6 +35,11 @@ function Header({
     navigate('/') // Переход на корневую страницу
   }
 
+  const isLikeArr = dataProducts.filter(
+    // eslint-disable-next-line no-underscore-dangle
+    (el) => el.likes.includes(userDetails._id),
+  ) // Выбор товаров с лайками запись в массив
+
   return ( // jsx разметка
     <header className={stylesHeader.header}>
       <Link to="/" className={stylesHeader.logo}>DogFood</Link>
@@ -61,9 +55,9 @@ function Header({
       )}
       <nav className={stylesHeader.nav}>
         {(user && token) && (
-        <Link to="/" className={stylesHeader.heart}>
+        <Link to="/likes" className={stylesHeader.heart}>
           <i className="fa-solid fa-heart" /* иконка с сердцем *//>
-          <span className={stylesHeader.basketQuantity}>0</span>
+          <span className={stylesHeader.basketQuantity}>{isLikeArr.length}</span>
         </Link>
         )/* Поле отображающие корзины заказа */}
         {(user && token) && (

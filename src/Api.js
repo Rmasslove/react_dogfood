@@ -74,6 +74,34 @@ class Api { // Класс (Api)
       throw new Error(error)
     }
   }
+
+  putLike(id) { // Функция установки лайка по (id)
+    try {
+      return fetch(`${this.path}/products/likes/${id}`, { // Запрос на сервер
+        method: 'PUT', // метод
+        headers: { // заголовок
+        // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
+
+  delLike(id) { // Функция удаления лайка по (id)
+    try {
+      return fetch(`${this.path}/products/likes/${id}`, { // Запрос на сервер
+        method: 'DELETE', // метод
+        headers: { // заголовок
+        // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
 }
 
 export { Api } // Экспорт класса

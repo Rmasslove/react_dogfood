@@ -1,0 +1,49 @@
+
+.link {
+    opacity: 0.7;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.likesEmptyWr{
+    display: flex;
+    justify-content: center;
+    flex-direction: column
+}
+
+.likesEmpty {
+    margin-top: 180px;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.likesEmptyI>i {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    font-weight: 600;
+    font-size: 150px;
+    color: rgba(34, 34, 34, 0.541);
+}
+
+.likesEmptyBtnLink{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.likesEmptyBtn{
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 30px;
+    opacity: 0.7;
+    padding: 5px 15px;
+}
+
+.likesEmptyBtn:hover{
+    background-color: #ffe44d;
+}

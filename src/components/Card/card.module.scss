@@ -3,11 +3,20 @@
 }
 
 
-.heart {
+.heartFalse {
     position: absolute;
     top: 0.1em;
     right: 0.4em;
     color: silver;
+    opacity: 0.5;
+    font-size: 34px;
+}
+
+.heartTrue {
+    position: absolute;
+    top: 0.1em;
+    right: 0.4em;
+    color: brown;
     opacity: 0.5;
     font-size: 34px;
 }

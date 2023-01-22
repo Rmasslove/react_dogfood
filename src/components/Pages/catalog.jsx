@@ -1,7 +1,9 @@
 import { Cards } from '../Card/Cards' // Импорт компонента
 import stylesPages from './pages.module.scss' // Импорт компонента стилей
 
-export function Catalog({ dataProducts }) { // Компонент отрисовки карточик с {props}
+export function Catalog({
+  dataProducts, userDetails, api, setReload,
+}) { // Компонент отрисовки карточик с {props}
   return (
     <>
       <p className={stylesPages.link}>Каталог товаров</p>
@@ -10,6 +12,10 @@ export function Catalog({ dataProducts }) { // Компонент отрисов
           <Cards /* Компонента Card */
             key={crypto.randomUUID() /* Вызов функции для получения (key) */}
             {...el /* Информация (содержимое) для карточек ввиде props */}
+            userDetails={userDetails}
+            dataProducts={dataProducts}
+            api={api}
+            setReload={setReload}
           />
         ))}
       </div>

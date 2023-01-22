@@ -15,6 +15,22 @@ function App() { // Компотент App
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [searchData, setSearchData] = useState(dataProducts) // Хук список количества товаров поиска
   const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
+  const [reload, setReload] = useState(0)
+
+  useEffect(() => { // Хук с запросом информации о пользователе
+    if (token) { // Если токен есть
+      api.getUserDetails() // Метод запроса на получение информации о пользователе
+        .then((res) => res.json()) // ответ в json
+        .then((data) => { // ответ в объекте
+          if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+            setUserDetails(data) // Запись результата в Хук (userDetails)
+          } else {
+          // eslint-disable-next-line no-alert
+            alert(data.message) // Вывод информации об ошибке
+          }
+        })
+    }
+  }, [dataProducts]) // Срабатывает на изменения (dataProducts)
 
   useEffect(() => { // Хук для проверки загрузки страницы и перезагрузки, при наличии (token)
     if (token) { // Если токен есть
@@ -63,7 +79,7 @@ function App() { // Компотент App
           }
         })
     }
-  }, [api]) // Срабатывает при изменении (api)
+  }, [api, reload]) // Срабатывает при изменении (api) и (reload)
 
   return ( // jsx разметка
     <>
@@ -81,14 +97,16 @@ function App() { // Компотент App
           setSearchData={setSearchData}
           searchText={searchText}
           setUpdateSearchText={setUpdateSearchText}
+          userDetails={userDetails}
         />
         <Main
           user={user}
           dataProducts={dataProducts}
-          token={token}
           api={api}
           setGoods={setGoods}
           setUpdateSearchText={setUpdateSearchText}
+          userDetails={userDetails}
+          setReload={setReload}
         />
         <Footer /* компонент Footer *//>
       </div>
