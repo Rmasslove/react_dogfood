@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react' // Импорт компонента
+import { useDispatch } from 'react-redux'
 import { Footer } from './components/Footer/Footer' // Импорт компонента
 import { Header } from './components/Header/Header' // Импорт компонента
 import { Main } from './components/Main/Main' // Импорт компонента
 import './App.css' // Импорт компонента стилей
 import { Modal } from './components/Modal/Modal' // Импорт компонента
 import { Api } from './Api' // Импорт компонента
+import { newArrDataProductsRedux } from './redux/slices/dataProductsSlise'
 
 function App() { // Компотент App
   const [user, setUser] = useState(localStorage.getItem('userSM8')) // Хук (useState) принимающий данные из (localStorage) о пользователе
@@ -12,10 +14,12 @@ function App() { // Компотент App
   const [modalActive, setModalActive] = useState(false) // Хук для модального окна, скрыто (false)
   const [api, setApi] = useState(new Api(token)) // Хук для состояния (Api)
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
+  const [likeProducts, setLikeProducts] = useState([]) // Хук для работы с любимыми товарами
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [searchData, setSearchData] = useState(dataProducts) // Хук список количества товаров поиска
   const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
-  const [reload, setReload] = useState(0)
+  const [reload, setReload] = useState(0) // Хук для массива зависимостей вызывающий перезапуск
+  const dispatch = useDispatch() // Хук из (Redux)
 
   useEffect(() => { // Хук с запросом информации о пользователе
     if (token) { // Если токен есть
@@ -39,6 +43,8 @@ function App() { // Компотент App
         .then((data) => { // ответ в объекте
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setGoods(data.products) // Запись результата в Хук (dataProducts)
+            dispatch(newArrDataProductsRedux(data.products)) // Запись информации в срез (redux)
+            setLikeProducts(data.products) // Запись в Хук для работы с любимыми товарами
           } else {
             // eslint-disable-next-line no-alert
             alert(data.message) // Вывод информации об ошибке
@@ -73,6 +79,8 @@ function App() { // Компотент App
         .then((data) => { // ответ в объекте
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setGoods(data.products) // Запись результата в Хук (dataProducts)
+            dispatch(newArrDataProductsRedux(data.products)) // Запись информации в срез (redux)
+            setLikeProducts(data.products) // Запись в Хук для работы с любимыми товарами
             const strData = JSON.stringify(data.products)
             // Сущность для с товарами для записи в (localStorage)
             localStorage.setItem('localProducts', strData) // Запись в (localStorage)
@@ -98,6 +106,7 @@ function App() { // Компотент App
           searchText={searchText}
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
+          likeProducts={likeProducts}
         />
         <Main
           user={user}

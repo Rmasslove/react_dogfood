@@ -66,7 +66,7 @@ export function Card({
     const arrBasket = basketRedux.filter((el) => el.id.includes(id)) // Проверка товара в корзине
     if (arrBasket.length === 0) { // Если такого товара нет то...
       const newArrBasket = basketRedux.concat(basketCard) // Добавляем товар к массиву из корзины
-      dispatch(newArrBasketRedux(newArrBasket)) // Добавляем товар в Хук корзины
+      dispatch(newArrBasketRedux(newArrBasket)) // Добавляем товар в срез (redux) корзины
     } else { // Иначе если товар уже есть в корзине
       const modifiedArrBasket = basketRedux.map((el) => { // Ищем товар в массиве
         if (el.id === id) { // если id совпадают
@@ -77,7 +77,7 @@ export function Card({
         }
         return el // Или возвращаем товар
       })
-      dispatch(newArrBasketRedux(modifiedArrBasket)) // Добавляем товар в Хук корзины
+      dispatch(newArrBasketRedux(modifiedArrBasket)) // Добавляем товар в срез (redux) корзины
     }
   }
 
@@ -96,6 +96,7 @@ export function Card({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
               // eslint-disable-next-line no-alert
               alert(data.message) // Вывод информации об ошибке
@@ -106,6 +107,7 @@ export function Card({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
               // eslint-disable-next-line no-alert
               alert(data.message) // Вывод информации об ошибке
@@ -113,7 +115,6 @@ export function Card({
           })
       }
     }
-    setReload(crypto.randomUUID()) // Вызывает перезагрузку товаров
   }
 
   const isLikeStylesFn = () => { // Функция для выбора цвета стиля сердечка

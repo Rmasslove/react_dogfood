@@ -10,6 +10,8 @@ export function SearchEmpty({ setGoods, setUpdateSearchText }) { // Компон
     setUpdateSearchText('') // Хук принимающий значение пустого поля для поиска
   }
 
+  console.log('Пусто')
+
   return ( // jsx разметка
     <div className={stylesSearch.searchEmptyWr}>
       <p className={stylesSearch.searchEmpty}>По запросу ничего не найдено</p>

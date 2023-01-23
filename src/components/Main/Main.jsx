@@ -27,10 +27,10 @@ function Main({ // Копонент основного тела сайта
           ))
             || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
+        <Route path="/catalog/searchempty" element={(<SearchEmpty setGoods={setGoods} setUpdateSearchText={setUpdateSearchText} />)} />
         <Route path="/card/:id" element={<Card api={api} dataProducts={dataProducts} userDetails={userDetails} setReload={setReload} />} />
         <Route path="/basket" element={<BasketRoute />} />
         <Route path="/likes" element={<LikesRoute dataProducts={dataProducts} userDetails={userDetails} api={api} setReload={setReload} />} />
-        <Route path="/catalog/searchempty" element={(<SearchEmpty setGoods={setGoods} setUpdateSearchText={setUpdateSearchText} />)} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </main>

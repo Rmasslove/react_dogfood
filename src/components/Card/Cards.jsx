@@ -31,6 +31,7 @@ export function Cards({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
               // eslint-disable-next-line no-alert
               alert(data.message) // Вывод информации об ошибке
@@ -41,6 +42,7 @@ export function Cards({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
               // eslint-disable-next-line no-alert
               alert(data.message) // Вывод информации об ошибке
@@ -48,7 +50,6 @@ export function Cards({
           })
       }
     }
-    setReload(crypto.randomUUID()) // Вызывает перезагрузку товаров
   }
 
   return ( // jsx разметка

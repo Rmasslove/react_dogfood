@@ -7,7 +7,7 @@ import { BasketCards } from './BasketCards' // Импорт компонента
 export function Basket() { // Компонент корзины
   const [totalQuantityGoods, setTotalQuantityGoods] = useState([]) // Хук кол. едениц общего заказа
   const [fullCalculation, setFullCalculation] = useState([]) // Хук для подсчёта общего заказа
-  const [checkboxSelectAll, setCheckboxSelectAll] = useState(false)
+  const [checkboxSelectAll, setCheckboxSelectAll] = useState(false) // Хук для чекбокса выбрать всё
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
 
