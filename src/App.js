@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { useDispatch } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
 import { Footer } from './components/Footer/Footer' // Импорт компонента
 import { Header } from './components/Header/Header' // Импорт компонента
 import { Main } from './components/Main/Main' // Импорт компонента
-import './App.css' // Импорт компонента стилей
 import { Modal } from './components/Modal/Modal' // Импорт компонента
 import { Api } from './Api' // Импорт компонента
 import { newArrDataProductsRedux } from './redux/slices/dataProductsSlise'
+import './App.css' // Импорт компонента стилей
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() { // Компотент App
   const [user, setUser] = useState(localStorage.getItem('userSM8')) // Хук (useState) принимающий данные из (localStorage) о пользователе
@@ -28,8 +30,7 @@ function App() { // Компотент App
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setUserDetails(data) // Запись результата в Хук (userDetails)
           } else {
-          // eslint-disable-next-line no-alert
-            alert(data.message) // Вывод информации об ошибке
+            toast.error(data.message) // Вывод информации об ошибке
           }
         })
     }
@@ -44,8 +45,7 @@ function App() { // Компотент App
             setGoods(data.products) // Запись результата в Хук (dataProducts)
             dispatch(newArrDataProductsRedux(data.products)) // Запись информации в срез (redux)
           } else {
-            // eslint-disable-next-line no-alert
-            alert(data.message) // Вывод информации об ошибке
+            toast.error(data.message) // Вывод информации об ошибке
           }
         })
     }
@@ -81,6 +81,8 @@ function App() { // Компотент App
             const strData = JSON.stringify(data.products)
             // Сущность для с товарами для записи в (localStorage)
             localStorage.setItem('localProducts', strData) // Запись в (localStorage)
+          } else {
+            toast.error(data.message) // Вывод информации об ошибке
           }
         })
     }
@@ -123,6 +125,7 @@ function App() { // Компотент App
         user={user}
         userDetails={userDetails}
       />
+      <ToastContainer />
     </>
   )
 }

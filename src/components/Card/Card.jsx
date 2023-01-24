@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react' // Импорт компонента
-import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
+import { Link, useParams } from 'react-router-dom' // Импорт компонента
 import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
+import { ToastContainer, toast } from 'react-toastify'
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
+import 'react-toastify/dist/ReactToastify.css'
 
 export function Card({
   api, dataProducts, userDetails, setReload,
@@ -11,7 +13,6 @@ export function Card({
   const [productId, setProductId] = useState([]) // Хук для получения информации об одном товаре
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
 
-  const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
   const stokStyle = localStorage.getItem('stock') // Сущность принимающая значения (stock) для стилей кнопок
@@ -26,8 +27,7 @@ export function Card({
             const strData = JSON.stringify(data.stock) // Сущность для записи в (localStorage)
             localStorage.setItem('stock', strData) // Метод записи в (localStorage)
           } else {
-          // eslint-disable-next-line no-alert
-            alert(data.message) // Вывод информации об ошибке
+            toast.error(data.message) // Вывод информации об ошибке
           }
         })
     }
@@ -52,7 +52,7 @@ export function Card({
   }
 
   const basketQuantity = () => { // Функция добавления товара в корзину
-    navigate('/basket') // Перенаправляем на страницу корзины с товарами
+    toast('Товар добавлен в корзину') // Вывод информации
     const basketCard = { // Карточка товара
       id,
       stockQuantity,
@@ -98,8 +98,7 @@ export function Card({
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
-              // eslint-disable-next-line no-alert
-              alert(data.message) // Вывод информации об ошибке
+              toast.error(data.message) // Вывод информации об ошибке
             }
           })
       } else { // Если лайка нет то...
@@ -109,8 +108,7 @@ export function Card({
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
-              // eslint-disable-next-line no-alert
-              alert(data.message) // Вывод информации об ошибке
+              toast.error(data.message) // Вывод информации об ошибке
             }
           })
       }
@@ -165,6 +163,7 @@ export function Card({
               руб.
             </p>
             <button type="button" onClick={basketQuantity} className={stylesCard.btn}><span>В корзину</span></button>
+            <ToastContainer />
           </div>
         </div>
       </div>

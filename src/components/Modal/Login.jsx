@@ -1,8 +1,10 @@
 import { useState } from 'react' // Импорт компонента
 import { useDispatch } from 'react-redux' // Импорт компонента
 import { useNavigate } from 'react-router-dom' // Импорт компонента
+import { ToastContainer, toast } from 'react-toastify'
 import { newAboutTokenRedux, newAboutUserRedux } from '../../redux/slices/aboutUserSlice' // Импорт компонента
 import styleslogin from './login.module.scss' // Импорт стилей
+import 'react-toastify/dist/ReactToastify.css'
 
 export function Login({
   setAuth, api, setModalActive, setToken,
@@ -27,8 +29,7 @@ export function Login({
           setModalActive(false) // Запись в Хку (modalActive) для скрытия модального окна
           navigate('/catalog') // Переход на страницу каталога
         } else {
-          // eslint-disable-next-line no-alert
-          alert(data.message) // Вывод информации об ошибке
+          toast.error(data.message) // Вывод информации об ошибке
         }
       })
   }
@@ -60,6 +61,7 @@ export function Login({
           onChange={(e) => { setInp2(e.target.value) }/* Поле приема данных, запись их в Хук */}
         />
         <button className={styleslogin.btn} type="submit">Войти</button>
+        <ToastContainer />
         <button
           className={styleslogin.link}
           type="submit"

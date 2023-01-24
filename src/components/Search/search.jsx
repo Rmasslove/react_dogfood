@@ -35,7 +35,7 @@ export function Search({
     } else { // Если в строке поиска символов нет то...
       navigate('/catalog') // Перенаправляем на страницу каталога с товарами
     }
-  }, [debounceValue, dataProducts]) // Срабатывает на изменение функции (debounceValue) 600ms
+  }, [debounceValue]) // Срабатывает на изменение функции (debounceValue) 600ms
 
   return (
     <div className={stylesSearch.search}>

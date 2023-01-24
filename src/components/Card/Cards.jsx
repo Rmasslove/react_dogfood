@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom' // Импорт компонента
+import { ToastContainer, toast } from 'react-toastify'
 import stylesCard from './cards.module.scss' // Импорт компонента стилей
 import { Cardtags } from './Cardtags' // Импорт компонента
+import 'react-toastify/dist/ReactToastify.css'
 
 export function Cards({
   name, pictures, wight, price, discount, tags, _id,
@@ -33,8 +35,7 @@ export function Cards({
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
-              // eslint-disable-next-line no-alert
-              alert(data.message) // Вывод информации об ошибке
+              toast.error(data.message) // Вывод информации об ошибке
             }
           })
       } else { // Если лайка нет то...
@@ -44,8 +45,7 @@ export function Cards({
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
             } else {
-              // eslint-disable-next-line no-alert
-              alert(data.message) // Вывод информации об ошибке
+              toast.error(data.message) // Вывод информации об ошибке
             }
           })
       }
@@ -54,6 +54,7 @@ export function Cards({
 
   return ( // jsx разметка
     <div className={stylesCard.card} role="presentation" onClick={cardInfo}>
+      <ToastContainer />
       <div>
         <img src={pictures} alt={name} />
       </div>
