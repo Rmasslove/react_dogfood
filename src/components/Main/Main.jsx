@@ -8,7 +8,8 @@ import { SearchEmpty } from '../Search/SearchNotFound'
 import { NotFoundPage } from './NotFoudPage' // Импорт компонента
 
 function Main({ // Копонент основного тела сайта
-  dataProducts, user, api, setGoods, setUpdateSearchText, userDetails, setReload,
+  dataProducts, user, api, setGoods, setUpdateSearchText,
+  userDetails, setReload, searchData, searchText,
 }) { // Компонент Main с {props}
   return ( // jsx разметка
     <main>
@@ -19,10 +20,11 @@ function Main({ // Копонент основного тела сайта
           path="/catalog"
           element={(user && (
             <Catalog
-              dataProducts={dataProducts}
+              dataProducts={searchText ? searchData : dataProducts}
               userDetails={userDetails}
               api={api}
               setReload={setReload}
+              searchText={searchText}
             />
           ))
             || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}

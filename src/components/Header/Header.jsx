@@ -6,9 +6,9 @@ import stylesHeader from './header.module.scss' // Импорт компонен
 import { REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3 } from '../../redux/initState' // Импорт значения из компонента
 
 function Header({
-  user, setUser, dataProducts, setModalActive, setGoods,
-  token, searchData,
-  setSearchData, searchText, setUpdateSearchText, userDetails, likeProducts,
+  user, setUser, dataProducts, setModalActive,
+  token,
+  setSearchData, searchText, setUpdateSearchText, userDetails,
 }) { // Компонент Header с {props}
   const navigate = useNavigate() // назначение Хук (useNavigate)
   const basketRedux = useSelector(getBasketSliceSelector) //  Хук из (Redux) с массивом корзины
@@ -36,7 +36,7 @@ function Header({
     navigate('/') // Переход на корневую страницу
   }
 
-  const isLikeArr = likeProducts.filter(
+  const isLikeArr = dataProducts.filter(
     // eslint-disable-next-line no-underscore-dangle
     (el) => el.likes.includes(userDetails._id),
   ) // Выбор товаров с лайками запись в массив
@@ -46,9 +46,7 @@ function Header({
       <Link to="/" className={stylesHeader.logo}>DogFood</Link>
       {user && (
       <Search /* Компонент (Search) и передача пропсов */
-        setGoods={setGoods}
         dataProducts={dataProducts}
-        searchData={searchData}
         setSearchData={setSearchData}
         searchText={searchText}
         setUpdateSearchText={setUpdateSearchText}

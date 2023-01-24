@@ -14,7 +14,6 @@ function App() { // Компотент App
   const [modalActive, setModalActive] = useState(false) // Хук для модального окна, скрыто (false)
   const [api, setApi] = useState(new Api(token)) // Хук для состояния (Api)
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
-  const [likeProducts, setLikeProducts] = useState([]) // Хук для работы с любимыми товарами
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [searchData, setSearchData] = useState(dataProducts) // Хук список количества товаров поиска
   const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
@@ -44,7 +43,6 @@ function App() { // Компотент App
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setGoods(data.products) // Запись результата в Хук (dataProducts)
             dispatch(newArrDataProductsRedux(data.products)) // Запись информации в срез (redux)
-            setLikeProducts(data.products) // Запись в Хук для работы с любимыми товарами
           } else {
             // eslint-disable-next-line no-alert
             alert(data.message) // Вывод информации об ошибке
@@ -80,7 +78,6 @@ function App() { // Компотент App
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setGoods(data.products) // Запись результата в Хук (dataProducts)
             dispatch(newArrDataProductsRedux(data.products)) // Запись информации в срез (redux)
-            setLikeProducts(data.products) // Запись в Хук для работы с любимыми товарами
             const strData = JSON.stringify(data.products)
             // Сущность для с товарами для записи в (localStorage)
             localStorage.setItem('localProducts', strData) // Запись в (localStorage)
@@ -96,17 +93,14 @@ function App() { // Компотент App
           user={user}
           setUser={setUser}
           dataProducts={dataProducts}
-          setGoods={setGoods}
           setModalActive={setModalActive}
           setUserDetails={setUserDetails}
           api={api}
           token={token}
-          searchData={searchData}
           setSearchData={setSearchData}
           searchText={searchText}
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
-          likeProducts={likeProducts}
         />
         <Main
           user={user}
@@ -116,6 +110,8 @@ function App() { // Компотент App
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
           setReload={setReload}
+          searchData={searchData}
+          searchText={searchText}
         />
         <Footer /* компонент Footer *//>
       </div>
