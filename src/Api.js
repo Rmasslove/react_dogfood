@@ -102,6 +102,22 @@ class Api { // Класс (Api)
       throw new Error(error)
     }
   }
+
+  addProduct(body) { // Функция добавление нового товара
+    try {
+      return fetch(`${this.path}/products`, { // Запрос на сервер
+        method: 'POST', // метод
+        headers: { // заголовок
+          'Content-Type': 'application/json', // Информация в заголовке
+          // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+        body: JSON.stringify(body),
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
 }
 
 export { Api } // Экспорт класса

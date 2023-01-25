@@ -54,14 +54,19 @@ function Header({
       )}
       <nav className={stylesHeader.nav}>
         {(user && token) && (
+        <Link to="/addingproduct" className={stylesHeader.user}>
+          <i className="fa-solid fa-circle-plus" /* иконка с плюс *//>
+        </Link>
+        )/* Поле отображающие добавление нового товара */}
+        {(user && token) && (
         <Link to="/likes" className={stylesHeader.heart}>
           <i className="fa-solid fa-heart" /* иконка с сердцем *//>
           <span className={stylesHeader.basketQuantity}>{isLikeArr.length}</span>
         </Link>
-        )/* Поле отображающие корзины заказа */}
+        )/* Поле отображающие избранные товары */}
         {(user && token) && (
         <Link to="/basket" className={stylesHeader.basket}>
-          <i className="fa-solid fa-basket-shopping" />
+          <i className="fa-solid fa-basket-shopping" /* иконка корзины */ />
           <span className={stylesHeader.basketQuantity}>
             {basketRedux.length}
           </span>
@@ -69,7 +74,7 @@ function Header({
         )/* Поле отображающие корзины заказа */}
         {(user && token) && (
         <a className={stylesHeader.user} href="_" onClick={UserDetails}>
-          <i className="fa-solid fa-user" />
+          <i className="fa-solid fa-user" /* иконка юзера *//>
           {' '}
         </a>
         )/* Поле отображающие имя пользователя */}

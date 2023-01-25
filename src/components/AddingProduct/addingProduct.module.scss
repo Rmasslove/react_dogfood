@@ -1,0 +1,86 @@
+
+.link {
+    opacity: 0.7;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.wr {
+    display: grid;
+    grid-template-columns: 50% 40%;
+    gap: 3em;
+    margin: 30px 10px 10px 10px;
+}
+
+.form {
+    display: grid;
+    grid-template-rows: auto;
+
+}
+
+.field {
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.textarea {
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding-left: 12px;
+    border: 1px solid rgba(65, 63, 63, 0.342);
+}
+
+.errors {
+    border-radius: 5px;
+    color: crimson;
+}
+
+.btnWr {
+    display: flex;
+    justify-content: center;    
+}
+
+.btn {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    border: none;
+    color: inherit;
+    background-color: #ffe44d;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+}
+
+.btn:active {
+    background-color: rgb(196, 170, 28);
+}
+
+img {
+    max-width: 100%;
+}
+
+.discount {
+    font-weight: 500;
+}
+
+.price {
+    font-weight: 700;
+}
+
+.priceDiscount {
+    font-weight: 700;
+    color: rgba(255, 30, 0, 0.884);
+}
+
+.wight {
+    opacity: 0.5;
+}
+
+.name {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
