@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom' // Импорт компонента
+import { Link, useNavigate } from 'react-router-dom' // Импорт компонента
 import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
 import {
   Formik, Form, Field,
@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css' // Импорт компонен�
 
 export function AddingProduct({ api, setReload }) { // Компонент добавление товара
   const [dataPreview, setdataPreview] = useState([]) // Хук для чекбокса выбрать всё
+  const navigate = useNavigate() // Хук из (react-router-dom)
 
   const SignupSchema = Yup.object().shape({ // Параметры валидации при помощи (Yup)
     name: Yup.string()
@@ -40,6 +41,7 @@ export function AddingProduct({ api, setReload }) { // Компонент доб
           toast('Товар добавлен!') // Вывод информации
           setdataPreview([]) // Очищаем Хук с объектом товара
           setTimeout(setReload(crypto.randomUUID()), 1000) // Флаг для перезагрузки товаров
+          navigate('/addproductdone') // Перенаправлени на страницу успешного добавления
         } else {
           toast.error(data.message) // Вывод информации об ошибке
         }
@@ -63,10 +65,9 @@ export function AddingProduct({ api, setReload }) { // Компонент доб
               pictures: '',
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values, { resetForm }) => { // Сбор значений с формы
+            onSubmit={(values) => { // Сбор значений с формы
               const body = values // Запись значений в объект
               setdataPreview(body) // Запись объекта в Хук
-              resetForm({ values: '' }) // Очистка полей формы
             }}
           >
             {({ errors, touched }) => (
@@ -117,7 +118,6 @@ export function AddingProduct({ api, setReload }) { // Компонент доб
                   name="discount"
                   placeholder="Скидка на товар"
                   type="number"
-                  step="5"
                   min={0}
                 />
                 {errors.description && touched.description ? (
