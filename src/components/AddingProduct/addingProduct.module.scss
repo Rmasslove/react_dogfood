@@ -12,10 +12,22 @@
     margin: 30px 10px 10px 10px;
 }
 
+@media (max-width: 900px) {
+    .wr {
+        grid-template-columns:  1fr;
+     }      
+}
+
 .form {
     display: grid;
     grid-template-rows: auto;
 
+}
+
+@media (max-width: 900px) {
+    .form {
+        width: 80%;
+     }      
 }
 
 .field {
@@ -36,8 +48,11 @@
 }
 
 .btnWr {
-    display: flex;
-    justify-content: center;    
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 50px;
+    justify-content: center;
+    padding: 0px 30px;    
 }
 
 .btn {
@@ -51,12 +66,37 @@
     font-weight: 600;
 }
 
+.fake {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    border: none;
+    color: inherit;
+    background-color: silver;
+    border-radius: 20px;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.7;
+}
+
 .btn:hover {
     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
 }
 
 .btn:active {
     background-color: rgb(196, 170, 28);
+}
+
+.card{
+    margin-bottom: 30px;
+    padding: 20px 20px;
+    box-shadow: 0 0 5px #2226;
+}
+
+@media (max-width: 900px) {
+    .card {
+        width: 80%;
+     }      
 }
 
 img {

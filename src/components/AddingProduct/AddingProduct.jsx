@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom' // Импорт компонента
 import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
-import { Formik, Form, Field } from 'formik' // Импорт компонента
+import {
+  Formik, Form, Field,
+} from 'formik' // Импорт компонента
 import * as Yup from 'yup' // Импорт компонента
-import { useState } from 'react'
-import { PreviewProduct } from './PreviewProduct'
+import { useState } from 'react' // Импорт компонента
+import { PreviewProduct } from './PreviewProduct' // Импорт компонента
 import stylesAddingProduct from './addingProduct.module.scss' // Импорт компонента стилей
 import 'react-toastify/dist/ReactToastify.css' // Импорт компонента стилей
 
-export function AddingProduct({ api }) { // Компонент добавление товара
+export function AddingProduct({ api, setReload }) { // Компонент добавление товара
   const [dataPreview, setdataPreview] = useState([]) // Хук для чекбокса выбрать всё
 
-  const SignupSchema = Yup.object().shape({
+  const SignupSchema = Yup.object().shape({ // Параметры валидации при помощи (Yup)
     name: Yup.string()
       .min(2, 'Минимум 2 символа!')
       .max(70, 'Максимум 70 символов!')
@@ -30,13 +32,14 @@ export function AddingProduct({ api }) { // Компонент добавлен�
       .required('Поле "Изображение" обязательно для заполнения!'),
   })
 
-  const addProductFn = (body) => { // Функция добавления товара
-    api.addProduct(body) // Метод добавление товара
+  const addProductFn = () => { // Функция добавления товара
+    api.addProduct(dataPreview) // Метод добавление товара
       .then((res) => res.json()) // ответ в json
       .then((data) => { // ответ в объекте
         if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
           toast('Товар добавлен!') // Вывод информации
-          setdataPreview([])
+          setdataPreview([]) // Очищаем Хук с объектом товара
+          setTimeout(setReload(crypto.randomUUID()), 1000) // Флаг для перезагрузки товаров
         } else {
           toast.error(data.message) // Вывод информации об ошибке
         }
@@ -60,10 +63,10 @@ export function AddingProduct({ api }) { // Компонент добавлен�
               pictures: '',
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values, { resetForm }) => {
-              const body = values
-              addProductFn(body)
-              resetForm({ values: '' })
+            onSubmit={(values, { resetForm }) => { // Сбор значений с формы
+              const body = values // Запись значений в объект
+              setdataPreview(body) // Запись объекта в Хук
+              resetForm({ values: '' }) // Очистка полей формы
             }}
           >
             {({ errors, touched }) => (
@@ -135,13 +138,16 @@ export function AddingProduct({ api }) { // Компонент добавлен�
                   placeholder="Изображение"
                 />
                 <div className={stylesAddingProduct.btnWr}>
-                  <button type="submit" className={stylesAddingProduct.btn}>Добавить товар</button>
+                  <button type="submit" className={stylesAddingProduct.btn}>Просмотр товара</button>
+                  {dataPreview.length !== 0 // Выбор тега кнопки
+                    ? <button type="button" onClick={addProductFn} className={stylesAddingProduct.btn}>Добавить товар</button>
+                    : <div className={stylesAddingProduct.fake}>Добавить товар</div>}
                 </div>
               </Form>
             )}
           </Formik>
         </div>
-        <PreviewProduct dataPreview={dataPreview} />
+        <PreviewProduct dataPreview={dataPreview} /* Компонент предварительного просмотра *//>
       </div>
       <ToastContainer />
     </>

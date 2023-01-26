@@ -1,32 +1,36 @@
 import stylesAddingProduct from './addingProduct.module.scss' // Импорт компонента стилей
 
-export function PreviewProduct({
-  name, pictures, wight, price, discount,
-}) { // Компонент отрисовки одной карточки c {props}
+export function PreviewProduct({ dataPreview }) { // Компонент отрисовки одной карточки c {props}
   const discountFun = () => { // Функция считающая скидку на товар
-    if (price) {
-      if (discount > 0) {
-        const result = Math.round(price - ((price / 100) * discount)) // Подсчёт и округление скидки
-        return (result, 'P')
+    if (dataPreview.price) { // Если значение есть...
+      if (dataPreview.discount > 0) { // Если скидка есть...
+        const result = Math.round(dataPreview.price
+          - ((dataPreview.price / 100) * dataPreview.discount)) // Подсчёт и округление скидки
+        return (`${result} P`) // Возвращаем результат со скидкой
       }
-      return (price, 'P')
+      return (`${dataPreview.price} P`) // Возвращаем цену без скидки
     }
     return ''
   }
 
   return ( // jsx разметка
-    <div className={stylesAddingProduct.card}>
+    <div className={dataPreview.length !== 0
+      ? stylesAddingProduct.card : stylesAddingProduct.cardFalse}
+    >
       <div>
-        <img src={pictures} alt={name} />
+        <img src={dataPreview.pictures} alt={dataPreview.name} />
       </div>
       <div className={stylesAddingProduct.text}>
-        <s className={stylesAddingProduct.discount}>{discount > 0 ? `${price} P` : '' }</s>
-        <h4 className={discount ? stylesAddingProduct.priceDiscount : stylesAddingProduct.price}>
+        <s className={stylesAddingProduct.discount}>{dataPreview.discount > 0 ? `${dataPreview.price} P` : '' }</s>
+        <h4 className={dataPreview.discount
+          ? stylesAddingProduct.priceDiscount : stylesAddingProduct.price}
+        >
           {discountFun()/* Вызов функции для расчёта скидки */}
         </h4>
-        <p className={stylesAddingProduct.wight}>{wight /* {props} размер упаковки (шт, гр) */}</p>
-        <h5 className={stylesAddingProduct.name}>{name /* {props} с текстом для карточки */}</h5>
+        <p className={stylesAddingProduct.wight}>{dataPreview.wight}</p>
+        <h5 className={stylesAddingProduct.name}>{dataPreview.name}</h5>
       </div>
+      <div><p>{dataPreview.description}</p></div>
     </div>
   )
 }
