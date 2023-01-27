@@ -33,7 +33,7 @@ export function Cards({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
+              setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
@@ -43,7 +43,7 @@ export function Cards({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
+              setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }

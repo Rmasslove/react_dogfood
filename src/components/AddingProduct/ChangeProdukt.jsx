@@ -1,56 +1,84 @@
-import { Link, useNavigate } from 'react-router-dom' // Импорт компонента
+import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
 import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
 import {
   Formik, Form, Field,
 } from 'formik' // Импорт компонента
 import * as Yup from 'yup' // Импорт компонента
-import { useState } from 'react' // Импорт компонента
+import { useEffect, useState } from 'react' // Импорт компонента
 import { PreviewProduct } from './PreviewProduct' // Импорт компонента
 import stylesAddingProduct from './addingProduct.module.scss' // Импорт компонента стилей
 import 'react-toastify/dist/ReactToastify.css' // Импорт компонента стилей
 
-export function AddingProduct({ api, setReload }) { // Компонент добавление товара
+export function ChangeProdukt({ api, setReload }) { // Компонент редактирования товара
   const [dataPreview, setdataPreview] = useState([]) // Хук для чекбокса выбрать всё
+  const [changeFlag, setchangeFlag] = useState(false)
+  // const [productIdChange, setProductIdChange] = useState([]) // Хук для информации товаре по (Id)
   const navigate = useNavigate() // Хук из (react-router-dom)
+  const { id } = useParams() // Хук из (react-router-dom) для извлечения id карточки
+
+  useEffect(() => { // Хук для загрузки информации об одном товере
+    if (id) { // Если Id есть
+      api.getProductId(id) // Метод запроса на получение информации об одном товаре
+        .then((res) => res.json()) // ответ в json
+        .then((data) => { // ответ в объекте
+          if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+            setdataPreview(data) // Запись в Хук информации об одном товаре
+          } else {
+            toast.error(data.message) // Вывод информации об ошибке
+          }
+        })
+    }
+  }, [])
 
   const SignupSchema = Yup.object().shape({ // Параметры валидации при помощи (Yup)
     name: Yup.string()
       .min(2, 'Минимум 2 символа!')
-      .max(70, 'Максимум 70 символов!')
-      .required('Поле "Название товара" обязательно для заполнения!'),
-    price: Yup.string()
-      .required('Поле "Цена" обязательно для заполнения!'),
-    wight: Yup.string()
-      .required('Поле "Вес" обязательно для заполнения!'),
-    stock: Yup.string()
-      .required('Поле "Количество товара" обязательно для заполнения!'),
+      .max(70, 'Максимум 70 символов!'),
+    price: Yup.string(),
+    wight: Yup.string(),
+    stock: Yup.string(),
     discount: Yup.string(),
     description: Yup.string()
       .min(3, 'Минимум 3 символа!')
       .max(1000, 'Максимум 1000 символов!'),
     pictures: Yup.string()
-      .url()
-      .required('Поле "Изображение" обязательно для заполнения!'),
+      .url(),
   })
 
-  const addProductFn = () => { // Функция добавления товара
-    api.addProduct(dataPreview) // Метод добавление товара
+  const addchangeProductFn = () => { // Функция добавления изменённого товара
+    api.changeProduct(id, dataPreview) // Метод добавление товара
       .then((res) => res.json()) // ответ в json
       .then((data) => { // ответ в объекте
         if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-          toast('Товар добавлен!', { autoClose: 1000 }) // Вывод информации
+          toast('Товар изменён!', { autoClose: 1000 }) // Вывод информации
           setdataPreview([]) // Очищаем Хук с объектом товара
           setTimeout(setReload(crypto.randomUUID()), 500) // Флаг для перезагрузки товаров
-          navigate('/addproductdone') // Перенаправлени на страницу успешного добавления
+          navigate(`/card/${id}`) // Перенаправлени на страницу измененного товара
         } else {
           toast.error(data.message) // Вывод информации об ошибке
         }
       })
   }
 
+  const changeObjFn = ({ // Функция формирующая новый объект с изменениями
+    name, price, wight, stock, discount, description, pictures,
+  }) => {
+    const obj = {
+      ...dataPreview,
+      name: name || dataPreview.name,
+      price: price || dataPreview.price,
+      wight: wight || dataPreview.wight,
+      stock: stock || dataPreview.stock,
+      discount: discount || dataPreview.discount,
+      description: description || dataPreview.description,
+      pictures: pictures || dataPreview.pictures,
+    }
+    return obj // Возвращаем измененный объект
+  }
+
   return ( // jsx разметка
     <>
-      <span className={stylesAddingProduct.link}>Страница добавления нового товара --&gt; </span>
+      <span className={stylesAddingProduct.link}>Страница редактирования товара --&gt; </span>
       <Link to="/catalog"><span className={stylesAddingProduct.link}/* Линк для перехода на страницу каталога */>Перейти в каталог товаров</span></Link>
       <div className={stylesAddingProduct.wr}>
         <div>
@@ -67,7 +95,8 @@ export function AddingProduct({ api, setReload }) { // Компонент доб
             validationSchema={SignupSchema}
             onSubmit={(values) => { // Сбор значений с формы
               const body = values // Запись значений в объект
-              setdataPreview(body) // Запись объекта в Хук
+              setdataPreview(changeObjFn(body)) // Запись объекта в Хук
+              setchangeFlag(true) // Поднимаем флаг для возможности отправки изменения на сервер
             }}
           >
             {({ errors, touched }) => (
@@ -139,20 +168,21 @@ export function AddingProduct({ api, setReload }) { // Компонент доб
                 />
                 <div className={stylesAddingProduct.btnWr}>
                   <button type="submit" className={stylesAddingProduct.btn}>
+                    {' '}
                     <i className="fa-solid fa-magnifying-glass-plus" />
                     Просмотр товара
                   </button>
-                  {dataPreview.length !== 0 // Выбор тега кнопки
+                  {changeFlag // Выбор тега кнопки
                     ? (
-                      <button type="button" onClick={addProductFn} className={stylesAddingProduct.btn}>
-                        <i className="fa-solid fa-circle-plus" />
-                        Добавить товар
+                      <button type="button" onClick={addchangeProductFn} className={stylesAddingProduct.btn}>
+                        <i className="fa-regular fa-pen-to-square" />
+                        Редактировать товар
                       </button>
                     )
                     : (
                       <div className={stylesAddingProduct.fake}>
-                        <i className="fa-solid fa-circle-plus" />
-                        Добавить товар
+                        <i className="fa-regular fa-pen-to-square" />
+                        Редактировать товар
                       </div>
                     )}
                 </div>

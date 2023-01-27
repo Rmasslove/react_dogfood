@@ -8,7 +8,7 @@
     top: 0.1em;
     right: 0.4em;
     color: silver;
-    opacity: 0.5;
+    opacity: 0.7;
     font-size: 34px;
 }
 
@@ -17,7 +17,7 @@
     top: 0.1em;
     right: 0.4em;
     color: brown;
-    opacity: 0.5;
+    opacity: 0.7;
     font-size: 34px;
 }
 
@@ -45,14 +45,26 @@ img {
 
 .wight {
     opacity: 0.5;
+    margin-bottom: 60px;
 }
+
+.changeCardButtonWr {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+    margin-bottom: 30px;
+    gap: 25px;
+}
+
+
 
 .btnWr {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 40px;
     padding-top: 25px;
     padding-bottom: 30px;
     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
@@ -73,6 +85,31 @@ img {
 
 .btn:active {
     background-color: rgb(196, 170, 28);
+}
+
+.btn  i {
+    margin-right: 10px;
+}
+
+.btnDel {
+    padding: 10px 18px;
+    border: none;
+    color: inherit;
+    background-color: #ff714d;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.btnDel:hover {
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+}
+
+.btnDel:active {
+    background-color: rgb(207, 66, 47);
+}
+
+.btnDel  i {
+    margin-right: 10px;
 }
 
 .tags {
@@ -116,6 +153,12 @@ img {
     
 }
 
+@media (max-width: 900px) {
+    .Wr {
+        grid-template-columns: auto;
+     }      
+}
+
 .stock {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -152,4 +195,15 @@ img {
 .stockP {
     font-weight: 500;
     opacity: 0.7;
+}
+
+.descriptionH {
+    margin-top: 30px;
+}
+
+.description {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    opacity: 0.9;
 }

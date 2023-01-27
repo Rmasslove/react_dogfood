@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react' // Импорт компонента
-import { Link, useParams } from 'react-router-dom' // Импорт компонента
+import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
 import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
 import { ToastContainer, toast } from 'react-toastify'
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
@@ -12,7 +12,9 @@ export function Card({
   const { id } = useParams() // Хук из (react-router-dom) для извлечения id карточки
   const [productId, setProductId] = useState([]) // Хук для получения информации об одном товаре
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
+  const [userFlag, setUserFlag] = useState(false)
 
+  const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
   const stokStyle = localStorage.getItem('stock') // Сущность принимающая значения (stock) для стилей кнопок
@@ -52,7 +54,7 @@ export function Card({
   }
 
   const basketQuantity = () => { // Функция добавления товара в корзину
-    toast('Товар добавлен в корзину') // Вывод информации
+    toast('Товар добавлен в корзину', { autoClose: 1000 }) // Вывод информации
     const basketCard = { // Карточка товара
       id,
       stockQuantity,
@@ -87,6 +89,7 @@ export function Card({
 
     // eslint-disable-next-line no-underscore-dangle
     const arr = dataProducts.find((el) => el._id === id) // Получаем товар из массива товаров
+
     if (arr !== undefined) { // проверяем что массив загрузился
       // eslint-disable-next-line no-underscore-dangle
       const islike = arr.likes.includes(userDetails._id) // Проверяем наличие лайка на товаре
@@ -96,7 +99,7 @@ export function Card({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
+              setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
@@ -106,7 +109,7 @@ export function Card({
           .then((res) => res.json()) // ответ в json
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-              setTimeout(setReload(crypto.randomUUID()), 1000) // Вызывает перезагрузку товаров
+              setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
@@ -126,6 +129,36 @@ export function Card({
     return false // Возвращаем отсутствие лайка
   }
 
+  useEffect(() => { // Хук для проверки автора товара
+    if (productId.length !== 0) { // Если товар загружен
+      // eslint-disable-next-line no-underscore-dangle
+      if (productId.author._id === userDetails._id) { // Если товар создан юзером...
+        setUserFlag(true) // Поднимаем флаг
+      }
+    }
+  }, [productId]) // срабатывает на загруженый товар
+
+  const changeCard = () => { // Функция по клику совершает переход на страницу для редактирования
+    if (userFlag) { // Если товар создан пользователем
+      // eslint-disable-next-line no-underscore-dangle
+      navigate(`/changeprodukt/${productId._id}`) // (navigate) на страницу редактирования карточки
+    }
+  }
+
+  const delProductFn = () => { // Функция удаления товара по (id)
+    api.delProduct(id) // Метод удаления товара
+      .then((res) => res.json()) // ответ в json
+      .then((data) => { // ответ в объекте
+        if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+          setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
+          toast('Товар удалён!', { autoClose: 1000 }) // Сообщение об удалении
+          navigate('/catalog') // Переход в каталог
+        } else {
+          toast.error(data.message) // Вывод информации об ошибке
+        }
+      })
+  }
+
   return ( // jsx разметка
     <>
       <span className={stylesCard.link}>Страница товара --&gt; </span>
@@ -138,6 +171,22 @@ export function Card({
           </span>
         </div>
         <div className={stylesCard.text}>
+          {userFlag && (
+          <div className={stylesCard.changeCardButtonWr}>
+            <button type="button" onClick={changeCard} className={stylesCard.btn}>
+              <span>
+                <i className="fa-regular fa-pen-to-square" />
+                Редактировать товар
+              </span>
+            </button>
+            <button type="button" onClick={delProductFn} className={stylesCard.btnDel}>
+              <span>
+                <i className="fa-solid fa-trash-can" />
+                Удалить товар
+              </span>
+            </button>
+          </div>
+          )}
           <h3 className={stylesCard.name}>{productId.name /* {props} с текстом для карточки */}</h3>
           <s className={stylesCard.discount}>{productId.discount > 0 ? `${productId.price} P` : '' }</s>
           <h4 className={productId.discount ? stylesCard.priceDiscount : stylesCard.price}>{productId.discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${productId.price} P` /* ценa и выбор стилей для скидки */}</h4>
@@ -162,9 +211,18 @@ export function Card({
               {' '}
               руб.
             </p>
-            <button type="button" onClick={basketQuantity} className={stylesCard.btn}><span>В корзину</span></button>
+            <button type="button" onClick={basketQuantity} className={stylesCard.btn}>
+              <span>
+                <i className="fa-solid fa-basket-shopping" />
+                В корзину
+              </span>
+            </button>
             <ToastContainer />
           </div>
+          <h6 className={stylesCard.descriptionH}>Описание товара:</h6>
+          <p className={stylesCard.description}>
+            {productId.description}
+          </p>
         </div>
       </div>
       <Link to="/catalog" className={stylesCard.link}>&lt;-- Назад</Link>

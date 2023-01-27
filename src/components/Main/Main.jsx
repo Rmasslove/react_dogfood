@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom' // Импорт компонента
 import { AddingProduct } from '../AddingProduct/AddingProduct'
 import { AddProductDone } from '../AddingProduct/AddProductDone'
+import { ChangeProdukt } from '../AddingProduct/ChangeProdukt'
 import { BasketRoute } from '../Basket/BasketRoute' // Импорт компонента
 import { Card } from '../Card/Card' // Импорт компонента
 import { LikesRoute } from '../Likes/LikesRoute'
@@ -35,6 +36,7 @@ function Main({ // Копонент основного тела сайта
         <Route path="/card/:id" element={<Card api={api} dataProducts={dataProducts} userDetails={userDetails} setReload={setReload} />} />
         <Route path="/basket" element={<BasketRoute />} />
         <Route path="/likes" element={<LikesRoute dataProducts={dataProducts} userDetails={userDetails} api={api} setReload={setReload} />} />
+        <Route path="/changeprodukt/:id" element={<ChangeProdukt api={api} setReload={setReload} />} />
         <Route path="/addingproduct" element={<AddingProduct api={api} setReload={setReload} />} />
         <Route path="/addproductdone" element={<AddProductDone />} />
         <Route path="*" element={<NotFoundPage />} />

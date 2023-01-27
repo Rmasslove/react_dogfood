@@ -61,7 +61,7 @@ function Header({
         {(user && token) && (
         <Link to="/likes" className={stylesHeader.heart}>
           <i className="fa-solid fa-heart" /* иконка с сердцем *//>
-          <span className={stylesHeader.basketQuantity}>{isLikeArr.length}</span>
+          <span className={stylesHeader.heartQuantity}>{isLikeArr.length}</span>
         </Link>
         )/* Поле отображающие избранные товары */}
         {(user && token) && (
