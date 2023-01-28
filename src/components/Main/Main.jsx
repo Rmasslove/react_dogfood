@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom' // Импорт компоне�
 import { AddingProduct } from '../AddingProduct/AddingProduct'
 import { AddProductDone } from '../AddingProduct/AddProductDone'
 import { ChangeProdukt } from '../AddingProduct/ChangeProdukt'
+import { DelProductDone } from '../AddingProduct/DelProductDone'
 import { BasketRoute } from '../Basket/BasketRoute' // Импорт компонента
 import { Card } from '../Card/Card' // Импорт компонента
 import { LikesRoute } from '../Likes/LikesRoute'
@@ -12,7 +13,7 @@ import { NotFoundPage } from './NotFoudPage' // Импорт компонент�
 
 function Main({ // Копонент основного тела сайта
   dataProducts, user, api, setGoods, setUpdateSearchText,
-  userDetails, setReload, searchData, searchText,
+  userDetails, setReload, searchData, searchText, isLoadingProducts,
 }) { // Компонент Main с {props}
   return ( // jsx разметка
     <main>
@@ -28,6 +29,7 @@ function Main({ // Копонент основного тела сайта
               api={api}
               setReload={setReload}
               searchText={searchText}
+              isLoadingProducts={isLoadingProducts}
             />
           ))
             || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
@@ -39,6 +41,7 @@ function Main({ // Копонент основного тела сайта
         <Route path="/changeprodukt/:id" element={<ChangeProdukt api={api} setReload={setReload} />} />
         <Route path="/addingproduct" element={<AddingProduct api={api} setReload={setReload} />} />
         <Route path="/addproductdone" element={<AddProductDone />} />
+        <Route path="/delproductdone" element={<DelProductDone />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </main>

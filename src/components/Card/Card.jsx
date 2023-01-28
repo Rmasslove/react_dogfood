@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 import 'react-toastify/dist/ReactToastify.css'
+import { Loader } from '../Loader/Loader'
 
 export function Card({
   api, dataProducts, userDetails, setReload,
@@ -12,12 +13,12 @@ export function Card({
   const { id } = useParams() // Хук из (react-router-dom) для извлечения id карточки
   const [productId, setProductId] = useState([]) // Хук для получения информации об одном товаре
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
-  const [userFlag, setUserFlag] = useState(false)
+  const [userFlag, setUserFlag] = useState(false) // Хук для флага что товар создан юзером
+  const [isLoadingProductId, setIsLoadingProductId] = useState(true) // Хук флага для лоудера
 
   const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
-  const stokStyle = localStorage.getItem('stock') // Сущность принимающая значения (stock) для стилей кнопок
 
   useEffect(() => { // Хук для загрузки информации об одном товере
     if (id) { // Если Id есть
@@ -26,11 +27,13 @@ export function Card({
         .then((data) => { // ответ в объекте
           if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
             setProductId(data) // Запись в Хук информации об одном товаре
-            const strData = JSON.stringify(data.stock) // Сущность для записи в (localStorage)
-            localStorage.setItem('stock', strData) // Метод записи в (localStorage)
+          } else if (data.message === 'Нет товара по заданному id') { // Если ошибка 404
+            toast.error(data.message) // Вывод информации об ошибке
+            navigate('*') // Переход на страницу с сообщением (страница не найдена)
           } else {
             toast.error(data.message) // Вывод информации об ошибке
           }
+          setIsLoadingProductId(false) // Меняем значение для лоудера
         })
     }
   }, [])
@@ -42,7 +45,7 @@ export function Card({
   }
 
   const stockPlus = () => { // Функция увеличивающая единиц за один товар
-    if (stockQuantity < localStorage.getItem('stock')) { // Если меньше чем записано изначально в (localStorage)
+    if (stockQuantity < productId.stock) { // Если меньше чем на складе
       setStockQuantity(stockQuantity + 1) // Увеличиваем на 1
     }
   }
@@ -100,6 +103,7 @@ export function Card({
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
+              toast('Товар удалён из избранного', { autoClose: 1000 }) // Вывод информации об удалении товара из избранного
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
@@ -110,6 +114,7 @@ export function Card({
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
+              toast('Товар добавлен в избранное', { autoClose: 1000 }) // Вывод информации о добавлении товара в избранного
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
@@ -146,86 +151,90 @@ export function Card({
   }
 
   const delProductFn = () => { // Функция удаления товара по (id)
-    api.delProduct(id) // Метод удаления товара
-      .then((res) => res.json()) // ответ в json
-      .then((data) => { // ответ в объекте
-        if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
-          setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
-          toast('Товар удалён!', { autoClose: 1000 }) // Сообщение об удалении
-          navigate('/catalog') // Переход в каталог
-        } else {
-          toast.error(data.message) // Вывод информации об ошибке
-        }
-      })
+    // eslint-disable-next-line no-alert, no-restricted-globals
+    if (confirm('Удалить товар?')) {
+      api.delProduct(id) // Метод удаления товара
+        .then((res) => res.json()) // ответ в json
+        .then((data) => { // ответ в объекте
+          if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+            setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
+            toast('Товар удалён!', { autoClose: 1000 }) // Сообщение об удалении
+            navigate('/delproductdone') // Переход на страницу уведомления
+          } else {
+            toast.error(data.message) // Вывод информации об ошибке
+          }
+        })
+    }
   }
 
   return ( // jsx разметка
     <>
       <span className={stylesCard.link}>Страница товара --&gt; </span>
       <Link to="/catalog"><span className={stylesCard.link}/* Линк для перехода на страницу каталога */>Перейти в каталог товаров</span></Link>
-      <div className={stylesCard.Wr}>
-        <div className={stylesCard.imgWr}>
-          <img src={productId.pictures} alt={productId.name} />
-          <span className={isLikeStylesFn() ? stylesCard.heartTrue : stylesCard.heartFalse} role="presentation" onClick={likesClick}>
-            <i className="fa-solid fa-heart" /* иконка с сердцем *//>
-          </span>
-        </div>
-        <div className={stylesCard.text}>
-          {userFlag && (
-          <div className={stylesCard.changeCardButtonWr}>
-            <button type="button" onClick={changeCard} className={stylesCard.btn}>
-              <span>
-                <i className="fa-regular fa-pen-to-square" />
-                Редактировать товар
-              </span>
-            </button>
-            <button type="button" onClick={delProductFn} className={stylesCard.btnDel}>
-              <span>
-                <i className="fa-solid fa-trash-can" />
-                Удалить товар
-              </span>
-            </button>
+      {isLoadingProductId ? <Loader /> : (
+        <div className={stylesCard.Wr}>
+          <div className={stylesCard.imgWr}>
+            <img src={productId.pictures} alt={productId.name} />
+            <span className={isLikeStylesFn() ? stylesCard.heartTrue : stylesCard.heartFalse} role="presentation" onClick={likesClick}>
+              <i className="fa-solid fa-heart" /* иконка с сердцем *//>
+            </span>
           </div>
-          )}
-          <h3 className={stylesCard.name}>{productId.name /* {props} с текстом для карточки */}</h3>
-          <s className={stylesCard.discount}>{productId.discount > 0 ? `${productId.price} P` : '' }</s>
-          <h4 className={productId.discount ? stylesCard.priceDiscount : stylesCard.price}>{productId.discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${productId.price} P` /* ценa и выбор стилей для скидки */}</h4>
-          <p className={stylesCard.wight}>{productId.wight /* {props} размер уп. (шт, гр) */}</p>
-          <div className={stylesCard.btnWr}>
-            <p className={stylesCard.stockP}/* Товаров в наличии */>
-              В наличии
-              {' '}
-              {productId.stock}
-              {' '}
-              шт.
-            </p>
-            <div className={stylesCard.stock}>
-              <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesCard.stockStop : stylesCard.stockStopFalse}>-</button>
-              {stockQuantity}
-              <button type="button" onClick={stockPlus} className={(stockQuantity < stokStyle) ? stylesCard.stockStopFalse : stylesCard.stockStop}>+</button>
+          <div className={stylesCard.text}>
+            {userFlag && (
+            <div className={stylesCard.changeCardButtonWr}>
+              <button type="button" onClick={changeCard} className={stylesCard.btn}>
+                <span>
+                  <i className="fa-regular fa-pen-to-square" />
+                  Редактировать товар
+                </span>
+              </button>
+              <button type="button" onClick={delProductFn} className={stylesCard.btnDel}>
+                <span>
+                  <i className="fa-solid fa-trash-can" />
+                  Удалить товар
+                </span>
+              </button>
             </div>
-            <p className={stylesCard.totalPrice}/* Итоговая сумма */>
-              Сумма
-              {' '}
-              {stockQuantity * (productId.discount > 0 ? discountFun() : productId.price)}
-              {' '}
-              руб.
+            )}
+            <h3 className={stylesCard.name}>{productId.name /* {props} с текст для карточки */}</h3>
+            <s className={stylesCard.discount}>{productId.discount > 0 ? `${productId.price} P` : '' }</s>
+            <h4 className={productId.discount ? stylesCard.priceDiscount : stylesCard.price}>{productId.discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${productId.price} P` /* ценa и выбор стилей для скидки */}</h4>
+            <p className={stylesCard.wight}>{productId.wight /* {props} размер уп. (шт, гр) */}</p>
+            <div className={stylesCard.btnWr}>
+              <p className={stylesCard.stockP}/* Товаров в наличии */>
+                В наличии
+                {' '}
+                {productId.stock}
+                {' '}
+                шт.
+              </p>
+              <div className={stylesCard.stock}>
+                <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesCard.stockStop : stylesCard.stockStopFalse}>-</button>
+                {stockQuantity}
+                <button type="button" onClick={stockPlus} className={(stockQuantity === productId.stock) ? stylesCard.stockStop : stylesCard.stockStopFalse}>+</button>
+              </div>
+              <p className={stylesCard.totalPrice}/* Итоговая сумма */>
+                Сумма
+                {' '}
+                {stockQuantity * (productId.discount > 0 ? discountFun() : productId.price)}
+                {' '}
+                руб.
+              </p>
+              <button type="button" onClick={basketQuantity} className={stylesCard.btn}>
+                <span>
+                  <i className="fa-solid fa-basket-shopping" />
+                  В корзину
+                </span>
+              </button>
+              <ToastContainer />
+            </div>
+            <h6 className={stylesCard.descriptionH}>Описание товара:</h6>
+            <p className={stylesCard.description}>
+              {productId.description}
             </p>
-            <button type="button" onClick={basketQuantity} className={stylesCard.btn}>
-              <span>
-                <i className="fa-solid fa-basket-shopping" />
-                В корзину
-              </span>
-            </button>
-            <ToastContainer />
           </div>
-          <h6 className={stylesCard.descriptionH}>Описание товара:</h6>
-          <p className={stylesCard.description}>
-            {productId.description}
-          </p>
         </div>
-      </div>
-      <Link to="/catalog" className={stylesCard.link}>&lt;-- Назад</Link>
+      )}
     </>
   )
 }

@@ -8,7 +8,7 @@ import { REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3 } from '../../redux/initSta
 function Header({
   user, setUser, dataProducts, setModalActive,
   token,
-  setSearchData, searchText, setUpdateSearchText, userDetails,
+  setSearchData, searchText, setUpdateSearchText, userDetails, setsearchParams,
 }) { // Компонент Header с {props}
   const navigate = useNavigate() // назначение Хук (useNavigate)
   const basketRedux = useSelector(getBasketSliceSelector) //  Хук из (Redux) с массивом корзины
@@ -27,7 +27,6 @@ function Header({
   const logOut = (e) => { // функция для Выхода
     e.preventDefault() // Отмена действий по умолчанию
     localStorage.removeItem('userSM8') // Удаления записи о пользователе из (localStorage)
-    localStorage.removeItem('stock') // Удаления записи о количестве товара из (localStorage)
     dispatch(newArrBasketRedux([])) // Делаем запись в корзину в (redux)
     localStorage.removeItem(REDUX_LS_KEY1) // Удаления записи о корзине из (localStorage)
     localStorage.removeItem(REDUX_LS_KEY2) // Удаления записи о корзине из (localStorage)
@@ -50,6 +49,7 @@ function Header({
         setSearchData={setSearchData}
         searchText={searchText}
         setUpdateSearchText={setUpdateSearchText}
+        setsearchParams={setsearchParams}
       />
       )}
       <nav className={stylesHeader.nav}>

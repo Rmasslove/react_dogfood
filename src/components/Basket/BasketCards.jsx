@@ -8,7 +8,6 @@ export function BasketCards({ // Компонента карточки това�
 }) {
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
-  const stokStyle = localStorage.getItem('stock') // Сущность принимающая значения (stock) для стилей кнопок
 
   const basketQuantityFn = () => { // Функция удаление товара из корзины заказа
     const newArrBasket = basketRedux.filter((el) => el.id !== id)
@@ -25,11 +24,9 @@ export function BasketCards({ // Компонента карточки това�
   }
 
   const stockPlus = () => { // Функция увеличивающая единиц за один товар в корзине
-    const strData = JSON.stringify(stock) // Сущность (stock) для записи в (localStorage)
-    localStorage.setItem('stock', strData) // Метод записи в (localStorage)
     const modifiedArrBasket = basketRedux.map((el) => { // Ищем товар в массиве
       if (el.id === id) { // если id совпадают
-        if (stockQuantity < localStorage.getItem('stock')) { // Если меньше чем записано изначально в (localStorage)
+        if (stockQuantity < stock) { // Если меньше чем на складе
           return { // Меняем количество товаров + 1
             ...el,
             stockQuantity: stockQuantity + 1,
@@ -41,8 +38,6 @@ export function BasketCards({ // Компонента карточки това�
   }
 
   const stockMinus = () => { // Функция уменьшающая единиц за один товар в корзине
-    const strData = JSON.stringify(stock) // Сущность (stock) для записи в (localStorage)
-    localStorage.setItem('stock', strData) // Метод записи в (localStorage)
     const modifiedArrBasket = basketRedux.map((el) => { // Ищем товар в массиве
       if (el.id === id) { // если id совпадают
         if (stockQuantity > 1) { // Если больше чем 1
@@ -68,6 +63,20 @@ export function BasketCards({ // Компонента карточки това�
     dispatch(newArrBasketRedux(modifiedArrBasket))
   }
 
+  const stockMinusStyle = () => { // Функция отображения стилей для (-)
+    if (stockQuantity === 1) { // Если количество равно 1 то...
+      return stylesBasket.stockStop
+    }
+    return stylesBasket.stockStopFalse
+  }
+
+  const stockPlusStyle = () => { // Функция отображения стилей для (-)
+    if (stockQuantity === stock) { // Если количество равно количеству на складе то...
+      return stylesBasket.stockStop
+    }
+    return stylesBasket.stockStopFalse
+  }
+
   return ( // jsx разметка
     <div className={stylesBasket.card}>
       <label className={stylesBasket.checkbox} htmlFor={`coding${id}`}>
@@ -75,9 +84,9 @@ export function BasketCards({ // Компонента карточки това�
         <p className={stylesBasket.name}>{name}</p>
       </label>
       <div className={stylesBasket.stock}>
-        <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesBasket.stockStop : stylesBasket.stockStopFalse}>-</button>
+        <button type="button" onClick={stockMinus} className={stockMinusStyle()}>-</button>
         {stockQuantity}
-        <button type="button" onClick={stockPlus} className={(stockQuantity < stokStyle) ? stylesBasket.stockStopFalse : stylesBasket.stockStop}>+</button>
+        <button type="button" onClick={stockPlus} className={stockPlusStyle()}>+</button>
       </div>
       <p>шт.</p>
       <p>

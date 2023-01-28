@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { useDispatch } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
+import { useSearchParams } from 'react-router-dom'
 import { Footer } from './components/Footer/Footer' // Импорт компонента
 import { Header } from './components/Header/Header' // Импорт компонента
 import { Main } from './components/Main/Main' // Импорт компонента
@@ -18,8 +19,10 @@ function App() { // Компотент App
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [searchData, setSearchData] = useState(dataProducts) // Хук список количества товаров поиска
-  const [searchText, setUpdateSearchText] = useState('') // Хук для поля поиска принимающий пустую строку
+  const [searchParams, setsearchParams] = useSearchParams() // Хку для отображения поиска в URL
+  const [searchText, setUpdateSearchText] = useState(() => searchParams.get('q') ?? '') // Хук для поля поиска принимающий URL или пустую строку
   const [reload, setReload] = useState(0) // Хук для массива зависимостей вызывающий перезапуск
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true) // Хук для флага лоудера
   const dispatch = useDispatch() // Хук из (Redux)
 
   useEffect(() => { // Хук с запросом информации о пользователе
@@ -47,6 +50,7 @@ function App() { // Компотент App
           } else {
             toast.error(data.message) // Вывод информации об ошибке
           }
+          setIsLoadingProducts(false) // Меняем флаг лоудера
         })
     }
   }, [])
@@ -84,6 +88,7 @@ function App() { // Компотент App
           } else {
             toast.error(data.message) // Вывод информации об ошибке
           }
+          setIsLoadingProducts(false) // Меняем флаг лоудера
         })
     }
   }, [api, reload]) // Срабатывает при изменении (api) и (reload)
@@ -103,6 +108,7 @@ function App() { // Компотент App
           searchText={searchText}
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
+          setsearchParams={setsearchParams}
         />
         <Main
           user={user}
@@ -114,6 +120,7 @@ function App() { // Компотент App
           setReload={setReload}
           searchData={searchData}
           searchText={searchText}
+          isLoadingProducts={isLoadingProducts}
         />
         <Footer /* компонент Footer *//>
       </div>

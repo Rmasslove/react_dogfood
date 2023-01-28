@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom' // Импорт компонента
-import { useEffect } from 'react' // Импорт компонента
+import { useEffect, useState } from 'react' // Импорт компонента
 import stylesSearch from './search.module.scss' // Импорт стилей компонента
 import { ReactComponent as Glass } from './img/magnifying-glass-solid.svg' // Импорт файла (svg) преобразованного в компонент
 import { ReactComponent as Xmark } from './img/circle-xmark-regular.svg' // Импорт файла (svg) преобразованного в компонент
 import { useDebounce } from '../../Hooks/useDebounce' // Импорт компонента
 
 export function Search({
-  dataProducts, setSearchData, searchText, setUpdateSearchText,
+  dataProducts, setSearchData, searchText, setUpdateSearchText, setsearchParams,
 }) { // Компонент строки поиска с {props}
   const navigate = useNavigate() // Хук из (react-router-dom)
   const debounceValue = useDebounce(searchText) // Хук (useDebounce) с задержкой 600ms
+  const [searchTextFlag, setSearchTextFlag] = useState(false) // Флаг для разрешения навигации
 
   const clearSearch = () => { // Функция очистки поля поиска
     setUpdateSearchText('') // Хук принимающий значение пустого поля для поиска
@@ -26,14 +27,28 @@ export function Search({
       const arr = dataProducts.filter( // Метод сортировки списка продуктов
         (el) => el.name.toLowerCase().includes(searchText.toLowerCase()),
       )
+      // eslint-disable-next-line no-unused-expressions
+      !searchTextFlag && navigate('/catalog') // Перенаправляем на страницу каталога с товарами
+      setSearchTextFlag(true) // Ставить флаг
       if (arr.length === 0) { // Если товаров не нейдено
         navigate('/catalog/searchempty') // Перенаправляем на страницу (searchempty)
+        setSearchTextFlag(false) // Измняем флаг
       } else {
-        navigate('/catalog') // Перенаправляем на страницу каталога с товарами
         setSearchData(arr) // Хук принимающий список отсортированых продуктов
       }
     }
   }, [debounceValue]) // Срабатывает на изменение функции (debounceValue) 600ms
+
+  useEffect(() => { // Хук для передачи значения из поля поиска в URL
+    setsearchParams({ q: searchText }) // Метод передачи
+  }, [searchText])
+
+  useEffect(() => { // Хук для отработки перехода в каталог при пустом поле поиска
+    if (!searchText) { // Если поле поиска опустело...
+      navigate('/catalog') // Перенаправляем на страницу каталога с товарами
+      setSearchTextFlag(false) // Изменяем флаг
+    }
+  }, [searchText])
 
   return (
     <div className={stylesSearch.search}>

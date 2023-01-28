@@ -28,6 +28,7 @@ export function PreviewProduct({ dataPreview }) { // Компонент отри
           {discountFun()/* Вызов функции для расчёта скидки */}
         </h4>
         <p className={stylesAddingProduct.wight}>{dataPreview.wight}</p>
+        {dataPreview.stock && (
         <p className={stylesAddingProduct.stock}>
           В наличии
           {' '}
@@ -35,6 +36,7 @@ export function PreviewProduct({ dataPreview }) { // Компонент отри
           {' '}
           шт.
         </p>
+        )}
         <h5 className={stylesAddingProduct.name}>{dataPreview.name}</h5>
       </div>
       <div><p>{dataPreview.description}</p></div>

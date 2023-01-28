@@ -34,6 +34,7 @@ export function Cards({
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
+              toast('Товар удалён из избранного', { autoClose: 1000 }) // Вывод информации об удалении товара из избранного
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
@@ -44,6 +45,7 @@ export function Cards({
           .then((data) => { // ответ в объекте
             if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
               setTimeout(setReload(crypto.randomUUID()), 500) // Вызывает перезагрузку товаров
+              toast('Товар добавлен в избранное', { autoClose: 1000 }) // Вывод информации о добавлении товара в избранного
             } else {
               toast.error(data.message) // Вывод информации об ошибке
             }
