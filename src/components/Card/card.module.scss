@@ -141,7 +141,7 @@ img {
     font-size: 24px;
 }
 
-.Wr{
+.WrBlock {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3em;
@@ -154,7 +154,7 @@ img {
 }
 
 @media (max-width: 900px) {
-    .Wr {
+    .WrBlock {
         grid-template-columns: auto;
      }      
 }
@@ -206,4 +206,32 @@ img {
     font-weight: 500;
     font-size: 16px;
     opacity: 0.9;
+}
+
+.btnReviews {
+    padding: 10px 18px;
+    border: none;
+    color: inherit;
+    background-color: silver;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.btnReviews:hover {
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+}
+
+.btnReviews:active {
+    background-color: rgb(128, 120, 120);
+}
+
+.btnReviews  i {
+    margin-right: 10px;
+}
+
+.reviewsWr{
+    display: grid;
+    gap: 5px;  
+    margin-bottom: 30px;
 }

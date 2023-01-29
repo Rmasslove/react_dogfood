@@ -56,8 +56,9 @@ export function Search({
     if (!searchText) { // Если поле поиска опустело...
       setIsLoadingSearchProducts(false) // Импорт компонента
       setSearchEmptyFlag(false) // Ставим закрывающий флаг для стриницы (ничего не найдено)
+      // eslint-disable-next-line no-unused-expressions
+      searchTextFlag && navigate('/catalog') // Перенаправляем на страницу каталога с товарами
       setSearchTextFlag(false) // Изменяем флаг на разрешающий переход при следующем поиске
-      navigate('/catalog') // Перенаправляем на страницу каталога с товарами
     }
   }, [searchText]) // Реагинует на текст в строке поиска
 

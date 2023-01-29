@@ -1,0 +1,32 @@
+.Wr{
+    display: grid;
+    grid-template-columns: auto 30%;  
+}
+
+.reviewsWr{
+    box-shadow: inset 0 -5px 15px -15px rgba(0, 0, 0, .5);
+    padding: 10px 30px;
+    padding-bottom: 35px;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 10% auto;
+    margin-bottom: 15px;
+    
+}
+
+.text {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.rating {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 16px;
+}

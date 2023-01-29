@@ -6,6 +6,7 @@ import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/ba
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 import 'react-toastify/dist/ReactToastify.css'
 import { Loader } from '../Loader/Loader'
+import { CardReviews } from './CardReviews'
 
 export function Card({
   api, dataProducts, userDetails, setReload,
@@ -15,6 +16,7 @@ export function Card({
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
   const [userFlag, setUserFlag] = useState(false) // Хук для флага что товар создан юзером
   const [isLoadingProductId, setIsLoadingProductId] = useState(true) // Хук флага для лоудера
+  const [reviewsBlock, setReviewsBlock] = useState(false)
 
   const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
@@ -167,71 +169,95 @@ export function Card({
     }
   }
 
+  const reviewsFn = () => { // Функция раскрытия блока с комментариями
+    if (!reviewsBlock && !productId.reviews.length) { // Если блок закрыт и комментариев нет...
+      toast('Комментарии к товару отсутствуют!', { autoClose: 1000 }) // Сообщение
+    } else { // Иначе...
+      setReviewsBlock(!reviewsBlock) // Открываем блок, меняя статус флага
+    }
+  }
+
   return ( // jsx разметка
     <>
       <span className={stylesCard.link}>Страница товара --&gt; </span>
       <Link to="/catalog"><span className={stylesCard.link}/* Линк для перехода на страницу каталога */>Перейти в каталог товаров</span></Link>
       {isLoadingProductId ? <Loader /> : (
         <div className={stylesCard.Wr}>
-          <div className={stylesCard.imgWr}>
-            <img src={productId.pictures} alt={productId.name} />
-            <span className={isLikeStylesFn() ? stylesCard.heartTrue : stylesCard.heartFalse} role="presentation" onClick={likesClick}>
-              <i className="fa-solid fa-heart" /* иконка с сердцем *//>
-            </span>
-          </div>
-          <div className={stylesCard.text}>
-            {userFlag && (
-            <div className={stylesCard.changeCardButtonWr}>
-              <button type="button" onClick={changeCard} className={stylesCard.btn}>
-                <span>
-                  <i className="fa-regular fa-pen-to-square" />
-                  Редактировать товар
-                </span>
-              </button>
-              <button type="button" onClick={delProductFn} className={stylesCard.btnDel}>
-                <span>
-                  <i className="fa-solid fa-trash-can" />
-                  Удалить товар
-                </span>
-              </button>
+          <div className={stylesCard.WrBlock}>
+            <div className={stylesCard.imgWr}>
+              <img src={productId.pictures} alt={productId.name} />
+              <span className={isLikeStylesFn() ? stylesCard.heartTrue : stylesCard.heartFalse} role="presentation" onClick={likesClick}>
+                <i className="fa-solid fa-heart" /* иконка с сердцем *//>
+              </span>
             </div>
-            )}
-            <h3 className={stylesCard.name}>{productId.name /* {props} с текст для карточки */}</h3>
-            <s className={stylesCard.discount}>{productId.discount > 0 ? `${productId.price} P` : '' }</s>
-            <h4 className={productId.discount ? stylesCard.priceDiscount : stylesCard.price}>{productId.discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${productId.price} P` /* ценa и выбор стилей для скидки */}</h4>
-            <p className={stylesCard.wight}>{productId.wight /* {props} размер уп. (шт, гр) */}</p>
-            <div className={stylesCard.btnWr}>
-              <p className={stylesCard.stockP}/* Товаров в наличии */>
-                В наличии
-                {' '}
-                {productId.stock}
-                {' '}
-                шт.
-              </p>
-              <div className={stylesCard.stock}>
-                <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesCard.stockStop : stylesCard.stockStopFalse}>-</button>
-                {stockQuantity}
-                <button type="button" onClick={stockPlus} className={(stockQuantity === productId.stock) ? stylesCard.stockStop : stylesCard.stockStopFalse}>+</button>
+            <div className={stylesCard.text}>
+              {userFlag && (
+              <div className={stylesCard.changeCardButtonWr}>
+                <button type="button" onClick={changeCard} className={stylesCard.btn}>
+                  <span>
+                    <i className="fa-regular fa-pen-to-square" />
+                    Редактировать товар
+                  </span>
+                </button>
+                <button type="button" onClick={delProductFn} className={stylesCard.btnDel}>
+                  <span>
+                    <i className="fa-solid fa-trash-can" />
+                    Удалить товар
+                  </span>
+                </button>
               </div>
-              <p className={stylesCard.totalPrice}/* Итоговая сумма */>
-                Сумма
-                {' '}
-                {stockQuantity * (productId.discount > 0 ? discountFun() : productId.price)}
-                {' '}
-                руб.
+              )}
+              <h3 className={stylesCard.name}>{productId.name /* текст для карточки */}</h3>
+              <s className={stylesCard.discount}>{productId.discount > 0 ? `${productId.price} P` : '' }</s>
+              <h4 className={productId.discount ? stylesCard.priceDiscount : stylesCard.price}>{productId.discount > 0 ? `${discountFun()/* Вызов функции для расчёта скидки */} P` : `${productId.price} P` /* ценa и выбор стилей для скидки */}</h4>
+              <p className={stylesCard.wight}>{productId.wight /* размер уп. (шт, гр) */}</p>
+              <div className={stylesCard.btnWr}>
+                <p className={stylesCard.stockP}/* Товаров в наличии */>
+                  В наличии
+                  {' '}
+                  {productId.stock}
+                  {' '}
+                  шт.
+                </p>
+                <div className={stylesCard.stock}>
+                  <button type="button" onClick={stockMinus} className={(stockQuantity === 1) ? stylesCard.stockStop : stylesCard.stockStopFalse}>-</button>
+                  {stockQuantity}
+                  <button type="button" onClick={stockPlus} className={(stockQuantity === productId.stock) ? stylesCard.stockStop : stylesCard.stockStopFalse}>+</button>
+                </div>
+                <p className={stylesCard.totalPrice}/* Итоговая сумма */>
+                  Сумма
+                  {' '}
+                  {stockQuantity * (productId.discount > 0 ? discountFun() : productId.price)}
+                  {' '}
+                  руб.
+                </p>
+                <button type="button" onClick={basketQuantity} className={stylesCard.btn}>
+                  <span>
+                    <i className="fa-solid fa-basket-shopping" />
+                    В корзину
+                  </span>
+                </button>
+                <ToastContainer />
+              </div>
+              <h6 className={stylesCard.descriptionH}>Описание товара:</h6>
+              <p className={stylesCard.description}>
+                {productId.description}
               </p>
-              <button type="button" onClick={basketQuantity} className={stylesCard.btn}>
-                <span>
-                  <i className="fa-solid fa-basket-shopping" />
-                  В корзину
-                </span>
-              </button>
-              <ToastContainer />
             </div>
-            <h6 className={stylesCard.descriptionH}>Описание товара:</h6>
-            <p className={stylesCard.description}>
-              {productId.description}
-            </p>
+          </div>
+          <button type="button" onClick={reviewsFn} className={stylesCard.btnReviews}>
+            <span>
+              <i className="fa-solid fa-plus" />
+              Коментарии:
+            </span>
+          </button>
+          <div className={stylesCard.reviewsWr}>
+            {reviewsBlock && productId.reviews.map((el) => (/* Вывод нужного количества карточек */
+              <CardReviews /* Компонента  */
+                key={crypto.randomUUID()/* Вызов функции для получения (key) */}
+                {...el /* Информация (содержимое) для карточек ввиде props */}
+              />
+            ))}
           </div>
         </div>
       )}
