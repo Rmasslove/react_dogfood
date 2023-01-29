@@ -1,6 +1,7 @@
 export const REDUX_LS_KEY1 = 'basketRedux' // Сущность для записи названия ключа в (localStorage)
 export const REDUX_LS_KEY2 = 'aboutUserRedux' // Сущность для записи названия ключа в (localStorage)
 export const REDUX_LS_KEY3 = 'dataProductsRedux' // Сущность для записи названия ключа в (localStorage)
+export const REDUX_LS_KEY4 = 'isLikeProductsRedux' // Сущность для записи названия ключа в (localStorage)
 
 export const initialState = { // Начальное состояние для редьюсеров
   basket: [],
@@ -9,6 +10,7 @@ export const initialState = { // Начальное состояние для р
     token: '',
   },
   dataProducts: [],
+  isLikeProducts: [],
 }
 export const getBasketInitialState = () => { // Функция вызова начального состояния
   const stateLS = localStorage.getItem(REDUX_LS_KEY1) // Запись в сущность из (localStorage)
@@ -26,4 +28,10 @@ export const getDataProductsInitialState = () => { // Функция вызов�
   const stateLS = localStorage.getItem(REDUX_LS_KEY3) // Запись в сущность из (localStorage)
 
   return stateLS ? JSON.parse(stateLS) : initialState.dataProducts // (localStor) или (initialState)
+}
+
+export const getIsLikeProductsInitialState = () => { // Функция вызова начального состояния
+  const stateLS = localStorage.getItem(REDUX_LS_KEY4) // Запись в сущность из (localStorage)
+
+  return stateLS ? JSON.parse(stateLS) : initialState.isLikeProducts // (localStor) или initialState
 }

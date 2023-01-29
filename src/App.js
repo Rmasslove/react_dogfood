@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react' // Импорт компонента
-import { useDispatch } from 'react-redux'
-import { ToastContainer, toast } from 'react-toastify'
-import { useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux' // Импорт компонента
+import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
+import { useSearchParams } from 'react-router-dom' // Импорт компонента
 import { Footer } from './components/Footer/Footer' // Импорт компонента
 import { Header } from './components/Header/Header' // Импорт компонента
 import { Main } from './components/Main/Main' // Импорт компонента
 import { Modal } from './components/Modal/Modal' // Импорт компонента
 import { Api } from './Api' // Импорт компонента
-import { newArrDataProductsRedux } from './redux/slices/dataProductsSlise'
+import { newArrDataProductsRedux } from './redux/slices/dataProductsSlise' // Импорт компонента
 import './App.css' // Импорт компонента стилей
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css' // Импорт компонента стилей
 
 function App() { // Компотент App
   const [user, setUser] = useState(localStorage.getItem('userSM8')) // Хук (useState) принимающий данные из (localStorage) о пользователе
@@ -23,6 +23,8 @@ function App() { // Компотент App
   const [searchText, setUpdateSearchText] = useState(() => searchParams.get('q') ?? '') // Хук для поля поиска принимающий URL или пустую строку
   const [reload, setReload] = useState(0) // Хук для массива зависимостей вызывающий перезапуск
   const [isLoadingProducts, setIsLoadingProducts] = useState(true) // Хук для флага лоудера
+  const [isLoadingSearchProducts, setIsLoadingSearchProducts] = useState(false) // Лоудер для поиска
+  const [searchEmptyFlag, setSearchEmptyFlag] = useState(false) // Флаг для стр. (ничего не найдено)
   const dispatch = useDispatch() // Хук из (Redux)
 
   useEffect(() => { // Хук с запросом информации о пользователе
@@ -109,18 +111,23 @@ function App() { // Компотент App
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
           setsearchParams={setsearchParams}
+          setSearchEmptyFlag={setSearchEmptyFlag}
+          setIsLoadingSearchProducts={setIsLoadingSearchProducts}
+          reload={reload}
         />
         <Main
           user={user}
           dataProducts={dataProducts}
           api={api}
-          setGoods={setGoods}
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
           setReload={setReload}
           searchData={searchData}
           searchText={searchText}
           isLoadingProducts={isLoadingProducts}
+          searchEmptyFlag={searchEmptyFlag}
+          setSearchEmptyFlag={setSearchEmptyFlag}
+          isLoadingSearchProducts={isLoadingSearchProducts}
         />
         <Footer /* компонент Footer *//>
       </div>

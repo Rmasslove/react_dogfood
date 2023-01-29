@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react' // Импорт компонента
+import { useDispatch } from 'react-redux' // Импорт компонента
+import { newArrIsLikeProductsRedux } from '../../redux/slices/isLikeProductsSlice' // Импорт компонента
 import { Loader } from '../Loader/Loader' // Импорт компонента
 import { Likes } from './Likes' // Импорт компонента
 import { LikesEmpty } from './LikesEmpty' // Импорт компонента
@@ -6,7 +8,9 @@ import { LikesEmpty } from './LikesEmpty' // Импорт компонента
 export function LikesRoute({
   dataProducts, userDetails, api, setReload,
 }) { // Копонент для выбора (likes)
-  const [isLoadingLikesProducts, setIsLoadingLikesProducts] = useState(true)
+  const [isLoadingLikesProducts, setIsLoadingLikesProducts] = useState(true) // Лоудер избранных тов
+  const dispatch = useDispatch() // Хук из (Redux)
+
   const isLikeArr = dataProducts.filter(
     // eslint-disable-next-line no-underscore-dangle
     (el) => el.likes.includes(userDetails._id),
@@ -15,6 +19,7 @@ export function LikesRoute({
   useEffect(() => { // Хук для проверки загрузки
     if (isLikeArr.length > 0) { // Если загрузилось
       setIsLoadingLikesProducts(false) // Меняем значение для лоудера
+      dispatch(newArrIsLikeProductsRedux(isLikeArr)) // Запись в (redux)
     }
   }, [isLikeArr])
 

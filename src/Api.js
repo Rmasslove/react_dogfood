@@ -148,6 +148,20 @@ class Api { // Класс (Api)
       throw new Error(error)
     }
   }
+
+  searchProduct(value) { // Функция поиска товаров
+    try {
+      return fetch(`${this.path}/products/search?query=${value}`, { // Запрос на сервер
+        method: 'GET', // метод
+        headers: { // заголовок
+        // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
 }
 
 export { Api } // Экспорт класса

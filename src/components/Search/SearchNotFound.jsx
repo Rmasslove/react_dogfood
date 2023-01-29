@@ -1,12 +1,11 @@
-import { useNavigate } from 'react-router-dom' // Импорт компонента
 import stylesSearch from './search.module.scss' // Импорт компонента стилей
 
-export function SearchEmpty({ setGoods, setUpdateSearchText }) { // Компонент пустого поиска
-  const navigate = useNavigate() // Хук из (react-router-dom)
+export function SearchEmpty({
+  setUpdateSearchText,
+  setSearchEmptyFlag,
+}) { // Компонент пустого поиска
   const navigeteFn = () => { // Функция для перехода в каталог
-    navigate('/catalog') // Перенаправляем на страницу каталога с товарами
-    const strProducts = localStorage.getItem('localProducts') // Сущность принимающая сохраненное значение о товарах в (localStorage)
-    setGoods(JSON.parse(strProducts)) // Запись в Хук начального значения товаров из (loc.Storage)
+    setSearchEmptyFlag(false) // Убираем флаг для перехода на стриницу (ничего не найдено)
     setUpdateSearchText('') // Хук принимающий значение пустого поля для поиска
   }
 

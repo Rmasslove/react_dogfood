@@ -1,19 +1,19 @@
 import { Routes, Route } from 'react-router-dom' // Импорт компонента
-import { AddingProduct } from '../AddingProduct/AddingProduct'
-import { AddProductDone } from '../AddingProduct/AddProductDone'
-import { ChangeProdukt } from '../AddingProduct/ChangeProdukt'
-import { DelProductDone } from '../AddingProduct/DelProductDone'
+import { AddingProduct } from '../AddingProduct/AddingProduct' // Импорт компонента
+import { AddProductDone } from '../AddingProduct/AddProductDone' // Импорт компонента
+import { ChangeProdukt } from '../AddingProduct/ChangeProdukt' // Импорт компонента
+import { DelProductDone } from '../AddingProduct/DelProductDone' // Импорт компонента
 import { BasketRoute } from '../Basket/BasketRoute' // Импорт компонента
 import { Card } from '../Card/Card' // Импорт компонента
-import { LikesRoute } from '../Likes/LikesRoute'
+import { LikesRoute } from '../Likes/LikesRoute' // Импорт компонента
 import { Catalog } from '../Pages/catalog' // Импорт компонента
 import { Home } from '../Pages/home' // Импорт компонента
-import { SearchEmpty } from '../Search/SearchNotFound'
 import { NotFoundPage } from './NotFoudPage' // Импорт компонента
 
 function Main({ // Копонент основного тела сайта
-  dataProducts, user, api, setGoods, setUpdateSearchText,
-  userDetails, setReload, searchData, searchText, isLoadingProducts,
+  dataProducts, user, api, userDetails, setReload, searchData,
+  searchText, isLoadingProducts, searchEmptyFlag,
+  setUpdateSearchText, setSearchEmptyFlag, isLoadingSearchProducts,
 }) { // Компонент Main с {props}
   return ( // jsx разметка
     <main>
@@ -25,16 +25,19 @@ function Main({ // Копонент основного тела сайта
           element={(user && (
             <Catalog
               dataProducts={searchText ? searchData : dataProducts}
+              searchEmptyFlag={searchEmptyFlag}
               userDetails={userDetails}
               api={api}
               setReload={setReload}
               searchText={searchText}
               isLoadingProducts={isLoadingProducts}
+              setUpdateSearchText={setUpdateSearchText}
+              setSearchEmptyFlag={setSearchEmptyFlag}
+              isLoadingSearchProducts={isLoadingSearchProducts}
             />
           ))
             || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
-        <Route path="/catalog/searchempty" element={(<SearchEmpty setGoods={setGoods} setUpdateSearchText={setUpdateSearchText} />)} />
         <Route path="/card/:id" element={<Card api={api} dataProducts={dataProducts} userDetails={userDetails} setReload={setReload} />} />
         <Route path="/basket" element={<BasketRoute />} />
         <Route path="/likes" element={<LikesRoute dataProducts={dataProducts} userDetails={userDetails} api={api} setReload={setReload} />} />

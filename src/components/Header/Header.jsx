@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux' // Импорт комп�
 import { Search } from '../Search/Search' // Импорт компонента
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
-import { REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3 } from '../../redux/initState' // Импорт значения из компонента
+import {
+  REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3, REDUX_LS_KEY4,
+} from '../../redux/initState' // Импорт значения из компонента
 
 function Header({
   user, setUser, dataProducts, setModalActive,
-  token,
-  setSearchData, searchText, setUpdateSearchText, userDetails, setsearchParams,
+  token, setIsLoadingSearchProducts,
+  setSearchData, searchText, setUpdateSearchText,
+  userDetails, setsearchParams, setSearchEmptyFlag, api, reload,
 }) { // Компонент Header с {props}
   const navigate = useNavigate() // назначение Хук (useNavigate)
   const basketRedux = useSelector(getBasketSliceSelector) //  Хук из (Redux) с массивом корзины
@@ -31,6 +34,7 @@ function Header({
     localStorage.removeItem(REDUX_LS_KEY1) // Удаления записи о корзине из (localStorage)
     localStorage.removeItem(REDUX_LS_KEY2) // Удаления записи о корзине из (localStorage)
     localStorage.removeItem(REDUX_LS_KEY3) // Удаления записи о корзине из (localStorage)
+    localStorage.removeItem(REDUX_LS_KEY4) // Удаления записи о корзине из (localStorage)
     setUser('') // Удаление записи о пользователе в Хук (useState)
     navigate('/') // Переход на корневую страницу
   }
@@ -50,6 +54,10 @@ function Header({
         searchText={searchText}
         setUpdateSearchText={setUpdateSearchText}
         setsearchParams={setsearchParams}
+        setSearchEmptyFlag={setSearchEmptyFlag}
+        api={api}
+        setIsLoadingSearchProducts={setIsLoadingSearchProducts}
+        reload={reload}
       />
       )}
       <nav className={stylesHeader.nav}>
