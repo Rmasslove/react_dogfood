@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
 import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
-import 'react-toastify/dist/ReactToastify.css'
-import { Loader } from '../Loader/Loader'
-import { CardReviews } from './CardReviews'
+import 'react-toastify/dist/ReactToastify.css' // Импорт компонента стилей
+import { Loader } from '../Loader/Loader' // Импорт компонента
+import { CardReviews } from './CardReviews' // Импорт компонента
+import { AddReviews } from './AddReviews' // Импорт компонента
 
 export function Card({
   api, dataProducts, userDetails, setReload,
@@ -16,7 +17,8 @@ export function Card({
   const [stockQuantity, setStockQuantity] = useState(1) // Хук количества по одному товару
   const [userFlag, setUserFlag] = useState(false) // Хук для флага что товар создан юзером
   const [isLoadingProductId, setIsLoadingProductId] = useState(true) // Хук флага для лоудера
-  const [reviewsBlock, setReviewsBlock] = useState(false)
+  const [reviewsBlock, setReviewsBlock] = useState(false) // Хук флага блок с комментариями
+  const [addReviewsBlock, setaddReviewsBlock] = useState(false) // Хук блока добавления комментария
 
   const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
@@ -172,8 +174,22 @@ export function Card({
   const reviewsFn = () => { // Функция раскрытия блока с комментариями
     if (!reviewsBlock && !productId.reviews.length) { // Если блок закрыт и комментариев нет...
       toast('Комментарии к товару отсутствуют!', { autoClose: 1000 }) // Сообщение
+    }
+    if (reviewsBlock === false) { // Если блок закрыт...
+      setReviewsBlock(true) // Открываем блок, меняя статус флага
     } else { // Иначе...
-      setReviewsBlock(!reviewsBlock) // Открываем блок, меняя статус флага
+      setaddReviewsBlock(false) // Закрываем блок с Добавить комментарий
+      setReviewsBlock(false) // Закрываем блок с комментариями
+    }
+  }
+
+  const addReviewsFn = () => { // Функция добавления комментария
+    if (reviewsBlock) { // Если блок с комментариями открыт...
+      if (addReviewsBlock === false) { // Если блок с добавление комментария закрыт...
+        setaddReviewsBlock(true) // Открываем блок
+      } else { // Иначе...
+        setaddReviewsBlock(false) // Закрываем блок
+      }
     }
   }
 
@@ -245,17 +261,29 @@ export function Card({
               </p>
             </div>
           </div>
-          <button type="button" onClick={reviewsFn} className={stylesCard.btnReviews}>
-            <span>
-              <i className="fa-solid fa-plus" />
-              Коментарии:
-            </span>
-          </button>
+          <div className={stylesCard.btnReviewsWr}>
+            <button type="button" onClick={reviewsFn} className={stylesCard.btnReviews}>
+              <span>
+                <i className="fa-solid fa-plus" />
+                Комментарии
+              </span>
+            </button>
+            {reviewsBlock && (
+            <button type="button" onClick={addReviewsFn} className={stylesCard.btnReviews}>
+              <span>
+                <i className="fa-solid fa-plus" />
+                Добавить комментарий
+              </span>
+            </button>
+            )}
+          </div>
           <div className={stylesCard.reviewsWr}>
+            {addReviewsBlock && <AddReviews /> }
             {reviewsBlock && productId.reviews.map((el) => (/* Вывод нужного количества карточек */
               <CardReviews /* Компонента  */
                 key={crypto.randomUUID()/* Вызов функции для получения (key) */}
                 {...el /* Информация (содержимое) для карточек ввиде props */}
+                api={api}
               />
             ))}
           </div>

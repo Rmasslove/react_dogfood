@@ -1,0 +1,32 @@
+.Wr {
+    display: grid;
+    grid-template-columns: 70% auto;
+}
+
+.formWr{
+    display: grid;
+    grid-template-columns: auto 30% ;
+    gap: 20px;
+    align-items: flex-end;  
+    justify-content: space-between;
+    padding: 30px 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+}
+
+// button{
+//     padding: 10px 18px;
+//     border: none;
+//     color: inherit;
+//     background-color: #ffe44d;
+//     border-radius: 20px;
+//     font-weight: 600;
+// }
+
+// button:hover {
+//     box-shadow: 0px 0px 3px 0.1px rgba(0, 0, 0, 0.527);
+// }
+
+// button:active {
+//     background-color: rgb(196, 170, 28);
+// }

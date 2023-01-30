@@ -226,6 +226,11 @@ img {
     background-color: rgb(128, 120, 120);
 }
 
+.btnReviewsWr {
+    display: flex;
+    gap: 200px;
+}
+
 .btnReviews  i {
     margin-right: 10px;
 }
@@ -235,3 +240,4 @@ img {
     gap: 5px;  
     margin-bottom: 30px;
 }
+
