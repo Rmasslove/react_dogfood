@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom' // Импорт компонента
+import { useNavigate, useSearchParams } from 'react-router-dom' // Импорт компонента
 import { useEffect, useState } from 'react' // Импорт компонента
 import { ToastContainer, toast } from 'react-toastify'
 import stylesSearch from './search.module.scss' // Импорт стилей компонента
@@ -8,11 +8,14 @@ import { useDebounce } from '../../Hooks/useDebounce' // Импорт компо
 
 export function Search({
   dataProducts, setSearchData, searchText, setUpdateSearchText,
-  setsearchParams, setSearchEmptyFlag, api, setIsLoadingSearchProducts, reload,
+  setSearchEmptyFlag, api, setIsLoadingSearchProducts, reload,
 }) { // Компонент строки поиска с {props}
   const navigate = useNavigate() // Хук из (react-router-dom)
   const debounceValue = useDebounce(searchText) // Хук (useDebounce) с задержкой 600ms
   const [searchTextFlag, setSearchTextFlag] = useState(false) // Флаг для разрешения навигации
+
+  // eslint-disable-next-line no-unused-vars
+  const [searchParams, setsearchParams] = useSearchParams() // Для отображения поиска в URL
 
   useEffect(() => { // Хук для передачи значения из поля поиска в URL
     setsearchParams({ q: searchText }) // Метод передачи

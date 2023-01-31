@@ -62,6 +62,35 @@ class Api { // Класс (Api)
     }
   }
 
+  getReviewProductId(id) { // Функция получение отзывов товара по Id
+    try {
+      return fetch(`${this.path}/products/review/${id}`, { // Запрос на сервер
+        headers: { // заголовок
+        // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
+
+  addReviewProductId(id, body) { // Функция добавление нового товара
+    try {
+      return fetch(`${this.path}/products/review/${id}`, { // Запрос на сервер
+        method: 'POST', // метод
+        headers: { // заголовок
+          'Content-Type': 'application/json', // Информация в заголовке
+          // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+        body: JSON.stringify(body),
+      })
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
+
   getUserDetails() { // Функция получение информации о пользователе по токену
     try {
       return fetch(`${this.path}/v2/${this.group}/users/me`, { // Запрос на сервер

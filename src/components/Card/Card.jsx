@@ -19,6 +19,9 @@ export function Card({
   const [isLoadingProductId, setIsLoadingProductId] = useState(true) // Хук флага для лоудера
   const [reviewsBlock, setReviewsBlock] = useState(false) // Хук флага блок с комментариями
   const [addReviewsBlock, setaddReviewsBlock] = useState(false) // Хук блока добавления комментария
+  const [reviews, setReviews] = useState([]) // Хук массива с комментариями
+  const [isLoadingReviews, setIsLoadingReviews] = useState(true) // Хук массива с комментариями
+  const [reloadReview, setReloadReview] = useState(false) // Хук для масс. зав. вызывающ. перезапуск
 
   const navigate = useNavigate() // Хук из (react-router-dom)
   const dispatch = useDispatch() // Хук из (Redux)
@@ -41,6 +44,22 @@ export function Card({
         })
     }
   }, [])
+
+  useEffect(() => { // Хук для загрузки отзывов об одном товере
+    if (id) { // Если Id есть
+      api.getReviewProductId(id) // Метод запроса на получение отзывов об одном товаре
+        .then((res) => res.json()) // ответ в json
+        .then((data) => { // ответ в объекте
+          if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+            setReviews(data) // Сохраняем массив в хук
+            setIsLoadingReviews(false) // Меняем флаг загрузки
+            setReloadReview(false) // Меняем флаг для перезагрузки после довавления нового коммент.
+          } else {
+            toast.error(data.message) // Вывод информации об ошибке
+          }
+        })
+    }
+  }, [reloadReview]) // Зависимость от добавления нового комментария
 
   const discountFun = () => { // Функция считающая скидку на товар
     const result = Math.round(productId.price - (
@@ -193,6 +212,22 @@ export function Card({
     }
   }
 
+  // eslint-disable-next-line consistent-return
+  const isLoadingReviewsFn = () => { // Функция для зпуска копанента с комментариями
+    if (reviewsBlock && isLoadingReviews) { // Если флаги (true)
+      return (<Loader />) // Грузим лоудер
+    }
+    if (reviewsBlock && !isLoadingReviews) { // Если флаги (true) и (false) ...
+      return (reviews.map((el) => (
+        <CardReviews // Компонент c комментариями
+          key={crypto.randomUUID()/* Вызов функции для получения (key) */}
+          {...el /* Информация (содержимое) для карточек ввиде props */}
+          api={api}
+        />
+      )))
+    }
+  }
+
   return ( // jsx разметка
     <>
       <span className={stylesCard.link}>Страница товара --&gt; </span>
@@ -278,14 +313,8 @@ export function Card({
             )}
           </div>
           <div className={stylesCard.reviewsWr}>
-            {addReviewsBlock && <AddReviews /> }
-            {reviewsBlock && productId.reviews.map((el) => (/* Вывод нужного количества карточек */
-              <CardReviews /* Компонента  */
-                key={crypto.randomUUID()/* Вызов функции для получения (key) */}
-                {...el /* Информация (содержимое) для карточек ввиде props */}
-                api={api}
-              />
-            ))}
+            {addReviewsBlock && <AddReviews api={api} id={id} setReloadReview={setReloadReview} /> }
+            {isLoadingReviewsFn()}
           </div>
         </div>
       )}

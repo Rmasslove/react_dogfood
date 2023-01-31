@@ -19,7 +19,7 @@ function App() { // Компотент App
   const [dataProducts, setGoods] = useState([]) // Хук для получения инф. о продуктах с сервера
   const [userDetails, setUserDetails] = useState([]) // Хук для получения инф. пользователе
   const [searchData, setSearchData] = useState(dataProducts) // Хук список количества товаров поиска
-  const [searchParams, setsearchParams] = useSearchParams() // Хку для отображения поиска в URL
+  const [searchParams] = useSearchParams() // Хку для отображения поиска в URL
   const [searchText, setUpdateSearchText] = useState(() => searchParams.get('q') ?? '') // Хук для поля поиска принимающий URL или пустую строку
   const [reload, setReload] = useState(0) // Хук для массива зависимостей вызывающий перезапуск
   const [isLoadingProducts, setIsLoadingProducts] = useState(true) // Хук для флага лоудера
@@ -110,7 +110,6 @@ function App() { // Компотент App
           searchText={searchText}
           setUpdateSearchText={setUpdateSearchText}
           userDetails={userDetails}
-          setsearchParams={setsearchParams}
           setSearchEmptyFlag={setSearchEmptyFlag}
           setIsLoadingSearchProducts={setIsLoadingSearchProducts}
           reload={reload}

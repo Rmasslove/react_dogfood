@@ -11,7 +11,7 @@ function Header({
   user, setUser, dataProducts, setModalActive,
   token, setIsLoadingSearchProducts,
   setSearchData, searchText, setUpdateSearchText,
-  userDetails, setsearchParams, setSearchEmptyFlag, api, reload,
+  userDetails, setSearchEmptyFlag, api, reload,
 }) { // Компонент Header с {props}
   const navigate = useNavigate() // назначение Хук (useNavigate)
   const basketRedux = useSelector(getBasketSliceSelector) //  Хук из (Redux) с массивом корзины
@@ -53,7 +53,6 @@ function Header({
         setSearchData={setSearchData}
         searchText={searchText}
         setUpdateSearchText={setUpdateSearchText}
-        setsearchParams={setsearchParams}
         setSearchEmptyFlag={setSearchEmptyFlag}
         api={api}
         setIsLoadingSearchProducts={setIsLoadingSearchProducts}
