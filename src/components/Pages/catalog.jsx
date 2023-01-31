@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Cards } from '../Card/Cards' // Импорт компонента
 import { Loader } from '../Loader/Loader' // Импорт компонента
 import { SearchEmpty } from '../Search/SearchNotFound' // Импорт компонента
@@ -7,6 +8,54 @@ export function Catalog({
   dataProducts, userDetails, api, setReload, searchText, isLoadingProducts,
   searchEmptyFlag, setUpdateSearchText, setSearchEmptyFlag, isLoadingSearchProducts,
 }) { // Компонент отрисовки карточик с {props}
+  const [sortCancell, setSortCancell] = useState(true) // Флаг для кнопки (отмена)
+  const [sortByPrice, setsortByPrice] = useState(false) // Флаг для кнопки (по цене)
+  const [sortByPriceChevron, setsortByPriceChevron] = useState(false) // Флаг для стрелки (по цене)
+  const [sortBypPomotion, setsortByPromotion] = useState(false) // Флаг для кнопки (по акции)
+  const [sortBypPomotionChevron, setsortByPromotionChevron] = useState(false) // Ф. д стр (по акции)
+  const [sortByDate, setsortByDate] = useState(false) // Флаг для кнопки (по дате)
+  const [sortByDateChevron, setsortByDateChevron] = useState(false) // Флак для стрелки (по дате)
+
+  const setSortCancellFn = () => { // Функция сортировки кнопка (отмена)
+    setSortCancell(true) // Меняем флаг отмены
+    setsortByPrice(false) // Меняем флаг по цене
+    setsortByPromotion(false) // Меняем флаг по акции
+    setsortByDate(false) // Меняем флаг по дате
+  }
+
+  const setsortByPriceFn = () => { // Функция сортировки кнопка (по цене)
+    if (!sortByPrice) { // Если кнопка не нажата...
+      setsortByPrice(true) // Меняем флаг по цене
+      setSortCancell(false) // Меняем флаг отмены
+      setsortByPromotion(false) // Меняем флаг по акции
+      setsortByDate(false) // Меняем флаг по дате
+    } else {
+      setsortByPriceChevron(!sortByPriceChevron) // Меняем флаг для стрелки
+    }
+  }
+
+  const setsortByPromotionFn = () => { // Функция сортировки кнопка (по акции)
+    if (!sortBypPomotion) { // Если кнопка не нажата...
+      setsortByPromotion(true) // Меняем флаг по акции
+      setSortCancell(false) // Меняем флаг отмены
+      setsortByPrice(false) // Меняем флаг по цене
+      setsortByDate(false) // Меняем флаг по дате
+    } else {
+      setsortByPromotionChevron(!sortBypPomotionChevron) // Меняем флаг для стрелки
+    }
+  }
+
+  const setsortByDateFn = () => { // Функция сортировки кнопка (по дате)
+    if (!sortByDate) { // Если кнопка не нажата...
+      setsortByDate(true) // Меняем флаг по дате
+      setSortCancell(false) // Меняем флаг отмены
+      setsortByPrice(false) // Меняем флаг по цене
+      setsortByPromotion(false) // Меняем флаг по акции
+    } else {
+      setsortByDateChevron(!sortByDateChevron) // Меняем флаг для стрелки
+    }
+  }
+
   const searchEmptyFn = () => { // Функция для выбора компанентова
     if (searchEmptyFlag) { // Если флаг для страницы (ничего не найдено) поднят...
       return ( // Выводим компанент (ничего не найдено)
@@ -52,6 +101,35 @@ export function Catalog({
         </span>
         )}
       </p>
+      {!searchEmptyFlag && ( // Если флаг для страницы (ничего не найдено) НЕ поднят...
+      <div className={stylesPages.btnSortWr}>
+        <div className={stylesPages.tagSort}>Сортировка:</div>
+        <button type="button" onClick={setSortCancellFn} className={sortCancell ? stylesPages.btnSortTrue : stylesPages.btnSortFalse}>
+          <span>
+            Отмена
+            <i className="fa-solid fa-xmark" />
+          </span>
+        </button>
+        <button type="button" onClick={setsortByPriceFn} className={sortByPrice ? stylesPages.btnSortTrue : stylesPages.btnSortFalse}>
+          <span>
+            По цене
+            {sortByPriceChevron ? <i className="fa-solid fa-chevron-down" /> : <i className="fa-solid fa-chevron-up" />}
+          </span>
+        </button>
+        <button type="button" onClick={setsortByPromotionFn} className={sortBypPomotion ? stylesPages.btnSortTrue : stylesPages.btnSortFalse}>
+          <span>
+            По акции
+            {sortBypPomotionChevron ? <i className="fa-solid fa-chevron-down" /> : <i className="fa-solid fa-chevron-up" />}
+          </span>
+        </button>
+        <button type="button" onClick={setsortByDateFn} className={sortByDate ? stylesPages.btnSortTrue : stylesPages.btnSortFalse}>
+          <span>
+            По дате
+            {sortByDateChevron ? <i className="fa-solid fa-chevron-down" /> : <i className="fa-solid fa-chevron-up" />}
+          </span>
+        </button>
+      </div>
+      )}
       {searchEmptyFn()}
     </>
   )
