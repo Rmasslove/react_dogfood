@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router-dom' // Импорт компонента
-import { useEffect, useState } from 'react' // Импорт компонента
+import { useEffect } from 'react' // Импорт компонента
 import { ToastContainer, toast } from 'react-toastify'
 import stylesSearch from './search.module.scss' // Импорт стилей компонента
 import { ReactComponent as Glass } from './img/magnifying-glass-solid.svg' // Импорт файла (svg) преобразованного в компонент
@@ -12,13 +12,15 @@ export function Search({
 }) { // Компонент строки поиска с {props}
   const navigate = useNavigate() // Хук из (react-router-dom)
   const debounceValue = useDebounce(searchText) // Хук (useDebounce) с задержкой 600ms
-  const [searchTextFlag, setSearchTextFlag] = useState(false) // Флаг для разрешения навигации
 
   // eslint-disable-next-line no-unused-vars
-  const [searchParams, setsearchParams] = useSearchParams() // Для отображения поиска в URL
+  const [searchParams, setSearchParams] = useSearchParams() // Для отображения поиска в URL
 
   useEffect(() => { // Хук для передачи значения из поля поиска в URL
-    setsearchParams({ q: searchText }) // Метод передачи
+    setSearchParams({
+      ...Object.fromEntries(searchParams.entries()), // Разварачиваем все ключи
+      q: searchText, // Меняем значение в нужном ключе
+    }) // Метод передачи
   }, [searchText]) // Реагинует на текст в строке поиска
 
   const clearSearch = () => { // Функция очистки поля поиска
@@ -44,9 +46,6 @@ export function Search({
             } else { // Если товары есть...
               setSearchData(data) // Хук принимающий список отсортированых продуктов для отображения
               setSearchEmptyFlag(false) // Ставим запрет на страницу (ничего не найдено)
-              // eslint-disable-next-line no-unused-expressions
-              !searchTextFlag && navigate('/catalog') // Перенаправляем на страницу каталога с товарами
-              setSearchTextFlag(true) // Ставить флаг о том что переход на стран. с catalog уже был
             }
           } else {
             toast.error(data.message) // Вывод информации об ошибке
@@ -59,9 +58,6 @@ export function Search({
     if (!searchText) { // Если поле поиска опустело...
       setIsLoadingSearchProducts(false) // Импорт компонента
       setSearchEmptyFlag(false) // Ставим закрывающий флаг для стриницы (ничего не найдено)
-      // eslint-disable-next-line no-unused-expressions
-      searchTextFlag && navigate('/catalog') // Перенаправляем на страницу каталога с товарами
-      setSearchTextFlag(false) // Изменяем флаг на разрешающий переход при следующем поиске
     }
   }, [searchText]) // Реагинует на текст в строке поиска
 
