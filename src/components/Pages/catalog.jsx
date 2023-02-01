@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Cards } from '../Card/Cards' // Импорт компонента
 import { Loader } from '../Loader/Loader' // Импорт компонента
 import { SearchEmpty } from '../Search/SearchNotFound' // Импорт компонента
@@ -15,12 +15,14 @@ export function Catalog({
   const [sortBypPomotionChevron, setsortByPromotionChevron] = useState(false) // Ф. д стр (по акции)
   const [sortByDate, setsortByDate] = useState(false) // Флаг для кнопки (по дате)
   const [sortByDateChevron, setsortByDateChevron] = useState(false) // Флак для стрелки (по дате)
+  const [sortDataProducts, setSortDataProducts] = useState([]) // Для приема сортирован. продуктов
 
   const setSortCancellFn = () => { // Функция сортировки кнопка (отмена)
     setSortCancell(true) // Меняем флаг отмены
     setsortByPrice(false) // Меняем флаг по цене
     setsortByPromotion(false) // Меняем флаг по акции
     setsortByDate(false) // Меняем флаг по дате
+    setSortDataProducts(dataProducts)
   }
 
   const setsortByPriceFn = () => { // Функция сортировки кнопка (по цене)
@@ -29,8 +31,40 @@ export function Catalog({
       setSortCancell(false) // Меняем флаг отмены
       setsortByPromotion(false) // Меняем флаг по акции
       setsortByDate(false) // Меняем флаг по дате
+    } if (sortByPriceChevron) {
+      setsortByPriceChevron(false) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = Math.round(prev.price - ((prev.price / 100) * prev.discount))
+        const d = Math.round(next.price - ((next.price / 100) * next.discount))
+        return c - d
+      })
+      setSortDataProducts(arr) // Записываем в Хук
     } else {
-      setsortByPriceChevron(!sortByPriceChevron) // Меняем флаг для стрелки
+      setsortByPriceChevron(true) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = Math.round(next.price - ((next.price / 100) * next.discount))
+        const d = Math.round(prev.price - ((prev.price / 100) * prev.discount))
+        return c - d
+      })
+      setSortDataProducts(arr) // Записываем в Хук
+    }
+  }
+
+  const setSearchSortByPriceFn = () => { // Функция сортировки При поиске, кнопка (по цене)
+    if (!sortByPriceChevron) {
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = Math.round(prev.price - ((prev.price / 100) * prev.discount))
+        const d = Math.round(next.price - ((next.price / 100) * next.discount))
+        return c - d
+      })
+      setSortDataProducts(arr) // Записываем в Хук
+    } else {
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = Math.round(next.price - ((next.price / 100) * next.discount))
+        const d = Math.round(prev.price - ((prev.price / 100) * prev.discount))
+        return c - d
+      })
+      setSortDataProducts(arr) // Записываем в Хук
     }
   }
 
@@ -40,8 +74,26 @@ export function Catalog({
       setSortCancell(false) // Меняем флаг отмены
       setsortByPrice(false) // Меняем флаг по цене
       setsortByDate(false) // Меняем флаг по дате
+    } if (sortBypPomotionChevron) {
+      setsortByPromotionChevron(false) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => prev.discount - next.discount) // Сортируем
+      setSortDataProducts(arr) // Записываем в Хук
     } else {
-      setsortByPromotionChevron(!sortBypPomotionChevron) // Меняем флаг для стрелки
+      setsortByPromotionChevron(true) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => next.discount - prev.discount) // Сортируем
+      setSortDataProducts(arr) // Записываем в Хук
+    }
+  }
+
+  const setSearchSortByPromotionFn = () => { // Функция сортировки При поиске, кнопка (по акции)
+    if (!sortBypPomotionChevron) {
+      setsortByPromotionChevron(false) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => prev.discount - next.discount) // Сортируем
+      setSortDataProducts(arr) // Записываем в Хук
+    } else {
+      setsortByPromotionChevron(true) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => next.discount - prev.discount) // Сортируем
+      setSortDataProducts(arr) // Записываем в Хук
     }
   }
 
@@ -51,10 +103,56 @@ export function Catalog({
       setSortCancell(false) // Меняем флаг отмены
       setsortByPrice(false) // Меняем флаг по цене
       setsortByPromotion(false) // Меняем флаг по акции
+    } if (sortByDateChevron) {
+      setsortByDateChevron(false) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = new Date(prev.created_at)
+        const d = new Date(next.created_at)
+        return c.getTime() - d.getTime()
+      })
+      setSortDataProducts(arr) // Записываем в Хук
     } else {
-      setsortByDateChevron(!sortByDateChevron) // Меняем флаг для стрелки
+      setsortByDateChevron(true) // Меняем флаг для стрелки
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = new Date(prev.created_at)
+        const d = new Date(next.created_at)
+        return d.getTime() - c.getTime()
+      })
+      setSortDataProducts(arr) // Записываем в Хук
     }
   }
+
+  const setSearchSortByDateFn = () => { // Функция сортировки При поиске, кнопка (по дате)
+    if (!sortByDateChevron) {
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = new Date(prev.created_at)
+        const d = new Date(next.created_at)
+        return c.getTime() - d.getTime()
+      })
+      setSortDataProducts(arr) // Записываем в Хук
+    } else {
+      const arr = [...dataProducts].sort((prev, next) => { // Сортируем
+        const c = new Date(prev.created_at)
+        const d = new Date(next.created_at)
+        return d.getTime() - c.getTime()
+      })
+      setSortDataProducts(arr) // Записываем в Хук
+    }
+  }
+
+  useEffect(() => { // Для приема массива с продуктами и переадресации через сортировки
+    if (dataProducts.length) {
+      if (sortByPrice) { // Если флаг по цене
+        setSearchSortByPriceFn() // Вызываем функцию сортировки
+      } else if (sortBypPomotion) { // Если флаг по акции
+        setSearchSortByPromotionFn() // Вызываем функцию сортировки
+      } else if (sortByDate) { // Если флаг по дате
+        setSearchSortByDateFn() // Вызываем функцию сортировки
+      } else {
+        setSortDataProducts(dataProducts) // Если по без сортировки
+      }
+    }
+  }, [dataProducts]) // Реагируем на массив с продуктами
 
   const searchEmptyFn = () => { // Функция для выбора компанентова
     if (searchEmptyFlag) { // Если флаг для страницы (ничего не найдено) поднят...
@@ -73,7 +171,7 @@ export function Catalog({
     }
     return ( // Иначе выводим список товаров
       <div className={stylesPages.cards}>
-        {dataProducts.map((el) => (/* Метод мап для отображения нужного количества карточек */
+        {sortDataProducts.map((el) => (/* Метод мап для отображения нужного количества карточек */
           <Cards /* Компонента Card */
             key={crypto.randomUUID() /* Вызов функции для получения (key) */}
             {...el /* Информация (содержимое) для карточек ввиде props */}

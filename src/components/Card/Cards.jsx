@@ -60,7 +60,7 @@ export function Cards({
       <div>
         <img src={pictures} alt={name} />
       </div>
-      <Cardtags tags={tags} /* Компонент (Cardtags) с пропсом *//>
+      <Cardtags tags={tags} discount={discount} /* Компонент (Cardtags) с пропсом *//>
       <span className={isLike.length ? stylesCard.heartTrue : stylesCard.heartFalse} role="presentation" onClick={likesClick}>
         <i className="fa-solid fa-heart" /* иконка с сердцем *//>
       </span>
