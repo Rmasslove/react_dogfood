@@ -4,7 +4,7 @@ import { Search } from '../Search/Search' // Импорт компонента
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesHeader from './header.module.scss' // Импорт компонента стилей
 import {
-  REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3, REDUX_LS_KEY4,
+  REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3, REDUX_LS_KEY4, REDUX_LS_KEY5,
 } from '../../redux/initState' // Импорт значения из компонента
 
 function Header({
@@ -35,6 +35,7 @@ function Header({
     localStorage.removeItem(REDUX_LS_KEY2) // Удаления записи о корзине из (localStorage)
     localStorage.removeItem(REDUX_LS_KEY3) // Удаления записи о корзине из (localStorage)
     localStorage.removeItem(REDUX_LS_KEY4) // Удаления записи о корзине из (localStorage)
+    localStorage.removeItem(REDUX_LS_KEY5) // Удаления записи о корзине из (localStorage)
     setUser('') // Удаление записи о пользователе в Хук (useState)
     navigate('/') // Переход на корневую страницу
   }

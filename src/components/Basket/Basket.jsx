@@ -1,15 +1,30 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
+import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
+import { newArrBasketIdsRedux } from '../../redux/slices/basketIdsSlice'
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesBasket from './basket.module.scss' // Импорт компонента стилей
 import { BasketCards } from './BasketCards' // Импорт компонента
 
-export function Basket() { // Компонент корзины
+export function Basket({ api }) { // Компонент корзины
   const [totalQuantityGoods, setTotalQuantityGoods] = useState([]) // Хук кол. едениц общего заказа
   const [fullCalculation, setFullCalculation] = useState([]) // Хук для подсчёта общего заказа
   const [checkboxSelectAll, setCheckboxSelectAll] = useState(false) // Хук для чекбокса выбрать всё
   const dispatch = useDispatch() // Хук из (Redux)
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
+
+  useEffect(() => { // Хук для загрузки информации о товарах по id
+    api.getProductIds(basketRedux.map((product) => product.id)) // Метод запрос на получение товаров
+      .then((data) => { // ответ в объекте
+        if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
+          dispatch(newArrBasketIdsRedux(data)) // Добавляем товар в срез (redux) корзины
+          console.log('1', data)
+        } else {
+          toast.error(data) // Вывод информации об ошибке
+          toast.error(data.message) // Вывод информации об ошибке
+        }
+      })
+  }, [])
 
   useEffect(() => { // Хук для расчёта кол. едениц общего заказа
     const filterArrBasket = basketRedux.filter((el) => el.isChecked === true) // выбр отмеченых тов.
@@ -104,6 +119,7 @@ export function Basket() { // Компонент корзины
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

@@ -9,15 +9,14 @@ export function Catalog({
   dataProducts, userDetails, api, setReload, searchText, isLoadingProducts,
   searchEmptyFlag, setUpdateSearchText, setSearchEmptyFlag, isLoadingSearchProducts,
 }) { // Компонент отрисовки карточик с {props}
-  const [sortCancell, setSortCancell] = useState(true) // Флаг для кнопки (отмена)
-  const [sortByPrice, setsortByPrice] = useState(false) // Флаг для кнопки (по цене)
-  const [sortByPriceChevron, setsortByPriceChevron] = useState(false) // Флаг для стрелки (по цене)
-  const [sortBypPomotion, setsortByPromotion] = useState(false) // Флаг для кнопки (по акции)
-  const [sortBypPomotionChevron, setsortByPromotionChevron] = useState(false) // Ф. д стр (по акции)
-  const [sortByDate, setsortByDate] = useState(false) // Флаг для кнопки (по дате)
-  const [sortByDateChevron, setsortByDateChevron] = useState(false) // Флак для стрелки (по дате)
-  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams() // Для отображения поиска в URL
+  const [sortCancell, setSortCancell] = useState(true) // Флаг для кнопки (отмена)
+  const [sortByPrice, setsortByPrice] = useState(() => searchParams.get('sortpe') ?? false) // Флаг для кнопки (по цене)
+  const [sortByPriceChevron, setsortByPriceChevron] = useState(false) // Флаг для стрелки (по цене)
+  const [sortBypPomotion, setsortByPromotion] = useState(() => searchParams.get('sortpn') ?? false) // Флаг для кнопки (по акции)
+  const [sortBypPomotionChevron, setsortByPromotionChevron] = useState(false) // Ф. д стр (по акции)
+  const [sortByDate, setsortByDate] = useState(() => searchParams.get('sortde') ?? false) // Флаг для кнопки (по дате)
+  const [sortByDateChevron, setsortByDateChevron] = useState(false) // Флак для стрелки (по дате)
   const [sortDataProducts, setSortDataProducts] = useState([]) // Для приема сортирован. продуктов
   const navigate = useNavigate() // Хук для навигации из (react-router-dom)
 
@@ -32,7 +31,7 @@ export function Catalog({
 
   const setsortByPriceFn = () => { // Функция сортировки кнопка (по цене)
     if (!sortByPrice) { // Если кнопка не нажата...
-      setSearchParams({ sort: 'price' }) // Метод передачи в URL
+      setSearchParams({ sortpe: 'price' }) // Метод передачи в URL
       setsortByPrice(true) // Меняем флаг по цене
       setSortCancell(false) // Меняем флаг отмены
       setsortByPromotion(false) // Меняем флаг по акции
@@ -57,6 +56,10 @@ export function Catalog({
   }
 
   const setSearchSortByPriceFn = () => { // Функция сортировки При поиске, кнопка (по цене)
+    setsortByPrice(true) // Меняем флаг по цене
+    setSortCancell(false) // Меняем флаг отмены
+    setsortByPromotion(false) // Меняем флаг по акции
+    setsortByDate(false) // Меняем флаг по дате
     if (!sortByPriceChevron) {
       const arr = [...dataProducts].sort((prev, next) => { // Сортируем
         const c = Math.round(prev.price - ((prev.price / 100) * prev.discount))
@@ -76,7 +79,7 @@ export function Catalog({
 
   const setsortByPromotionFn = () => { // Функция сортировки кнопка (по акции)
     if (!sortBypPomotion) { // Если кнопка не нажата...
-      setSearchParams({ sort: 'promotion' }) // Метод передачи в URL
+      setSearchParams({ sortpn: 'promotion' }) // Метод передачи в URL
       setsortByPromotion(true) // Меняем флаг по акции
       setSortCancell(false) // Меняем флаг отмены
       setsortByPrice(false) // Меняем флаг по цене
@@ -93,6 +96,10 @@ export function Catalog({
   }
 
   const setSearchSortByPromotionFn = () => { // Функция сортировки При поиске, кнопка (по акции)
+    setsortByPromotion(true) // Меняем флаг по акции
+    setSortCancell(false) // Меняем флаг отмены
+    setsortByPrice(false) // Меняем флаг по цене
+    setsortByDate(false) // Меняем флаг по дате
     if (!sortBypPomotionChevron) {
       setsortByPromotionChevron(false) // Меняем флаг для стрелки
       const arr = [...dataProducts].sort((prev, next) => prev.discount - next.discount) // Сортируем
@@ -106,7 +113,7 @@ export function Catalog({
 
   const setsortByDateFn = () => { // Функция сортировки кнопка (по дате)
     if (!sortByDate) { // Если кнопка не нажата...
-      setSearchParams({ sort: 'date' }) // Метод передачи в URL
+      setSearchParams({ sortde: 'date' }) // Метод передачи в URL
       setsortByDate(true) // Меняем флаг по дате
       setSortCancell(false) // Меняем флаг отмены
       setsortByPrice(false) // Меняем флаг по цене
@@ -131,6 +138,10 @@ export function Catalog({
   }
 
   const setSearchSortByDateFn = () => { // Функция сортировки При поиске, кнопка (по дате)
+    setsortByDate(true) // Меняем флаг по дате
+    setSortCancell(false) // Меняем флаг отмены
+    setsortByPrice(false) // Меняем флаг по цене
+    setsortByPromotion(false) // Меняем флаг по акции
     if (!sortByDateChevron) {
       const arr = [...dataProducts].sort((prev, next) => { // Сортируем
         const c = new Date(prev.created_at)
@@ -156,8 +167,6 @@ export function Catalog({
         setSearchSortByPromotionFn() // Вызываем функцию сортировки
       } else if (sortByDate) { // Если флаг по дате
         setSearchSortByDateFn() // Вызываем функцию сортировки
-      } else if (sortCancell && !searchText) {
-        setSortCancellFn() // Если по без сортировки
       } else {
         setSortDataProducts(dataProducts)
       }

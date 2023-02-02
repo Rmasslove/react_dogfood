@@ -5,12 +5,12 @@ import { Basket } from './Basket' // Импорт компонента
 import stylesBasket from './basket.module.scss' // Импорт компонента стилей
 import { BasketEmpty } from './BasketEmpty' // Импорт компонента
 
-export function BasketRoute() {
+export function BasketRoute({ api }) {
   const basketRedux = useSelector(getBasketSliceSelector) // Хук из (Redux) с массивом корзины
   // eslint-disable-next-line react/no-unstable-nested-components
   function BasketRouteFn() { // функция выбора страницы
     if (basketRedux.length > 0) { // Если корзина не пустая то...
-      return <Basket /* Страница корзины */ />
+      return <Basket api={api}/* Страница корзины */ />
     }
     return <BasketEmpty /* Если корзина пустая *//>
   }

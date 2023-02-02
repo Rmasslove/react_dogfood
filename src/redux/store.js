@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit' // Импорт компонента
 import {
-  REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3, REDUX_LS_KEY4,
+  REDUX_LS_KEY1, REDUX_LS_KEY2, REDUX_LS_KEY3, REDUX_LS_KEY4, REDUX_LS_KEY5,
 } from './initState' // Импорт компонента
 import { basketReducer } from './slices/basketSlice' // Импорт компонента
 import { aboutUserReducer } from './slices/aboutUserSlice' // Импорт компонента
 import { dataProductsReduser } from './slices/dataProductsSlise'
 import { isLikeProductsReduser } from './slices/isLikeProductsSlice'
+import { basketIdsReducer } from './slices/basketIdsSlice'
 
 export const store = configureStore({ // Конфигурация (store)
   reducer: { // Редьюсеры для корзины и информации о (user)
@@ -13,6 +14,7 @@ export const store = configureStore({ // Конфигурация (store)
     aboutUser: aboutUserReducer, // Информация о пользователе
     dataProducts: dataProductsReduser, // Загруженный массив товаров
     isLikeProducts: isLikeProductsReduser, // Избранные товары
+    basketIds: basketIdsReducer, // Корзина с товарами
   },
 })
 
@@ -21,4 +23,5 @@ store.subscribe(() => { // Подписчики в (localStorage)
   localStorage.setItem(REDUX_LS_KEY2, JSON.stringify(store.getState().aboutUser)) // Запись о юзере
   localStorage.setItem(REDUX_LS_KEY3, JSON.stringify(store.getState().dataProducts)) // Зап о товар.
   localStorage.setItem(REDUX_LS_KEY4, JSON.stringify(store.getState().isLikeProducts)) // Запись Lok
+  localStorage.setItem(REDUX_LS_KEY5, JSON.stringify(store.getState().basketIds)) // Запись о корз.
 })

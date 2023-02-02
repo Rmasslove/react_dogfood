@@ -39,7 +39,7 @@ function Main({ // Копонент основного тела сайта
             || <Home user={user} /* При отсутствии юзера выбор копонента (Home) */ />}
         />
         <Route path="/card/:id" element={<Card api={api} dataProducts={dataProducts} userDetails={userDetails} setReload={setReload} />} />
-        <Route path="/basket" element={<BasketRoute />} />
+        <Route path="/basket" element={<BasketRoute api={api} />} />
         <Route path="/likes" element={<LikesRoute dataProducts={dataProducts} userDetails={userDetails} api={api} setReload={setReload} />} />
         <Route path="/changeprodukt/:id" element={<ChangeProdukt api={api} setReload={setReload} />} />
         <Route path="/addingproduct" element={<AddingProduct api={api} setReload={setReload} />} />

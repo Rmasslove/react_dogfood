@@ -15,4 +15,4 @@ export const getIsLikeProductsSliceSelector = (store) => store.isLikeProducts //
 
 export const { newArrIsLikeProductsRedux } = isLikeProductsSlice.actions // Методы для среза
 
-export const isLikeProductsReduser = isLikeProductsSlice.reducer // Связь редьюсера со срезом
+export const isLikeProductsReduser = isLikeProductsSlice.reducer // Связь редьюсера со срезом store

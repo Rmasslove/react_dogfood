@@ -20,4 +20,4 @@ export const getAboutUserSliceSelector = (store) => store.aboutUser // Выбо�
 
 export const { newAboutUserRedux, newAboutTokenRedux } = aboutUserSlice.actions // Методы для среза
 
-export const aboutUserReducer = aboutUserSlice.reducer // Связь редьюсера со срезом
+export const aboutUserReducer = aboutUserSlice.reducer // Связь редьюсера со срезом в (store)

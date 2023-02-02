@@ -49,6 +49,19 @@ class Api { // Класс (Api)
     }
   }
 
+  getProductIds(ids) { // Функция получение нескольких товаров по Id
+    try {
+      return Promise.all(ids.map((id) => fetch(`${this.path}/products/${id}`, { // Запрос на сервер
+        headers: { // заголовок
+        // eslint-disable-next-line quote-props
+          'authorization': `Bearer ${this.token}`, // Строка с токеном
+        },
+      }).then((res) => res.json()))) // ответ в json
+    } catch (error) { // Отлов ошибки
+      throw new Error(error)
+    }
+  }
+
   getProductId(id) { // Функция получение товара по Id
     try {
       return fetch(`${this.path}/products/${id}`, { // Запрос на сервер

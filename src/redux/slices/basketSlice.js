@@ -15,4 +15,4 @@ export const getBasketSliceSelector = (store) => store.basket // Выбор ко
 
 export const { newArrBasketRedux } = basketSlice.actions // Методы для среза
 
-export const basketReducer = basketSlice.reducer // Связь редьюсера со срезом
+export const basketReducer = basketSlice.reducer // Связь редьюсера со срезом в (store)
