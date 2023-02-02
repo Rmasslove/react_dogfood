@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { Link, useNavigate, useParams } from 'react-router-dom' // Импорт компонента
 import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
+import { toast } from 'react-toastify' // Импорт компонента
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesCard from './card.module.scss' // Импорт компонента стилей
 import 'react-toastify/dist/ReactToastify.css' // Импорт компонента стилей
@@ -288,7 +288,6 @@ export function Card({
                     В корзину
                   </span>
                 </button>
-                <ToastContainer />
               </div>
               <h6 className={stylesCard.descriptionH}>Описание товара:</h6>
               <p className={stylesCard.description}>

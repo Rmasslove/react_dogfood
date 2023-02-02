@@ -1,5 +1,5 @@
 import { useState } from 'react' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import stylesSignup from './signup.module.scss' // Импорт стилей
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -69,7 +69,6 @@ export function Signup({ setAuth, api }) { // Компонент (Signup) с {pr
       <button className={stylesSignup.btn} type="submit" disabled={testPwd /* Кнопка (Регистрации) проверка отображения */}>
         Зарегистрироваться
       </button>
-      <ToastContainer />
       <button
         className={stylesSignup.link}
         type="submit"

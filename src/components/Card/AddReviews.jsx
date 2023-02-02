@@ -2,7 +2,7 @@ import {
   Formik, Form, Field,
 } from 'formik' // Импорт компонента
 import * as Yup from 'yup' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
+import { toast } from 'react-toastify' // Импорт компонента
 import stylesAddReviews from './addReviews.module.scss' // Импорт компонента стилей
 
 export function AddReviews({ api, id, setReloadReview }) { // Компонент добавления комментариев
@@ -75,7 +75,6 @@ export function AddReviews({ api, id, setReloadReview }) { // Компонент
           </Form>
         )}
       </Formik>
-      <ToastContainer />
     </div>
   )
 }

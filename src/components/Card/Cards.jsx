@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import stylesCard from './cards.module.scss' // Импорт компонента стилей
 import { Cardtags } from './Cardtags' // Импорт компонента
 import 'react-toastify/dist/ReactToastify.css'
@@ -56,7 +56,6 @@ export function Cards({
 
   return ( // jsx разметка
     <div className={stylesCard.card} role="presentation" onClick={cardInfo}>
-      <ToastContainer />
       <div>
         <img src={pictures} alt={name} />
       </div>

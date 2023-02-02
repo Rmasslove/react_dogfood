@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react' // Импорт компонента
 import { useDispatch, useSelector } from 'react-redux' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
+import { toast } from 'react-toastify' // Импорт компонента
 import { newArrBasketIdsRedux } from '../../redux/slices/basketIdsSlice'
 import { getBasketSliceSelector, newArrBasketRedux } from '../../redux/slices/basketSlice' // Импорт компонента
 import stylesBasket from './basket.module.scss' // Импорт компонента стилей
@@ -18,7 +18,6 @@ export function Basket({ api }) { // Компонент корзины
       .then((data) => { // ответ в объекте
         if (!data.error && !data.err) { // Проверка на ошибку (если нет - то)
           dispatch(newArrBasketIdsRedux(data)) // Добавляем товар в срез (redux) корзины
-          console.log('1', data)
         } else {
           toast.error(data) // Вывод информации об ошибке
           toast.error(data.message) // Вывод информации об ошибке
@@ -119,7 +118,6 @@ export function Basket({ api }) { // Компонент корзины
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   )
 }

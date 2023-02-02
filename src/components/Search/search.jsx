@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from 'react-router-dom' // Импорт компонента
 import { useEffect } from 'react' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import stylesSearch from './search.module.scss' // Импорт стилей компонента
 import { ReactComponent as Glass } from './img/magnifying-glass-solid.svg' // Импорт файла (svg) преобразованного в компонент
 import { ReactComponent as Xmark } from './img/circle-xmark-regular.svg' // Импорт файла (svg) преобразованного в компонент
@@ -69,7 +69,6 @@ export function Search({
           ? <Xmark onClick={clearSearch} /* Установка иконки через компонент (Xmark) *//>
           : <Glass /* Или установка иконки через компонент (Glass) *//>}
       </button>
-      <ToastContainer />
     </div>
   )
 }

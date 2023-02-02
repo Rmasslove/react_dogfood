@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom' // Импорт компонента
-import { ToastContainer, toast } from 'react-toastify' // Импорт компонента
+import { toast } from 'react-toastify' // Импорт компонента
 import {
   Formik, Form, Field,
 } from 'formik' // Импорт компонента
@@ -162,7 +162,6 @@ export function AddingProduct({ api, setReload }) { // Компонент доб
         </div>
         <PreviewProduct dataPreview={dataPreview} /* Компонент предварительного просмотра *//>
       </div>
-      <ToastContainer />
     </>
   )
 }
