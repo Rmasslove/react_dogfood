@@ -223,6 +223,10 @@ export function Card({
           key={crypto.randomUUID()/* Вызов функции для получения (key) */}
           {...el /* Информация (содержимое) для карточек ввиде props */}
           api={api}
+          id={id}
+          // eslint-disable-next-line no-underscore-dangle
+          user_id={userDetails._id}
+          setReloadReview={setReloadReview}
         />
       )))
     }

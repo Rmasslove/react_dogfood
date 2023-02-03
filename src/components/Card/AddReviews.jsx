@@ -33,7 +33,7 @@ export function AddReviews({ api, id, setReloadReview }) { // Компонент
     <div className={stylesAddReviews.Wr}>
       <Formik
         initialValues={{
-          rating: 0,
+          rating: 1,
           text: '',
         }}
         validationSchema={SignupSchema}
@@ -53,7 +53,7 @@ export function AddReviews({ api, id, setReloadReview }) { // Компонент
                 name="rating"
                 placeholder="Рейтинг"
                 type="number"
-                min={0}
+                min={1}
                 max={5}
               />
             </div>
