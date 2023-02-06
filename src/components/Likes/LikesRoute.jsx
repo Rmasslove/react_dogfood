@@ -20,6 +20,8 @@ export function LikesRoute({
     if (isLikeArr.length > 0) { // Если загрузилось
       setIsLoadingLikesProducts(false) // Меняем значение для лоудера
       dispatch(newArrIsLikeProductsRedux(isLikeArr)) // Запись в (redux)
+    } else if (isLikeArr) {
+      setIsLoadingLikesProducts(false) // Меняем значение для лоудера
     }
   }, [isLikeArr])
 
